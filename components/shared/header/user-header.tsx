@@ -24,7 +24,7 @@ const UserHeader = () => {
 
           <div
             id="collapseMenu"
-            className="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50"
+            className="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50 items-center"
           >
             <Button
               id="toggleClose"
@@ -77,6 +77,14 @@ const UserHeader = () => {
                   className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
                 >
                   History
+                </Link>
+              </li>
+              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
+                <Link
+                  href="/dashboard/vault"
+                  className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
+                >
+                  Vault
                 </Link>
               </li>
             </ul>
