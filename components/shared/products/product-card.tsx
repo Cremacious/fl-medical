@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import Image from 'next/image';
-import stock from '@/public/stock.jpg'
+import stock from '@/public/stock.jpg';
 
 const ProductCard = () => {
   return (
@@ -33,7 +33,7 @@ const ProductCard = () => {
         </div>
       </div> */}
 
-      <Card className="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <Card className="max-w-xs border-none overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
         <CardHeader>
           <CardTitle>Sour Diesel</CardTitle>
           <p className="mt-1 text-sm text-gray-800 dark:text-gray-400">
@@ -41,9 +41,9 @@ const ProductCard = () => {
             quidem sequi illum facere recusandae voluptatibus
           </p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-0">
           <Image
-            className="object-cover rounded-lg"
+            className="object-cover"
             src={stock}
             alt="NIKE AIR"
             height={48}
