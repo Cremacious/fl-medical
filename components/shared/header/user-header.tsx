@@ -73,7 +73,7 @@ const UserHeader = () => {
               </li>
               <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
                 <Link
-                  href="javascript:void(0)"
+                  href="/dashboard/history"
                   className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
                 >
                   History
