@@ -34,6 +34,10 @@ const ItemPage = () => {
                 <p className="text-gray-500">Type</p>
                 <p className="ml-auto text-gray-900">Vape</p>
               </div>
+              <div className="flex border-t border-gray-200 py-2">
+                <p className="text-gray-500"></p>
+                <p className="ml-auto text-gray-900">Vape</p>
+              </div>
             </div>
             <img
               alt="ecommerce"
