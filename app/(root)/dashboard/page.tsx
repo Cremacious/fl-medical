@@ -8,6 +8,9 @@ const DashboardPage = () => {
       <Button asChild>
         <Link href="/dashboard/add">Add</Link>
       </Button>
+      <Button asChild>
+        <Link href="/dashboard/profile">Profile</Link>
+      </Button>
     </>
   );
 };

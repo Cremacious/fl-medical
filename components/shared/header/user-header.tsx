@@ -3,6 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const UserHeader = () => {
+  const links = [
+    { name: 'Dashboard', link: '/dashboard' },
+    { name: 'Profile', link: '/dashboard/profile' },
+    { name: 'History', link: '/dashboard/history' },
+    { name: 'Vault', link: '/dashboard/vault' },
+    { name: 'Friends', link: '/dashboard/friends' },
+    { name: 'Settings', link: '/dashboard/settings' },
+  ];
   return (
     <>
       <header className="flex shadow-md py-4 mb-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
@@ -55,38 +63,19 @@ const UserHeader = () => {
                   />
                 </a>
               </li>
-              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-                <Link
-                  href="javascript:void(0)"
-                  className="hover:text-blue-700 text-blue-700 block font-medium text-[15px]"
+              {links.map((link, index) => (
+                <li
+                  key={index}
+                  className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3"
                 >
-                  Home
-                </Link>
-              </li>
-              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-                <Link
-                  href="/dashboard"
-                  className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
-                >
-                  Dashboard
-                </Link>
-              </li>
-              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-                <Link
-                  href="/dashboard/history"
-                  className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
-                >
-                  History
-                </Link>
-              </li>
-              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-                <Link
-                  href="/dashboard/vault"
-                  className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
-                >
-                  Vault
-                </Link>
-              </li>
+                  <Link
+                    href={link.link}
+                    className="hover:text-blue-700 text-blue-700 block font-medium text-[15px]"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           {/* SignInOut and Menu Icon */}
