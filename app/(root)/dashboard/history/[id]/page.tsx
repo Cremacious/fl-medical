@@ -6,10 +6,13 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
   return (
     <>
       <div className="newPage">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="">
+        <div
+          className="flex justify-center
+"
+        >
+          <div className=" bg-red-50 grid grid-cols-1 md:grid-cols-2 gap-4 w-full p-4">
             <div className="">
-              <Card>
+              <Card className="max-w-sm">
                 <CardHeader>
                   <CardTitle>04/20/2025</CardTitle>
                 </CardHeader>
@@ -23,7 +26,6 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
                       <div className="font-bold">Items</div>
                       <div>4</div>
                     </div>
-
                     <div className="flex flex-row justify-between border-b-2  border-b-slate-200 pb-2">
                       <div className="font-bold">Total</div>
                       <div>$120</div>
@@ -32,9 +34,12 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
                 </CardContent>
               </Card>
             </div>
-          </div>
-          <div className="bg-blue-100 p-4 rounded-lg shadow-lg">
-            <div className="flex flex-col gap-4">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+              <PurchaseCard />
+              <PurchaseCard />
+              <PurchaseCard />
+              <PurchaseCard />
               <PurchaseCard />
               <PurchaseCard />
               <PurchaseCard />
