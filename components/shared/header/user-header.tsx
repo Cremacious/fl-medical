@@ -70,7 +70,7 @@ const UserHeader = () => {
                 >
                   <Link
                     href={link.link}
-                    className="hover:text-blue-700 text-blue-700 block font-medium text-[15px]"
+                    className="hover:text-blue-700 text-slate-800 block font-medium text-[15px]"
                   >
                     {link.name}
                   </Link>
