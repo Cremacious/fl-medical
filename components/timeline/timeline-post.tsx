@@ -7,7 +7,7 @@ import TimelineComment from './timeline-comment';
 
 const TimelinePost = () => {
   return (
-    <>
+    <Link href="/post/3">
       <div className="flex justify-center items-center">
         <div className="max-w-xs container bg-white rounded-xl shadow-lg animationEffect">
           <div>
@@ -25,7 +25,7 @@ const TimelinePost = () => {
           </div>
         </div>
       </div>
-    </>
+    </Link>
   );
 };
 

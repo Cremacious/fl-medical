@@ -14,7 +14,7 @@ import {
 const UserHeader = () => {
   const links = [
     { name: 'Dashboard', link: '/dashboard' },
-    { name: 'Profile', link: '/dashboard/profile' },
+    { name: 'Profile', link: '/profile/3' },
     { name: 'History', link: '/dashboard/history' },
     { name: 'Vault', link: '/dashboard/vault' },
     { name: 'Friends', link: '/dashboard/friends' },

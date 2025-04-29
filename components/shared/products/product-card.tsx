@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 const ProductCard = () => {
   return (
-    <Link href="/dashboard">
+    <Link href="/dashboard/vault/3">
       <Card className="hover:scale-105 transition-transform cursor-pointer max-w-xs border-4 border-slate-300 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
         <CardHeader>
           <CardTitle>Sour Diesel</CardTitle>

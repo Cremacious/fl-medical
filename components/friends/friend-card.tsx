@@ -11,7 +11,7 @@ import stock from '@/public/stock.jpg';
 
 const FriendCard = () => {
   return (
-    <Link href="/">
+    <Link href="/profile/3">
       <div className="flex justify-center items-center">
         <div className="max-w-xs container bg-blue-50 p-4 rounded-xl shadow-lg animationEffect">
           <div>
