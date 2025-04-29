@@ -3,14 +3,15 @@ import { Button } from '@/components/ui/button';
 import UsageChart from '@/components/usage-chart';
 import Image from 'next/image';
 import stock from '@/public/avatar.png';
+import TimelineRow from '@/components/timeline/timeline-row';
 
 const DashboardPage = () => {
   return (
     <>
       <div className="newPage">
-        <div className="justify-center bg-green-200 flex px-5 py-24 md:flex-row flex-col gap-8">
-          <div className="items-center bg-white flex flex-col">
-            <h1 className="text-center">Welcome, name!</h1>
+        <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
+          <div className="items-center bg-white flex flex-col p-8">
+            <h1 className="text-center my-4">Welcome, name!</h1>
             <Image
               className="object-cover object-center rounded-full"
               alt="hero"
@@ -29,6 +30,18 @@ const DashboardPage = () => {
           <div className="flex flex-col bg-red-100 justify-center">
             <UsageChart />
           </div>
+        </div>
+        <div>
+          <div className="text-center font-bold text-lg mb-2">
+            Your Recent Posts
+          </div>
+          <TimelineRow />
+        </div>
+        <div className="my-4">
+          <div className="text-center font-bold text-lg mb-2">
+            Friends Recent Posts
+          </div>
+          <TimelineRow />
         </div>
       </div>
     </>
