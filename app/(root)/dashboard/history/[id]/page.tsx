@@ -10,7 +10,7 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
           className="flex justify-center
 "
         >
-          <div className=" bg-red-50 grid grid-cols-1 md:grid-cols-2 gap-4 w-full p-4">
+          <div className=" bg-red-50 grid grid-cols-1 md:grid-cols-3 gap-4 w-full md:p-8">
             <div className="">
               <Card className="max-w-sm">
                 <CardHeader>
@@ -35,7 +35,7 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
               </Card>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            <div className="grid grid-cols-1 col-span-2 md:grid-cols-2 gap-4 w-full">
               <PurchaseCard />
               <PurchaseCard />
               <PurchaseCard />
