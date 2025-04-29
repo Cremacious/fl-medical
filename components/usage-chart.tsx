@@ -17,6 +17,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const chartData = [
   { label: 'Used', usage: 12, fill: 'red' },
@@ -29,8 +36,22 @@ const UsageChart = () => {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>
+          <Select>
+            <SelectTrigger className="w-full justify-center text-slate-800">
+              <SelectValue className="text-slate-800" placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem className="text-center" value="light">
+                Inhalation
+              </SelectItem>
+              <SelectItem value="dark">Edible</SelectItem>
+              <SelectItem value="system">Oral</SelectItem>
+              <SelectItem value="system">Topical</SelectItem>
+              <SelectItem value="system">Sublingual</SelectItem>
+            </SelectContent>
+          </Select>
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -53,10 +74,7 @@ const UsageChart = () => {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          You have used 50% of your allotment
         </div>
       </CardFooter>
     </Card>
