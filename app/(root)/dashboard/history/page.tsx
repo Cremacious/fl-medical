@@ -7,8 +7,8 @@ const HistoryPage = () => {
   return (
     <>
       <HistorySearch />
-      <div className="newPage roundShadow">
-        <div className="customCyan">
+      <div className="newPage">
+        <div className="customCyan px-4 py-8 roundShadow">
           <HistoryTable />
         </div>
       </div>

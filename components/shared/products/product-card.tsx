@@ -15,7 +15,7 @@ const ProductCard = () => {
     <Link href="/dashboard/vault/3">
       <Card className="max-w-xs overflow-hidden border-none roundShadow customBlue">
         <CardHeader>
-          <CardTitle className="text-white">Sour Diesel</CardTitle>
+          <CardTitle className="textOrange">Sour Diesel</CardTitle>
           <p className="mt-1 text-sm text-white">
             Lorem ipsum dolor sit amet consectetur adipisissscing...
           </p>
@@ -30,8 +30,8 @@ const ProductCard = () => {
           />
         </CardContent>
         <CardFooter className="flex items-center justify-evenly">
-          <Badge className="customOrange text-md">Inhalent</Badge>
-          <Badge className="customOrange text-md">Trulieve</Badge>
+          <Badge className="customCyan text-md">Inhalent</Badge>
+          <Badge className="customCyan text-md">Trulieve</Badge>
         </CardFooter>
       </Card>
     </Link>

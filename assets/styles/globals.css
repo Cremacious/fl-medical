@@ -139,7 +139,7 @@ body {
   background-image: url('./bg-image5.png');
   background-repeat: repeat;
   background-attachment: fixed;
-  background-size: 400px;
+  background-size: 700px;
 }
 
 body {
@@ -148,7 +148,7 @@ body {
 
 @layer utilities {
   .customOrange {
-    background-color: #eb7808;
+    background-color: #f7b84c;
   }
   .customBlue {
     background-color: #116a7e;
@@ -159,6 +159,6 @@ body {
 }
 
 .textOrange {
-  --custom-orange: #eb7808;
+  --custom-orange: #f7c062;
   color: var(--custom-orange);
 }
