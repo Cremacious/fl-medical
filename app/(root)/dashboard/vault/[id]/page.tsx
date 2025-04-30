@@ -12,7 +12,7 @@ const ItemPage = () => {
   return (
     <div className="newPage">
       <div className="flex justify-center">
-        <div className="customCyan w-1/2 px-4 py-8 roundShadow">
+        <div className="customCyan md:w-1/2 px-4 py-8 roundShadow">
           <div className="customBlue roundShadow p-6">
             <h1 className="text-3xl text-center textOrange font-extrabold">
               Sour Diesel
