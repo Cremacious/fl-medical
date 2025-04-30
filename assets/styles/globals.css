@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import '@fontsource-variable/comfortaa';
+@import '@fontsource-variable/ubuntu-sans';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -143,7 +143,7 @@ body {
 }
 
 body {
-  font-family: 'Comfortaa Variable', system-ui;
+  font-family: 'Ubuntu Sans Variable', sans-serif;
 }
 
 @layer utilities {
@@ -156,4 +156,9 @@ body {
   .customCyan {
     background-color: #3e9495;
   }
+}
+
+.textOrange {
+  --custom-orange: #eb7808;
+  color: var(--custom-orange);
 }

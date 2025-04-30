@@ -15,7 +15,7 @@ const TimelinePost = () => {
               04/10/2023
             </span>
             <h1 className="text-lg my-2 ml-4 font-bold text-white cursor-pointer hover:text-gray-200 transition duration-100">
-              Tonight after work
+              Tonight after work this is what I'll be doing
             </h1>
           </div>
           <Image

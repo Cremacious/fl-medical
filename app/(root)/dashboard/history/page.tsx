@@ -7,8 +7,10 @@ const HistoryPage = () => {
   return (
     <>
       <HistorySearch />
-      <div className="bg-white container h-screen mx-auto p-5 rounded-lg shadow-lg">
-        <HistoryTable />
+      <div className="newPage roundShadow">
+        <div className="customCyan">
+          <HistoryTable />
+        </div>
       </div>
     </>
   );

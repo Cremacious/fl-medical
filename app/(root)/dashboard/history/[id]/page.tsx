@@ -6,12 +6,9 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
   return (
     <>
       <div className="newPage">
-        <div
-          className="flex justify-center
-"
-        >
-          <div className=" bg-red-50 grid grid-cols-1 md:grid-cols-3 gap-4 w-full md:p-8">
-            <div className="">
+        <div className="flex justify-center customCyan px-4 py-8 roundShadow">
+          <div className=" bg-white roundShadow grid grid-cols-1 md:grid-cols-3 gap-4 w-full md:p-8">
+            <div className="ml-4 mt-4 md:ml-0 md:mt-0">
               <Card className="max-w-sm">
                 <CardHeader>
                   <CardTitle>04/20/2025</CardTitle>
