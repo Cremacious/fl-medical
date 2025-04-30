@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import '@fontsource-variable/comfortaa';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -123,7 +124,7 @@
 
 @layer utilities {
   .newPage {
-    @apply container justify-center mx-auto p-4 min-h-4/5 bg-white dark:bg-black rounded-lg shadow-lg;
+    @apply container justify-center mx-auto p-4 min-h-4/5  dark:bg-black rounded-lg shadow-lg;
   }
   .animationEffect {
     @apply hover:scale-105 transition-transform cursor-pointer;
@@ -135,5 +136,9 @@ body {
   background-image: url('./bg-image5.png');
   background-repeat: repeat;
   background-attachment: fixed;
-  background-size: 200px;
+  background-size: 400px;
+}
+
+body {
+  font-family: 'Comfortaa Variable', system-ui;
 }
