@@ -8,10 +8,10 @@ import TimelineRow from '@/components/timeline/timeline-row';
 const DashboardPage = () => {
   return (
     <>
+      <div className="bg-white">Welcome, Name!</div>
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
           <div className="items-center bg-white flex flex-col p-8">
-            <h1 className="text-center my-4">Welcome, name!</h1>
             <Image
               className="object-cover object-center rounded-full"
               alt="hero"

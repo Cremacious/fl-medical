@@ -129,3 +129,11 @@
     @apply hover:scale-105 transition-transform cursor-pointer;
   }
 }
+
+body {
+  @apply bg-background text-foreground;
+  background-image: url('./bg-image5.png');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 200px;
+}

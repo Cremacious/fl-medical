@@ -26,8 +26,8 @@ import {
 } from '@/components/ui/select';
 
 const chartData = [
-  { label: 'Used', usage: 12, fill: 'red' },
-  { label: 'Available', usage: 12, fill: 'blue' },
+  { label: 'Used', usage: 8, fill: 'blue' },
+  { label: 'Available', usage: 16, fill: 'black' },
 ];
 
 const chartConfig = {} satisfies ChartConfig;
@@ -74,7 +74,7 @@ const UsageChart = () => {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          You have used 50% of your allotment
+          You have used 33% of your allotment
         </div>
       </CardFooter>
     </Card>
