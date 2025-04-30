@@ -16,7 +16,7 @@ const UserHeader = () => {
     { name: 'Dashboard', link: '/dashboard' },
     { name: 'Profile', link: '/profile/3' },
     { name: 'History', link: '/dashboard/history' },
-    { name: 'Vault', link: '/dashboard/vault' },
+    { name: 'Stash', link: '/dashboard/stash' },
     { name: 'Friends', link: '/dashboard/friends' },
     { name: 'Settings', link: '/dashboard/settings' },
   ];

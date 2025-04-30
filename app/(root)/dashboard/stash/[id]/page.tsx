@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import icon from '@/assets/images/icons/flower-blue.png';
+import icon from '@/assets/images/icons/flower-yellow.png';
 import Image from 'next/image';
 
 const ItemPage = () => {
@@ -16,13 +16,13 @@ const ItemPage = () => {
       <div className="flex justify-center">
         <div className="customCyan md:w-1/2 px-4 py-8 roundShadow">
           <div className="customBlue roundShadow p-6">
-            <div className="flex justify-center">
-              <Image src={icon} alt="image" height={300} width={300} />
+            <div className="flex justify-center mb-4">
+              <Image src={icon} alt="image" height={100} width={100} />
             </div>
-            <h1 className="text-3xl text-center textOrange mb-2 font-extrabold">
+            <h1 className="text-3xl text-center textOrange mb-4 font-extrabold">
               Sour Diesel
             </h1>
-            <p className="text-white">User thinks...</p>
+            <p className="textOrange font-bold">UserNameHere thinks...</p>
             <p className="mb-4 text-white">
               Fam locavore kickstarter distillery. Mixtape chillwave tumeric
               sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo
@@ -48,11 +48,11 @@ const ItemPage = () => {
                 <div className="font-extrabold textOrange">THC</div>
                 <div className="text-white font-bold">22%</div>
               </div>
-              <div className="flex flex-row justify-between border-t-2  border-gray-400 pt-2">
+              <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">CBD</div>
                 <div className="text-white font-bold">10%</div>
               </div>
-              <div className="flex flex-row justify-between border-t-2 border-gray-400 pt-2">
+              <div className="flex flex-row justify-between border-t-2 border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">Lineage</div>
                 <div className="flex-1 text-right break-words text-white font-bold">
                   Girl Scout Cookies x Pineapple Express
@@ -65,10 +65,6 @@ const ItemPage = () => {
               <div className="flex flex-row justify-between border-t-2  border-b-slate-200 pt-2">
                 <div className="font-extrabold textOrange">Price Per</div>
                 <div className="text-white font-bold">$25</div>
-              </div>
-              <div className="flex flex-row justify-between border-t-2  border-b-slate-200 pt-2">
-                <div className="font-extrabold textOrange">Details</div>
-                <div className="text-white font-bold">View</div>
               </div>
             </div>
           </div>

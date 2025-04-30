@@ -9,30 +9,28 @@ import {
 import Image from 'next/image';
 import stock from '@/public/stock.jpg';
 import Link from 'next/link';
+import image from '@/assets/images/icons/flower-yellow.png';
 
 const ProductCard = () => {
   return (
-    <Link href="/dashboard/vault/3">
-      <Card className="max-w-xs overflow-hidden border-none roundShadow customBlue">
+    <Link href="/dashboard/stash/3">
+      <Card className="animationEffect border-none roundShadow customBlue">
         <CardHeader>
-          <CardTitle className="textOrange">Sour Diesel</CardTitle>
-          <p className="mt-1 text-sm text-white">
-            Lorem ipsum dolor sit amet consectetur adipisissscing...
-          </p>
+          <CardTitle className="textOrange text-center text-2xl font-bold">
+            Sour Diesel
+          </CardTitle>
         </CardHeader>
         <CardContent className="px-0">
-          <Image
-            className="object-cover"
-            src={stock}
-            alt="NIKE AIR"
-            height={48}
-            width={320}
-          />
+          <div className="flex justify-center mx-4">
+            <Image
+              className="object-cover"
+              src={image}
+              alt="NIKE AIR"
+              height={200}
+              width={200}
+            />
+          </div>
         </CardContent>
-        <CardFooter className="flex items-center justify-evenly">
-          <Badge className="customCyan text-md">Inhalent</Badge>
-          <Badge className="customCyan text-md">Trulieve</Badge>
-        </CardFooter>
       </Card>
     </Link>
   );

@@ -1,15 +1,15 @@
 import ProductCard from '@/components/shared/products/product-card';
 import VaultSearch from './vault-search';
 
-const VaultPage = () => {
+const StashPage = () => {
   return (
     <>
       <div className="container justify-center mx-auto">
         <VaultSearch />
       </div>
       <div className="container mx-auto">
-        <div className="customCyan px-4 py-8 mx-4 roundShadow">
-          <div className="grid gap-4 md:grid-cols-3 justify-center bg-white p-6 roundShadow">
+        <div className="customBlue px-4 py-8 mx-4 roundShadow">
+          <div className="grid gap-4 md:grid-cols-4 justify-center customCyan p-6 roundShadow">
             <ProductCard />
             <ProductCard />
             <ProductCard />
@@ -23,4 +23,4 @@ const VaultPage = () => {
   );
 };
 
-export default VaultPage;
+export default StashPage;
