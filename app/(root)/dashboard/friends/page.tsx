@@ -6,15 +6,16 @@ const FriendsPage = () => {
     <>
       <FriendSearch />
       <div className="newPage">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <FriendCard />
-          <FriendCard />
-          <FriendCard />
-          <FriendCard />
-          <FriendCard />
+        <div className="customBlue px-4 py-8 mx-4 roundShadow">
+          <div className="">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 customCyan p-6 roundShadow">
+              <FriendCard />
+              <FriendCard />
+          
+            </div>
+          </div>
         </div>
       </div>
-      ;
     </>
   );
 };

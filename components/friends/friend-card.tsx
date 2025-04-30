@@ -7,23 +7,27 @@ import {
   CardDescription,
 } from '../ui/card';
 import Image from 'next/image';
-import stock from '@/public/stock.jpg';
+import stock from '@/public/avatar.png';
 
 const FriendCard = () => {
   return (
     <Link href="/profile/3">
-      <div className="flex justify-center items-center">
-        <div className="max-w-xs container bg-blue-50 p-4 rounded-xl shadow-lg animationEffect">
-          <div>
-            <h1 className="text-lg mb-2 text-center font-bold text-slate-800">
-              FRIEND NAME
-            </h1>
-          </div>
-          <div className="flex justify-center">
-            <Image className="w-4/5 rounded-full" src={stock} alt="image" />
-          </div>
-        </div>
-      </div>
+      <Card className="customBlue border-none animationEffect roundShadow">
+        <CardHeader className="flex flex-col items-center justify-center text-center">
+          <CardTitle className="text-xl font-bold textOrange">
+            John Doe
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col items-center ">
+          <Image
+            className="rounded-full"
+            src={stock}
+            alt="image"
+            width={150}
+            height={150}
+          />
+        </CardContent>
+      </Card>
     </Link>
   );
 };

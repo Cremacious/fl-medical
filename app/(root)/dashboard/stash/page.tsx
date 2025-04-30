@@ -7,7 +7,7 @@ const StashPage = () => {
       <div className="container justify-center mx-auto">
         <VaultSearch />
       </div>
-      <div className="container mx-auto">
+      <div className="newPage">
         <div className="customBlue px-4 py-8 mx-4 roundShadow">
           <div className="grid gap-4 md:grid-cols-4 justify-center customCyan p-6 roundShadow">
             <ProductCard />
