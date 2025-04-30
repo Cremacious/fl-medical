@@ -13,11 +13,11 @@ import Link from 'next/link';
 const ProductCard = () => {
   return (
     <Link href="/dashboard/vault/3">
-      <Card className="hover:scale-105 transition-transform cursor-pointer max-w-xs border-4 border-slate-300 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <Card className="max-w-xs overflow-hidden border-none roundShadow customBlue">
         <CardHeader>
-          <CardTitle>Sour Diesel</CardTitle>
-          <p className="mt-1 text-sm text-gray-800 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing...
+          <CardTitle className="text-white">Sour Diesel</CardTitle>
+          <p className="mt-1 text-sm text-white">
+            Lorem ipsum dolor sit amet consectetur adipisissscing...
           </p>
         </CardHeader>
         <CardContent className="px-0">
@@ -30,8 +30,8 @@ const ProductCard = () => {
           />
         </CardContent>
         <CardFooter className="flex items-center justify-evenly">
-          <Badge>Inhalent</Badge>
-          <Badge>Trulieve</Badge>
+          <Badge className="customOrange text-md">Inhalent</Badge>
+          <Badge className="customOrange text-md">Trulieve</Badge>
         </CardFooter>
       </Card>
     </Link>

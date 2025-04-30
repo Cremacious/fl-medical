@@ -7,14 +7,16 @@ const VaultPage = () => {
       <div className="container justify-center mx-auto">
         <VaultSearch />
       </div>
-      <div className="bg-white container mx-auto p-6 rounded-lg shadow-lg">
-        <div className="grid gap-4 md:grid-cols-4 justify-center">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+      <div className="container mx-auto">
+        <div className="customCyan px-4 py-8 mx-4 roundShadow">
+          <div className="grid gap-4 md:grid-cols-3 justify-center bg-white p-6 roundShadow">
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </div>
         </div>
       </div>
     </>

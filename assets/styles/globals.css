@@ -124,7 +124,10 @@
 
 @layer utilities {
   .newPage {
-    @apply container justify-center mx-auto p-4 min-h-4/5  dark:bg-black rounded-lg shadow-lg;
+    @apply container justify-center mx-auto p-4 min-h-4/5;
+  }
+  .roundShadow {
+    @apply shadow-lg rounded-lg;
   }
   .animationEffect {
     @apply hover:scale-105 transition-transform cursor-pointer;
@@ -141,4 +144,16 @@ body {
 
 body {
   font-family: 'Comfortaa Variable', system-ui;
+}
+
+@layer utilities {
+  .customOrange {
+    background-color: #eb7808;
+  }
+  .customBlue {
+    background-color: #116a7e;
+  }
+  .customCyan {
+    background-color: #3e9495;
+  }
 }

@@ -5,11 +5,11 @@ import stock from '@/public/stock.jpg';
 const ProfilePage = () => {
   return (
     <div className="newPage">
-      <div className="bg-gray-100">
+      <div className="customCyan roundShadow">
         <div className="container mx-auto py-8">
           <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
             <div className="col-span-4 sm:col-span-3">
-              <div className="bg-white shadow rounded-lg p-6">
+              <div className="bg-white roundShadow p-6">
                 <div className="flex flex-col items-center">
                   <Image
                     src={stock}
