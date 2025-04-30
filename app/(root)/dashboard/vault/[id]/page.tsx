@@ -7,6 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import icon from '@/assets/images/icons/flower-blue.png';
+import Image from 'next/image';
 
 const ItemPage = () => {
   return (
@@ -14,7 +16,10 @@ const ItemPage = () => {
       <div className="flex justify-center">
         <div className="customCyan md:w-1/2 px-4 py-8 roundShadow">
           <div className="customBlue roundShadow p-6">
-            <h1 className="text-3xl text-center textOrange font-extrabold">
+            <div className="flex justify-center">
+              <Image src={icon} alt="image" height={300} width={300} />
+            </div>
+            <h1 className="text-3xl text-center textOrange mb-2 font-extrabold">
               Sour Diesel
             </h1>
             <p className="text-white">User thinks...</p>

@@ -21,23 +21,23 @@ const PurchaseCard = () => {
             <div className="font-extrabold textOrange">Category</div>
             <div className="text-white font-bold">Topical</div>
           </div>
-          <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
+          <div className="flex flex-row justify-between border-t-2  border-[#3e9495] pt-2">
             <div className="font-extrabold textOrange">Type</div>
             <div className="text-white font-bold">Hybrid</div>
           </div>
-          <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
+          <div className="flex flex-row justify-between border-t-2  border-[#3e9495] pt-2">
             <div className="font-extrabold textOrange">Size</div>
             <div className="text-white font-bold">1G</div>
           </div>
-          <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
+          <div className="flex flex-row justify-between border-t-2  border-[#3e9495] pt-2">
             <div className="font-extrabold textOrange">THC</div>
             <div className="text-white font-bold">22%</div>
           </div>
-          <div className="flex flex-row justify-between border-t-2  border-gray-400 pt-2">
+          <div className="flex flex-row justify-between border-t-2  border-[#3e9495] pt-2">
             <div className="font-extrabold textOrange">CBD</div>
             <div className="text-white font-bold">10%</div>
           </div>
-          <div className="flex flex-row justify-between border-t-2 border-gray-400 pt-2">
+          <div className="flex flex-row justify-between border-t-2 border-[#3e9495]pt-2">
             <div className="font-extrabold textOrange">Lineage</div>
             <div className="flex-1 text-right break-words text-white font-bold">
               Girl Scout Cookies x Pineapple Express
