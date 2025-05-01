@@ -6,9 +6,9 @@ import HistorySearch from './history-search';
 const HistoryPage = () => {
   return (
     <>
-      <HistorySearch />
       <div className="newPage">
-        <div className="customBlue px-4 py-8 mx-4 roundShadow">
+        <div className="customBlue px-4 pt-4 pb-8 roundShadow">
+          <HistorySearch />
           <HistoryTable />
         </div>
       </div>

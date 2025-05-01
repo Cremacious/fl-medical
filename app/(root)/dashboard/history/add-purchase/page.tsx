@@ -1,9 +1,10 @@
-import PurchaseForm from './purchase-form';
+import AddPurchaseForm from './add-purchase-form';
 
 const AddPurchasePage = () => {
   return (
     <div className="newPage">
-      <PurchaseForm />
+      Add purchase page
+      <AddPurchaseForm />
     </div>
   );
 };

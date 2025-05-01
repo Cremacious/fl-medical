@@ -59,12 +59,8 @@ const ItemPage = () => {
                 </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-b-slate-200 pt-2">
-                <div className="font-extrabold textOrange">Quantity</div>
-                <div className="text-white font-bold">4</div>
-              </div>
-              <div className="flex flex-row justify-between border-t-2  border-b-slate-200 pt-2">
-                <div className="font-extrabold textOrange">Price Per</div>
-                <div className="text-white font-bold">$25</div>
+                <div className="font-extrabold textOrange">Purchased From</div>
+                <div className="text-white font-bold">Trulieve</div>
               </div>
             </div>
           </div>

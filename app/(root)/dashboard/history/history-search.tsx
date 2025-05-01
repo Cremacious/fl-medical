@@ -7,23 +7,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 const HistorySearch = () => {
   return (
     <div className="flex justify-center">
-      <div className="bg-white rounded-lg shadow-lg mb-4 container mx-auto">
-        <div className="flex flex-row justify-between items-center p-4">
-          <div className="flex flex-row gap-2">
-            <Button>Add New</Button>
+      <div className="customBlue mb-4 container mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center p-4">
+          <div className="flex flex-row gap-2 mb-4 md:mb-0 w-full">
+            <Button asChild className="w-full md:w-xs">
+              <Link href="/dashboard/history/add-purchase">
+                Add New Purchase
+              </Link>
+            </Button>
           </div>
           <div className="flex flex-row gap-2 items-center">
-            <div>Search:</div>
+            <div className="textOrange font-bold text-lg">Search:</div>
             <Select>
-              <SelectTrigger className="w-[100px]">
-                <SelectValue placeholder="Month" />
+              <SelectTrigger className="bg-white w-[100px]">
+                <SelectValue className="text-black" placeholder="Month" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="light">Light</SelectItem>
@@ -32,8 +34,8 @@ const HistorySearch = () => {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[100px]">
-                <SelectValue placeholder="Year" />
+              <SelectTrigger className="w-[100px] bg-white">
+                <SelectValue className="" placeholder="Year" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="light">Light</SelectItem>

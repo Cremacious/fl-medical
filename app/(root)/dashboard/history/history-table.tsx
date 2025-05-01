@@ -20,13 +20,13 @@ const HistoryTable = () => {
         <TableCaption>A list of your recent purchases.</TableCaption>
         <TableHeader>
           <TableRow className="">
-            <TableHead className="text-center text-lg font-bold textOrange">
+            <TableHead className="text-center text-md font-bold textOrange">
               Date
             </TableHead>
-            <TableHead className="text-center text-lg font-bold  textOrange">
+            <TableHead className="text-center text-md font-bold  textOrange">
               Dispensary
             </TableHead>
-            <TableHead className="text-center text-lg font-bold  textOrange">
+            <TableHead className="text-center text-md font-bold  textOrange">
               Price
             </TableHead>
           </TableRow>
