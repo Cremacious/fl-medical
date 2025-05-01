@@ -60,7 +60,7 @@ const UserHeader = () => {
                   <li className="max-lg:py-3 px-3 hover:bg-[#3e9495] rounded-md">
                     <Link
                       href={link.link}
-                      className="textOrange block font-bold mt-1 text-md p-1"
+                      className="textOrange block font-bold mt-[2px] text-md p-1"
                     >
                       {link.name}
                     </Link>
