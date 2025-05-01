@@ -34,13 +34,13 @@ const HistoryTable = () => {
         <TableBody>
           <Link legacyBehavior href="/dashboard/history/1">
             <TableRow className="cursor-pointer customBlue roundShadow my-4 hover:bg-cyan-800">
-              <TableCell className="text-center text-white text-lg font-bold">
+              <TableCell className="text-center text-white text-md font-bold">
                 04/20/25
               </TableCell>
-              <TableCell className="text-center text-white text-lg font-bold">
+              <TableCell className="text-center text-white text-md font-bold">
                 Trulieve
               </TableCell>
-              <TableCell className="flex-1 text-center break-words text-white text-lg font-bold">
+              <TableCell className="flex-1 text-center break-words text-white text-md font-bold">
                 $2500.00
               </TableCell>
             </TableRow>
