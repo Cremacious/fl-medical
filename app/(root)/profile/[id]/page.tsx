@@ -33,7 +33,7 @@ const ProfilePage = () => {
             </div>
             <div className="col-span-4 sm:col-span-9">
               <div className="flex justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <TimelinePost />
                   <TimelinePost />
                   <TimelinePost />
