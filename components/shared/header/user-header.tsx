@@ -12,6 +12,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
+import logo from '@/public/logo.jpeg';
+import name from '@/public/logo-name.png';
 
 const UserHeader = () => {
   const links = [
@@ -25,21 +27,19 @@ const UserHeader = () => {
   return (
     <>
       <header className="flex shadow-md py-2 mb-4 px-4 sm:px-10 customBlue min-h-[50px] tracking-wide relative z-50">
-        <div className="flex flex-wrap items-center justify-between gap-5 w-full">
-          <Link href="javascript:void(0)" className="max-sm:hidden">
-            {/* <Image
-              src="https://readymadeui.com/readymadeui.svg"
-              alt="logo"
-              className="w-36"
-            /> */}
-          </Link>
-          {/* <a href="javascript:void(0)" className="hidden max-sm:block">
-            <Image
-              src="https://readymadeui.com/readymadeui-short.svg"
-              alt="logo"
-              className="w-9"
-            />
-          </a> */}
+        <div className="flex flex-wrap items-center justify-between gap-8 w-full">
+          <div className="flex flex-row gap-4">
+            <Link href="/" className="max-sm:hidden">
+              <Image src={logo} alt="logo" className="w-9 rounded-full" />
+            </Link>
+
+            <Link href="/" className="hidden max-sm:block">
+              <Image src={logo} alt="logo" className="w-9 rounded-full" />
+            </Link>
+            <div className="flex justify-center text-lg items-center textOrange font-bold">
+              Sunset Stash
+            </div>
+          </div>
 
           <div
             id="collapseMenu"
@@ -60,7 +60,7 @@ const UserHeader = () => {
                   <li className="max-lg:py-3 px-3 hover:bg-[#3e9495] rounded-md">
                     <Link
                       href={link.link}
-                      className="textOrange block font-bold text-lg p-1"
+                      className="textOrange block font-bold mt-1 text-md p-1"
                     >
                       {link.name}
                     </Link>
@@ -68,14 +68,13 @@ const UserHeader = () => {
                   {index < links.length - 1 && (
                     <Separator
                       orientation="vertical"
-                      className="min-h-[25px] m-[5px] border-[1px] bg-blue-300"
+                      className="min-h-[25px] m-[5px] border-[1px]"
                     />
                   )}
                 </React.Fragment>
               ))}
             </ul>
           </div>
-          {/* SignInOut and Menu Icon */}
           <div className="flex max-lg:ml-auto space-x-4">
             <Sheet>
               <SheetTrigger>

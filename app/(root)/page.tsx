@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import logo from '@/assets/styles/wallpaper.jpeg';
+import logo from '@/public/logo.jpeg';
 import Image from 'next/image';
 
 const Homepage = () => {
