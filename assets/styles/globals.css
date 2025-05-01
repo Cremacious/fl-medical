@@ -162,22 +162,3 @@ body {
   --custom-orange: #f7c062;
   color: var(--custom-orange);
 }
-
-/* Add this to your global CSS or layout wrapper */
-html,
-body {
-  height: 100%; /* Ensure the body takes up the full height of the viewport */
-  margin: 0;
-}
-
-#root, /* If using React's root div */
-#__next {
-  /* If using Next.js */
-  display: flex;
-  flex-direction: column;
-  min-height: 100%; /* Ensure the container takes up the full height */
-}
-
-.main-content {
-  flex: 1; /* Pushes the footer to the bottom */
-}

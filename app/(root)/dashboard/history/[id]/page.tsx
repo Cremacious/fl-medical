@@ -7,26 +7,28 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
   return (
     <>
       <div className="newPage">
-        <div className="flex justify-center customCyan px-4 py-8 roundShadow">
-          <div className=" bg-white roundShadow grid grid-cols-1 md:grid-cols-3 gap-4 w-full md:p-8">
+        <div className="flex justify-center customBlue px-4 py-8 roundShadow">
+          <div className="customCyan roundShadow grid grid-cols-1 md:grid-cols-3 gap-4 w-full md:p-8">
             <div className="ml-4 mt-4 md:ml-0 md:mt-0">
-              <Card className="max-w-sm border-none shadow-none">
+              <Card className="customCyan max-w-sm border-none shadow-none">
                 <CardHeader>
-                  <CardTitle>04/20/2025</CardTitle>
+                  <CardTitle className="font-bold text-xl text-white">
+                    04/20/2025
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col gap-2">
                     <div className="flex flex-row justify-between border-b-2 border-b-slate-200 pb-2">
-                      <div className="font-bold">Dispensary</div>
-                      <div>Trulieve</div>
+                      <div className="font-bold text-white">Dispensary</div>
+                      <div className="font-bold text-white">Trulieve</div>
                     </div>
                     <div className="flex flex-row justify-between border-b-2  border-b-slate-200 pb-2">
-                      <div className="font-bold">Items</div>
-                      <div>4</div>
+                      <div className="font-bold text-white">Items</div>
+                      <div className="font-bold text-white">4</div>
                     </div>
                     <div className="flex flex-row justify-between pb-2">
-                      <div className="font-bold">Total</div>
-                      <div>$120</div>
+                      <div className="font-bold text-white">Total</div>
+                      <div className="font-bold text-white">$120</div>
                     </div>
                     <Button className="customOrange cursor-pointer font-bold hover:bg-orange-300 text-slate-800">
                       Edit Purchase
