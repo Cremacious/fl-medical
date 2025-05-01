@@ -5,11 +5,11 @@ import stock from '@/public/stock.jpg';
 const ProfilePage = () => {
   return (
     <div className="newPage">
-      <div className="customCyan roundShadow">
-        <div className="container mx-auto py-8">
+      <div className="customBlue px-4 py-8 roundShadow">
+        <div className="customCyan roundShadow py-4 md:p-6">
           <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
             <div className="col-span-4 sm:col-span-3">
-              <div className="bg-white roundShadow p-6">
+              <div className="customBlue roundShadow p-6">
                 <div className="flex flex-col items-center">
                   <Image
                     src={stock}
@@ -29,21 +29,10 @@ const ProfilePage = () => {
                     </a>
                   </div>
                 </div>
-                <hr className="my-6 border-t border-gray-300" />
-                <div className="flex flex-col">
-                  <span className="text-gray-700 uppercase font-bold tracking-wider mb-2">
-                    Details
-                  </span>
-                  <ul>
-                    <li className="mb-2">Detail</li>
-                    <li className="mb-2">Detail</li>
-                    <li className="mb-2">Detail</li>
-                  </ul>
-                </div>
               </div>
             </div>
             <div className="col-span-4 sm:col-span-9">
-              <div className="bg-white shadow rounded-lg p-6 flex justify-center">
+              <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <TimelinePost />
                   <TimelinePost />
