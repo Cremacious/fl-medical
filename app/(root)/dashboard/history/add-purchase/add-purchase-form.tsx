@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { Calendar as CalendarIcon, CirclePlus } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
@@ -122,11 +122,11 @@ const AddPurchaseForm = () => {
               />
               <FormField
                 control={form.control}
-                name="quantity"
+                name="size"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="textOrange text-md font-bold">
-                      Quantity
+                      Size
                     </FormLabel>
                     <div className="flex items-center space-x-2">
                       <FormControl>
@@ -220,7 +220,7 @@ const AddPurchaseForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="textOrange text-md font-bold">
-                      Dispensary Name
+                      Quantity
                     </FormLabel>
                     <FormControl>
                       <Input className="max-w-sm bg-white" {...field} />
@@ -333,7 +333,18 @@ const AddPurchaseForm = () => {
               )}
             />
             <div className="flex justify-center mt-4">
-              <Button type="submit">Submit Purchase</Button>
+              <button
+                onClick={() => {
+                  console.log('CirclePlus button clicked!');
+                  // Add your desired action here
+                }}
+                className="flex items-center justify-center textOrange hover:cursor-pointer"
+              >
+                <CirclePlus size={40} />
+              </button>
+            </div>
+            <div className="flex justify-center mt-4">
+              <Button type="submit">Submit</Button>
             </div>
           </form>
         </Form>
