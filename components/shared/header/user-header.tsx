@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SquareMenu } from 'lucide-react';
@@ -10,6 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { Separator } from '@/components/ui/separator';
 
 const UserHeader = () => {
   const links = [
@@ -22,7 +24,7 @@ const UserHeader = () => {
   ];
   return (
     <>
-      <header className="flex shadow-md py-4 mb-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
+      <header className="flex shadow-md py-2 mb-4 px-4 sm:px-10 customBlue min-h-[50px] tracking-wide relative z-50">
         <div className="flex flex-wrap items-center justify-between gap-5 w-full">
           <Link href="javascript:void(0)" className="max-sm:hidden">
             {/* <Image
@@ -54,17 +56,22 @@ const UserHeader = () => {
                 </a>
               </li>
               {links.map((link, index) => (
-                <li
-                  key={index}
-                  className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3"
-                >
-                  <Link
-                    href={link.link}
-                    className="hover:text-blue-700 text-slate-800 block font-medium text-[15px]"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
+                <React.Fragment key={index}>
+                  <li className="max-lg:py-3 px-3 hover:bg-[#3e9495] rounded-md">
+                    <Link
+                      href={link.link}
+                      className="textOrange block font-bold text-lg p-1"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                  {index < links.length - 1 && (
+                    <Separator
+                      orientation="vertical"
+                      className="min-h-[25px] m-[5px] border-[1px] bg-blue-300"
+                    />
+                  )}
+                </React.Fragment>
               ))}
             </ul>
           </div>
