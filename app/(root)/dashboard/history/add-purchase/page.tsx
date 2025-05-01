@@ -3,8 +3,11 @@ import AddPurchaseForm from './add-purchase-form';
 const AddPurchasePage = () => {
   return (
     <div className="newPage">
-      Add purchase page
-      <AddPurchaseForm />
+      <div className="px-4 py-8 roundShadow customBlue">
+        <div className="customCyan p-4 roundShadow">
+          <AddPurchaseForm />
+        </div>
+      </div>
     </div>
   );
 };

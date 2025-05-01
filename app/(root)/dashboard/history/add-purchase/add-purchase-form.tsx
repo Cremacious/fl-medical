@@ -35,7 +35,7 @@ const AddPurchaseForm = () => {
   const [date, setDate] = useState<Date>();
   return (
     <div className="flex items-center justify-center">
-      <div className="border-8 border-blue-200 p-4 rounded-lg">
+      <div className="rounded-lg">
         <Form {...form}>
           <form>
             {/* Name Field */}
@@ -45,10 +45,12 @@ const AddPurchaseForm = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Strain Name</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Strain Name
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        className="max-w-sm"
+                        className="max-w-sm bg-white"
                         placeholder="Name"
                         {...field}
                       />
@@ -66,13 +68,15 @@ const AddPurchaseForm = () => {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Category
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full bg-white">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                       </FormControl>
@@ -94,13 +98,15 @@ const AddPurchaseForm = () => {
                 name="type"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Type</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Type
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full bg-white">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                       </FormControl>
@@ -119,11 +125,13 @@ const AddPurchaseForm = () => {
                 name="quantity"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Quantity</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Quantity
+                    </FormLabel>
                     <div className="flex items-center space-x-2">
                       <FormControl>
                         <Input
-                          className="max-w-[100px]"
+                          className="max-w-[100px] bg-white"
                           type="number"
                           placeholder="0"
                           value={field.value?.split(/(g|oz)/)[0] || ''}
@@ -145,7 +153,7 @@ const AddPurchaseForm = () => {
                             field.value?.match(/(g|oz)/)?.[0] || 'g'
                           }
                         >
-                          <SelectTrigger className="w-[80px]">
+                          <SelectTrigger className="w-[80px] bg-white">
                             <SelectValue placeholder="Unit" />
                           </SelectTrigger>
                           <SelectContent>
@@ -168,7 +176,9 @@ const AddPurchaseForm = () => {
                 name="date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Purchase Date</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Purchase Date
+                    </FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -209,9 +219,11 @@ const AddPurchaseForm = () => {
                 name="dispensary"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Dispensary Name</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Dispensary Name
+                    </FormLabel>
                     <FormControl>
-                      <Input className="max-w-sm" {...field} />
+                      <Input className="max-w-sm bg-white" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -222,10 +234,12 @@ const AddPurchaseForm = () => {
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Price
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        className="max-w-sm"
+                        className="max-w-sm bg-white"
                         type="number"
                         placeholder="0"
                         {...field}
@@ -244,10 +258,12 @@ const AddPurchaseForm = () => {
                 name="thc"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>THC %</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      THC %
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        className="max-w-[120px]"
+                        className="max-w-[120px] bg-white"
                         placeholder="0"
                         {...field}
                       />
@@ -261,10 +277,12 @@ const AddPurchaseForm = () => {
                 name="cbd"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>CBD %</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      CBD %
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        className="max-w-[120px]"
+                        className="max-w-[120px] bg-white"
                         placeholder="0"
                         {...field}
                       />
@@ -278,10 +296,12 @@ const AddPurchaseForm = () => {
                 name="lineage"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Lineage</FormLabel>
+                    <FormLabel className="textOrange text-md font-bold">
+                      Lineage
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        className="max-w-sm"
+                        className="max-w-sm bg-white"
                         placeholder="i.e. Cookies x Kush Mints"
                         {...field}
                       />
@@ -299,14 +319,22 @@ const AddPurchaseForm = () => {
               name="thoughts"
               render={({ field }) => (
                 <FormItem className="mt-4">
-                  <FormLabel>Personal Thoughts</FormLabel>
+                  <FormLabel className="textOrange text-md font-bold">
+                    Personal Thoughts
+                  </FormLabel>
+                  <FormDescription className="text-white font-bold">
+                    Share any additional thoughts or details
+                  </FormDescription>
                   <FormControl>
-                    <Textarea className="w-full" {...field} />
+                    <Textarea className="w-full bg-white" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+            <div className="flex justify-center mt-4">
+              <Button type="submit">Submit Purchase</Button>
+            </div>
           </form>
         </Form>
       </div>
