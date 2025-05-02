@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,27 +16,38 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { insertStashItemSchema } from '@/lib/validators';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { z } from 'zod';
 
 const AddStashForm = () => {
-  const form = useForm({});
-  const [date, setDate] = useState<Date>();
+  const form = useForm<z.infer<typeof insertStashItemSchema>>({
+    resolver: zodResolver(insertStashItemSchema),
+    defaultValues: {
+      name: '',
+      category: '',
+      type: '',
+      size: '',
+      thc: '',
+      cbd: '',
+      lineage: '',
+      thoughts: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<z.infer<typeof insertStashItemSchema>> = async (
+    data
+  ) => {
+    console.log(data);
+    form.reset;
+  };
+
   return (
     <div className="flex items-center justify-center">
       <Form {...form}>
-        <form>
-          {/* Name Field */}
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="">
             <FormField
               control={form.control}
@@ -59,8 +69,6 @@ const AddStashForm = () => {
               )}
             />
           </div>
-
-          {/* Category, Type, Quantity */}
           <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
             <FormField
               control={form.control}
@@ -163,8 +171,6 @@ const AddStashForm = () => {
               )}
             />
           </div>
-
-          {/* THC and CBD Fields */}
           <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
             <FormField
               control={form.control}
@@ -216,8 +222,6 @@ const AddStashForm = () => {
               )}
             />
           </div>
-
-          {/* Text Areas */}
           <FormField
             control={form.control}
             name="thoughts"
@@ -233,7 +237,6 @@ const AddStashForm = () => {
               </FormItem>
             )}
           />
-
           <div className="flex justify-center mt-6">
             <Button type="submit">Submit</Button>
           </div>

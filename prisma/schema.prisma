@@ -98,8 +98,8 @@ model StashItem {
   category   String
   type       String
   size       String
-  thc        Float
-  cbd        Float
+  thc        String
+  cbd        String
   lineage    String
   thoughts    String
 
