@@ -41,7 +41,7 @@ const AddStashForm = () => {
     data
   ) => {
     console.log(data);
-    form.reset;
+    form.reset();
   };
 
   return (
