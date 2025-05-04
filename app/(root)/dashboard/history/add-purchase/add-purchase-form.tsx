@@ -22,8 +22,9 @@ import {
   FormMessage,
   FormDescription,
 } from '@/components/ui/form';
-import { CirclePlus } from 'lucide-react';
+import { CirclePlus, MinusCircle } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
 
 const AddPurchaseForm = () => {
   const form = useForm<z.infer<typeof purchaseSchema>>({
@@ -57,6 +58,7 @@ const AddPurchaseForm = () => {
     data
   ) => {
     console.log(data);
+    toast.success('Purchase added successfully!');
     form.reset();
   };
 
@@ -66,15 +68,21 @@ const AddPurchaseForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             {/* Dispensary and Date */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 customBlue p-4 justify-evenly roundShadow mb-4">
               <FormField
                 control={form.control}
                 name="dispensary"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Dispensary</FormLabel>
+                    <FormLabel className="textOrange font-bold text-md">
+                      Dispensary
+                    </FormLabel>
                     <FormControl>
-                      <Input placeholder="Dispensary Name" {...field} />
+                      <Input
+                        className="bg-white"
+                        placeholder="Dispensary Name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -85,9 +93,12 @@ const AddPurchaseForm = () => {
                 name="date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Purchase Date</FormLabel>
+                    <FormLabel className="textOrange font-bold text-md">
+                      Purchase Date
+                    </FormLabel>
                     <FormControl>
                       <Input
+                        className="bg-white max-w-[140px]"
                         type="date"
                         value={field.value?.toISOString().split('T')[0]}
                         onChange={(e) =>
@@ -104,6 +115,15 @@ const AddPurchaseForm = () => {
             {/* Purchase Items */}
             {fields.map((item, index) => (
               <div key={item.id} className="customBlue p-4 roundShadow my-4">
+                <div className="flex flex-col items-end mb-2">
+                  <button
+                    onClick={() => remove(index)}
+                    className="mt-4"
+                    type="button"
+                  >
+                    <MinusCircle className="textOrange" size={40} />
+                  </button>
+                </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <FormField
                     control={form.control}
@@ -274,7 +294,7 @@ const AddPurchaseForm = () => {
                       </FormItem>
                     )}
                   />
-                  <div className="flex flex-row gap-4 mb-[1px]">
+                  <div className="flex flex-row gap-4">
                     <FormField
                       control={form.control}
                       name={`items.${index}.thc`}
@@ -318,7 +338,7 @@ const AddPurchaseForm = () => {
                     control={form.control}
                     name={`items.${index}.lineage`}
                     render={({ field }) => (
-                      <FormItem className="mt-4">
+                      <FormItem>
                         <FormLabel className="textOrange text-md font-bold">
                           Lineage
                         </FormLabel>
@@ -333,32 +353,25 @@ const AddPurchaseForm = () => {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name={`items.${index}.details`}
-                    render={({ field }) => (
-                      <FormItem className="mt-4">
-                        <FormLabel className="textOrange text-md font-bold">
-                          Extra Details
-                        </FormLabel>
-                        <FormDescription className="text-white font-bold">
-                          Share any additional details
-                        </FormDescription>
-                        <FormControl>
-                          <Textarea className="w-full bg-white" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
                 </div>
-                <Button
-                  variant="destructive"
-                  onClick={() => remove(index)}
-                  className="mt-4"
-                >
-                  Remove Item
-                </Button>
+                <FormField
+                  control={form.control}
+                  name={`items.${index}.details`}
+                  render={({ field }) => (
+                    <FormItem className="mt-4">
+                      <FormLabel className="textOrange text-md font-bold">
+                        Extra Details
+                      </FormLabel>
+                      <FormDescription className="text-white font-bold">
+                        Share any additional details
+                      </FormDescription>
+                      <FormControl>
+                        <Textarea className="w-full bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             ))}
 
