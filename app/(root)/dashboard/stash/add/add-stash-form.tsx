@@ -45,9 +45,9 @@ const AddStashForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center ">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form className='customBlue p-4 my-4 roundShadow' onSubmit={form.handleSubmit(onSubmit)}>
           <div className="">
             <FormField
               control={form.control}

@@ -68,7 +68,7 @@ const AddPurchaseForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             {/* Dispensary and Date */}
-            <div className="grid grid-cols-3 gap-4 customBlue p-4 justify-evenly roundShadow mb-4">
+            <div className="grid grid-cols-3 gap-4 customBlue p-4 roundShadow mb-4">
               <FormField
                 control={form.control}
                 name="dispensary"
