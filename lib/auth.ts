@@ -44,10 +44,10 @@ export const authOptions = {
           }
         }
 
-        return null; 
+        return null;
       },
     }),
   ],
 };
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+export default NextAuth(authOptions);
