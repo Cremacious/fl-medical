@@ -17,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { signUpUser } from '@/lib/actions/user.actions';
 
 const SignUpForm = () => {
   const form = useForm<z.infer<typeof signUpFormSchema>>({
@@ -32,6 +33,7 @@ const SignUpForm = () => {
     data
   ) => {
     console.log(data);
+    const response = await signUpUser(data);
   };
 
   return (
