@@ -14,7 +14,7 @@ export async function signUpUser(data: z.infer<typeof signUpFormSchema>) {
     //   confirmPassword: formData.get('confirmPassword'),
     // });
     const plainPassword = user.password;
-    user.password = hashSync(user.password, 10);
+    user.password = hashSync(user.password, 10); //fix
     await prisma.user.create({
       data: {
         username: user.username,
