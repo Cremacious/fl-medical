@@ -34,6 +34,11 @@ const SignUpForm = () => {
   ) => {
     console.log(data);
     const response = await signUpUser(data);
+    if (response.success) {
+      console.log(response.message);
+    } else {
+      console.log(response.message);
+    }
   };
 
   return (
