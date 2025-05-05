@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import logo from '@/public/logo.jpeg';
 import Image from 'next/image';
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs';
 
 const Homepage = () => {
   return (
@@ -17,6 +25,15 @@ const Homepage = () => {
       <Link className="p-2 rounded-lg bg-white" href="/dashboard">
         Go To Dashboard
       </Link>
+      <div className="bg-white">
+        <SignedOut>
+          <SignInButton />
+          <SignUpButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div>
       {/* <div className="newPage">
       </div> */}
     </>

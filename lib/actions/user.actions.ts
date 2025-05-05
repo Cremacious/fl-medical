@@ -6,30 +6,35 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { hashSync } from 'bcrypt-ts-edge';
 import { formatError } from '../utils';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
 
-export async function signUpUser(data: z.infer<typeof signUpFormSchema>) {
+export async function signUpUser(prevState: unknown, formData: FormData) {
   try {
-    const user = signUpFormSchema.parse(data);
+    const user = signUpFormSchema.parse({
+      username: formData.get('username'),
+      confirmPassword: formData.get('confirmPassword'),
+      password: formData.get('password'),
+    });
     const plainPassword = user.password;
-    user.password = hashSync(user.password, 10); //fix
+    user.password = hashSync(user.password, 10);
     await prisma.user.create({
       data: {
         username: user.username,
         password: user.password,
       },
     });
-
     await signIn('credentials', {
       username: user.username,
       password: plainPassword,
     });
-    console.log('User created successfully');
     return { success: true, message: 'User created successfully' };
   } catch (error) {
-    console.log(formatError(error));
+    if (isRedirectError(error)) {
+      throw error;
+    }
     return {
       success: false,
-      message: formatError(error),
+      message: 'Something went wrong',
     };
   }
 }
