@@ -22,7 +22,7 @@ const SignUpForm = () => {
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
       confirmPassword: '',
     },
@@ -37,7 +37,7 @@ const SignUpForm = () => {
   return (
     <div className="">
       <Form {...form}>
-        <form className="">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <section className="py-32">
             <div className="container mx-auto">
               <div className="flex flex-col gap-4">
@@ -51,54 +51,82 @@ const SignUpForm = () => {
                     </div>
                     <div className="">
                       <div className="grid gap-4">
-                        <Input
-                          type="email"
-                          placeholder="Enter your email"
-                          required
+                        <FormField
+                          control={form.control}
+                          name="username"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="textOrange text-md font-bold">
+                                Username
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  className=" bg-white"
+                                  placeholder="Username"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
                         />
                         <div>
-                          <Input
-                            type="password"
-                            placeholder="Enter your password"
-                            required
+                          <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="textOrange text-md font-bold">
+                                  Password
+                                </FormLabel>
+                                <FormControl>
+                                  <Input
+                                    type="password"
+                                    className=" bg-white"
+                                    placeholder="Password"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
                           />
                         </div>
                         <div>
-                          <Input
-                            type="password"
-                            placeholder="Confirm password"
-                            required
+                          <FormField
+                            control={form.control}
+                            name="confirmPassword"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="textOrange text-md font-bold">
+                                  Confirm Password
+                                </FormLabel>
+                                <FormControl>
+                                  <Input
+                                    type="password"
+                                    className=" bg-white"
+                                    placeholder="Confirm Password"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
                           />
                         </div>
-                        <div className="flex justify-between">
-                          <div className="flex items-center space-x-2">
-                            <label
-                              htmlFor="remember"
-                              className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                            >
-                              Remember me
-                            </label>
-                          </div>
-                          <a
-                            href="#"
-                            className="text-sm text-primary hover:underline"
-                          >
-                            Forgot password
-                          </a>
-                        </div>
                         <Button type="submit" className="mt-2 w-full">
-                          LOGIN TEXT
+                          Sign Up
                         </Button>
                         {/* <Button variant="outline" className="w-full">
                   <FcGoogle className="mr-2 size-5" />
                   {googleText}
                 </Button> */}
                       </div>
-                      <div className="mx-auto mt-8 flex justify-center gap-1 text-sm text-muted-foreground">
+                      <div className="mx-auto mt-8 flex justify-center gap-1 text-sm text-white">
                         <p>Already have an account?</p>
                         <Link
                           href="/sign-in"
-                          className="font-medium text-primary"
+                          className="font-medium textOrange"
                         >
                           Sign In
                         </Link>
