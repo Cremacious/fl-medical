@@ -117,10 +117,6 @@ const SignUpForm = () => {
                         <Button type="submit" className="mt-2 w-full">
                           Sign Up
                         </Button>
-                        {/* <Button variant="outline" className="w-full">
-                  <FcGoogle className="mr-2 size-5" />
-                  {googleText}
-                </Button> */}
                       </div>
                       <div className="mx-auto mt-8 flex justify-center gap-1 text-sm text-white">
                         <p>Already have an account?</p>
