@@ -38,3 +38,34 @@ export async function getHistory() {
     return [];
   }
 }
+
+export async function getPurchaseById(id: string) {
+  try {
+    const user = await auth();
+    if (!user) {
+      throw new Error('No logged-in user found.');
+    }
+    const existingUser = await db.user.findUnique({
+      where: {
+        clerkUserId: user.userId ?? undefined,
+      },
+    });
+    if (!existingUser) {
+      throw new Error('User not found');
+    }
+    const purchase = await db.purchase.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        purchaseItems: true,
+      },
+    });
+    if (!purchase) {
+      throw new Error('Purchase not found');
+    }
+    return purchase;
+  } catch (error) {
+    return null;
+  }
+}
