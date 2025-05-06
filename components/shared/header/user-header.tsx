@@ -15,17 +15,24 @@ import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
 import name from '@/public/logo-name.png';
 import { checkUserExists } from '@/lib/actions/user.actions';
+import { auth, currentUser } from '@clerk/nextjs/server';
 
 const UserHeader = async () => {
   const links = [
     { name: 'Dashboard', link: '/dashboard' },
-    { name: 'Profile', link: '/profile/3' },
+    { name: 'Profile', link: '/dashboard/profile/3' },
     { name: 'History', link: '/dashboard/history' },
     { name: 'Stash', link: '/dashboard/stash' },
     { name: 'Friends', link: '/dashboard/friends' },
     { name: 'Settings', link: '/dashboard/settings' },
   ];
-  await checkUserExists(); // Ensure user is created if not already present
+  await checkUserExists();
+
+  // const { userId } = await auth();
+
+  // if (!userId) {
+  //   return null;
+  // }
 
   return (
     <>

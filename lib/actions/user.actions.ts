@@ -29,7 +29,6 @@ export const checkUserExists = async () => {
     data: {
       clerkUserId: user.id,
       username: user.username || `user_${user.id}`,
-      password: '',
       role: 'user',
     },
   });
