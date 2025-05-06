@@ -5,13 +5,20 @@ import Image from 'next/image';
 import stock from '@/public/avatar.png';
 import TimelineRow from '@/components/timeline/timeline-row';
 import { UserButton } from '@clerk/nextjs';
+import Gravatar from '@/components/shared/gravatar';
+import { currentUser } from '@clerk/nextjs/server';
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+  const user = await currentUser();
+  const email = user?.emailAddresses[0]?.emailAddress;
+
+  console.log(email);
   return (
     <>
       <div className="bg-white">
         Welcome, Name!
         <UserButton />
+        <Gravatar email={email || 'default@example.com'} />
       </div>
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
