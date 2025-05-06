@@ -26,6 +26,7 @@ import { CirclePlus, MinusCircle } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { addHistoryPurchase } from '@/lib/actions/user.actions';
+import { redirect } from 'next/navigation';
 
 const AddPurchaseForm = () => {
   const form = useForm<z.infer<typeof purchaseSchema>>({
@@ -61,7 +62,8 @@ const AddPurchaseForm = () => {
     const response = await addHistoryPurchase(data);
     if (response.success) {
       toast.success(response.message);
-      form.reset(); 
+      form.reset();
+      redirect('/dashboard/history');
     } else {
       toast.error(response.message);
     }
