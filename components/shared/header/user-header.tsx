@@ -14,8 +14,9 @@ import {
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
 import name from '@/public/logo-name.png';
+import { createNewUser } from '@/lib/actions/user.actions';
 
-const UserHeader = () => {
+const UserHeader = async () => {
   const links = [
     { name: 'Dashboard', link: '/dashboard' },
     { name: 'Profile', link: '/profile/3' },
@@ -24,6 +25,8 @@ const UserHeader = () => {
     { name: 'Friends', link: '/dashboard/friends' },
     { name: 'Settings', link: '/dashboard/settings' },
   ];
+  await createNewUser(); // Ensure user is created if not already present
+
   return (
     <>
       <header className="flex shadow-md py-2 mb-4 px-4 sm:px-10 customBlue min-h-[50px] tracking-wide relative z-50">
