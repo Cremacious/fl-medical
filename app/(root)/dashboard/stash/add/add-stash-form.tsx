@@ -23,6 +23,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { addStashItem } from '@/lib/actions/user.actions';
+import { redirect } from 'next/navigation';
 
 const AddStashForm = () => {
   const form = useForm<z.infer<typeof insertStashItemSchema>>({
@@ -46,6 +47,7 @@ const AddStashForm = () => {
     if (response.success) {
       toast.success(response.message);
       form.reset();
+      redirect('/dashboard/stash');
     } else {
       toast.error(`Error: ${response.message}`);
     }
