@@ -107,7 +107,7 @@ const UserHeader = async () => {
                 </SheetFooter>
               </SheetContent>
             </Sheet>
-            <div className="hidden lg:flex customOrange roundShadow items-center py-1 px-2 mt-1">
+            <div className="hidden lg:flex customOrange roundShadow items-center py-1 px-2">
               <SignOutButton />
             </div>
           </div>

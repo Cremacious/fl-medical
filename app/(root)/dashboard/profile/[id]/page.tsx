@@ -4,9 +4,9 @@ import stock from '@/public/stock.jpg';
 
 const ProfilePage = () => {
   return (
-    <div className="newPage">
-      <div className="customBlue px-4 py-8 roundShadow">
-        <div className="customCyan roundShadow py-4 md:p-6">
+    <div className="newPage min-h-screen">
+      <div className="customBlue min-h-screen px-4 py-8 roundShadow">
+        <div className="customCyan min-h-screen roundShadow py-4 md:p-6">
           <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
             <div className="col-span-4 sm:col-span-3">
               <div className="customBlue roundShadow p-6">
@@ -34,6 +34,8 @@ const ProfilePage = () => {
             <div className="col-span-4 sm:col-span-9">
               <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <TimelinePost />
+                  <TimelinePost />
                   <TimelinePost />
                   <TimelinePost />
                   <TimelinePost />
