@@ -2,7 +2,11 @@
 
 import { currentUser, auth } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
-import { insertStashItemSchema, purchaseItemSchema } from '../validators';
+import {
+  insertStashItemSchema,
+  purchaseItemSchema,
+  purchaseSchema,
+} from '../validators';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { formatError } from '../utils';
@@ -68,9 +72,7 @@ export async function addStashItem(
   }
 }
 
-export async function addHistoryPurchase(
-  data: z.infer<typeof purchaseItemSchema>
-) {
+export async function addHistoryPurchase(data: z.infer<typeof purchaseSchema>) {
   try {
     const user = await auth();
     if (!user) {
@@ -82,8 +84,35 @@ export async function addHistoryPurchase(
       },
     });
     if (!existingUser) throw new Error('User not found');
-    const purchase = purchaseItemSchema.parse(data);
-    // await db.purchase.create({});
+    const purchase = purchaseSchema.parse(data);
+
+    await db.purchase.create({
+      data: {
+        userId: existingUser.id,
+        dispensary: purchase.dispensary,
+        date: purchase.date,
+        total: purchase.items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        ),
+        quantity: purchase.items.reduce((sum, item) => sum + item.quantity, 0),
+        purchaseItems: {
+          create: purchase.items.map((item) => ({
+            name: item.name,
+            category: item.category,
+            type: item.type,
+            size: item.size,
+            quantity: item.quantity,
+            price: item.price,
+            thc: parseFloat(item.thc),
+            cbd: parseFloat(item.cbd),
+            lineage: item.lineage,
+            details: item.details ?? '',
+          })),
+        },
+      },
+    });
+
     revalidatePath('/dashboard/history');
     return {
       success: true,

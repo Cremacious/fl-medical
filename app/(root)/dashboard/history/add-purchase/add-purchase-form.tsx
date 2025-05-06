@@ -58,7 +58,13 @@ const AddPurchaseForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof purchaseSchema>> = async (
     data
   ) => {
-   
+    const response = await addHistoryPurchase(data);
+    if (response.success) {
+      toast.success(response.message);
+      form.reset(); 
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (
