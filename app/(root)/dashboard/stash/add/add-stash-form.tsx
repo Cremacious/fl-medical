@@ -21,6 +21,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
+import { toast } from 'sonner';
+import { addStashItem } from '@/lib/actions/user.actions';
 
 const AddStashForm = () => {
   const form = useForm<z.infer<typeof insertStashItemSchema>>({
@@ -40,14 +42,22 @@ const AddStashForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof insertStashItemSchema>> = async (
     data
   ) => {
-    console.log(data);
-    form.reset();
+    const response = await addStashItem(data);
+    if (response.success) {
+      toast.success(response.message);
+      form.reset();
+    } else {
+      toast.error(`Error: ${response.message}`);
+    }
   };
 
   return (
     <div className="flex items-center justify-center ">
       <Form {...form}>
-        <form className='customBlue p-4 my-4 roundShadow' onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="customBlue p-4 my-4 roundShadow"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <div className="">
             <FormField
               control={form.control}
