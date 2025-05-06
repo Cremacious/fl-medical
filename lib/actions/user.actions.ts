@@ -2,14 +2,14 @@
 
 import { currentUser, auth } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
+import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
+import { formatError } from '../utils';
 import {
   insertStashItemSchema,
   purchaseItemSchema,
   purchaseSchema,
 } from '../validators';
-import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
-import { formatError } from '../utils';
 
 export const checkUserExists = async () => {
   const user = await currentUser();

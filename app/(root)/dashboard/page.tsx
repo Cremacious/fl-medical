@@ -18,11 +18,14 @@ const DashboardPage = async () => {
       <div className="bg-white">
         Welcome, Name!
         <UserButton />
-        <Gravatar email={email || 'default@example.com'} />
       </div>
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
           <div className="items-center bg-white flex flex-col p-8">
+            <Gravatar
+              email={email || 'default@example.com'}
+              className="object-cover object-center rounded-full"
+            />
             <Image
               className="object-cover object-center rounded-full"
               alt="hero"
