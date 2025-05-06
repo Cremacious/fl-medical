@@ -19,7 +19,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
-          <Header />
           {children}
           <Toaster />
         </body>

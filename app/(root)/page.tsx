@@ -1,18 +1,13 @@
 import Link from 'next/link';
 import logo from '@/public/logo.jpeg';
 import Image from 'next/image';
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs';
+
+import Header from '@/components/shared/header/header';
 
 const Homepage = () => {
   return (
     <>
+      <Header />
       <div className="flex justify-center">
         <Image
           src={logo}
@@ -22,20 +17,6 @@ const Homepage = () => {
           className="rounded-full"
         />
       </div>
-      <Link className="p-2 rounded-lg bg-white" href="/dashboard">
-        Go To Dashboard
-      </Link>
-      <div className="bg-white">
-        <SignedOut>
-          <SignInButton />
-          <SignUpButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </div>
-      {/* <div className="newPage">
-      </div> */}
     </>
   );
 };

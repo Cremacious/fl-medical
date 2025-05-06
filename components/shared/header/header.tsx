@@ -6,7 +6,7 @@ import {
   SignUpButton,
   SignedIn,
   SignedOut,
-  UserButton,
+  SignOutButton
 } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 
@@ -29,7 +29,11 @@ const Header = () => {
           </div>
           <div className="flex max-lg:ml-auto space-x-2">
             <SignedIn>
-              <UserButton />
+              <Button asChild>
+                <Link href="/dashboard">
+                  Dashboard
+                </Link>
+              </Button>
             </SignedIn>
             <SignedOut>
               <SignInButton>

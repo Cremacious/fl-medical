@@ -10,12 +10,15 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetFooter,
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
 import name from '@/public/logo-name.png';
 import { checkUserExists } from '@/lib/actions/user.actions';
 import { auth, currentUser } from '@clerk/nextjs/server';
+import { UserButton } from '@clerk/nextjs';
+import { SignOutButton } from '@clerk/nextjs';
 
 const UserHeader = async () => {
   const links = [
@@ -50,45 +53,31 @@ const UserHeader = async () => {
               Sunset Stash
             </div>
           </div>
-
-          <div
-            id="collapseMenu"
-            className="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50 items-center"
-          >
-            <ul className="lg:flex gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
-              <li className="mb-6 hidden max-lg:block">
-                <a href="javascript:void(0)">
-                  <img
-                    src="https://readymadeui.com/readymadeui.svg"
-                    alt="logo"
-                    className="w-36"
+          <div className="md:flex hidden flex-row ">
+            {links.map((link, index) => (
+              <React.Fragment key={index}>
+                <div className="max-lg:py-3 px-1 hover:bg-[#3e9495] rounded-md">
+                  <Link
+                    href={link.link}
+                    className="textOrange block font-bold mt-[2px] text-md p-1"
+                  >
+                    {link.name}
+                  </Link>
+                </div>
+                {index < links.length - 1 && (
+                  <Separator
+                    orientation="vertical"
+                    className="min-h-[25px] m-[5px] border-[1px]"
                   />
-                </a>
-              </li>
-              {links.map((link, index) => (
-                <React.Fragment key={index}>
-                  <li className="max-lg:py-3 px-3 hover:bg-[#3e9495] rounded-md">
-                    <Link
-                      href={link.link}
-                      className="textOrange block font-bold mt-[2px] text-md p-1"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                  {index < links.length - 1 && (
-                    <Separator
-                      orientation="vertical"
-                      className="min-h-[25px] m-[5px] border-[1px]"
-                    />
-                  )}
-                </React.Fragment>
-              ))}
-            </ul>
+                )}
+              </React.Fragment>
+            ))}
           </div>
-          <div className="flex max-lg:ml-auto space-x-4">
+
+          <div className="flex space-x-4">
             <Sheet>
               <SheetTrigger>
-                <SquareMenu className="w-10 h-10 md:hidden" />
+                <SquareMenu className="w-10 h-10 md:hidden textOrange" />
               </SheetTrigger>
               <SheetContent className="bg-white">
                 <SheetHeader>
@@ -111,8 +100,16 @@ const UserHeader = async () => {
                     </ul>
                   </SheetDescription>
                 </SheetHeader>
+                <SheetFooter>
+                  <div className="customOrange text-center p-2 roundShadow items-center gap-2">
+                    <SignOutButton />
+                  </div>
+                </SheetFooter>
               </SheetContent>
             </Sheet>
+            <div className="hidden md:flex customOrange p-2 roundShadow items-center gap-2">
+              <SignOutButton />
+            </div>
           </div>
         </div>
       </header>
@@ -121,3 +118,57 @@ const UserHeader = async () => {
 };
 
 export default UserHeader;
+
+// {links.map((link, index) => (
+//   <React.Fragment key={index}>
+//     <li className="max-lg:py-3 px-1 hover:bg-[#3e9495] rounded-md">
+//       <Link
+//         href={link.link}
+//         className="textOrange block font-bold mt-[2px] text-md p-1"
+//       >
+//         {link.name}
+//       </Link>
+//     </li>
+//     {index < links.length - 1 && (
+//       <Separator
+//         orientation="vertical"
+//         className="min-h-[25px] m-[5px] border-[1px]"
+//       />
+//     )}
+//   </React.Fragment>
+// ))}
+
+{
+  /* <div className="hidden md:flex customCyan p-2 roundShadow items-center gap-2">
+<h3 className="flex items-center">Username</h3>
+<UserButton />
+</div> */
+}
+
+// <Sheet>
+// <SheetTrigger>
+//   <SquareMenu className="w-10 h-10 md:hidden" />
+// </SheetTrigger>
+// <SheetContent className="bg-white">
+//   <SheetHeader>
+//     <SheetTitle>Title</SheetTitle>
+//     <SheetDescription className="mt-4">
+//       <ul>
+//         {links.map((link, index) => (
+//           <li
+//             key={index}
+//             className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3"
+//           >
+//             <Link
+//               href={link.link}
+//               className="hover:text-blue-700 text-slate-800 block font-medium text-lg"
+//             >
+//               {link.name}
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </SheetDescription>
+//   </SheetHeader>
+// </SheetContent>
+// </Sheet>
