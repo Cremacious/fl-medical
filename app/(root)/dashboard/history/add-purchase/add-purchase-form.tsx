@@ -25,6 +25,7 @@ import {
 import { CirclePlus, MinusCircle } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
+import { addHistoryPurchase } from '@/lib/actions/user.actions';
 
 const AddPurchaseForm = () => {
   const form = useForm<z.infer<typeof purchaseSchema>>({
