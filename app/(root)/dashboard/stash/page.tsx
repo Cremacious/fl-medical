@@ -12,13 +12,15 @@ const StashPage = () => {
         {/* <Link href="/dashboard/stash/add">Add</Link> */}
         <div className="customBlue px-4 pt-4 pb-8 roundShadow">
           <StashSearch />
-          <div className="grid gap-4 md:grid-cols-4 justify-center customCyan p-6 roundShadow">
-            <ProductCard />
-            {/* <ProductCard />
+          <div className=" customCyan p-6 roundShadow min-h-screen">
+            <div className="grid gap-4 md:grid-cols-4 justify-center">
+              <ProductCard />
+              {/* <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard /> */}
+            </div>
           </div>
         </div>
       </div>
