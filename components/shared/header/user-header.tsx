@@ -14,7 +14,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
 import name from '@/public/logo-name.png';
-import { createNewUser } from '@/lib/actions/user.actions';
+import { checkUserExists } from '@/lib/actions/user.actions';
 
 const UserHeader = async () => {
   const links = [
@@ -25,7 +25,7 @@ const UserHeader = async () => {
     { name: 'Friends', link: '/dashboard/friends' },
     { name: 'Settings', link: '/dashboard/settings' },
   ];
-  await createNewUser(); // Ensure user is created if not already present
+  await checkUserExists(); // Ensure user is created if not already present
 
   return (
     <>

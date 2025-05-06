@@ -3,7 +3,7 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 
-export const createNewUser = async () => {
+export const checkUserExists = async () => {
   // Get the current logged-in user from Clerk
   const user = await currentUser();
 
