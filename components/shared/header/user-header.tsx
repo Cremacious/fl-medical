@@ -53,7 +53,7 @@ const UserHeader = async () => {
               Sunset Stash
             </div>
           </div>
-          <div className="md:flex hidden flex-row ">
+          <div className="lg:flex hidden flex-row ">
             {links.map((link, index) => (
               <React.Fragment key={index}>
                 <div className="max-lg:py-3 px-1 hover:bg-[#3e9495] rounded-md">
@@ -77,7 +77,7 @@ const UserHeader = async () => {
           <div className="flex space-x-4">
             <Sheet>
               <SheetTrigger>
-                <SquareMenu className="w-10 h-10 md:hidden textOrange" />
+                <SquareMenu className="w-10 h-10 lg:hidden textOrange" />
               </SheetTrigger>
               <SheetContent className="customBlue">
                 <SheetHeader>
@@ -107,7 +107,7 @@ const UserHeader = async () => {
                 </SheetFooter>
               </SheetContent>
             </Sheet>
-            <div className="hidden md:flex customOrange p-2 roundShadow items-center gap-2">
+            <div className="hidden lg:flex customOrange roundShadow items-center py-1 px-2 mt-1">
               <SignOutButton />
             </div>
           </div>
@@ -118,57 +118,3 @@ const UserHeader = async () => {
 };
 
 export default UserHeader;
-
-// {links.map((link, index) => (
-//   <React.Fragment key={index}>
-//     <li className="max-lg:py-3 px-1 hover:bg-[#3e9495] rounded-md">
-//       <Link
-//         href={link.link}
-//         className="textOrange block font-bold mt-[2px] text-md p-1"
-//       >
-//         {link.name}
-//       </Link>
-//     </li>
-//     {index < links.length - 1 && (
-//       <Separator
-//         orientation="vertical"
-//         className="min-h-[25px] m-[5px] border-[1px]"
-//       />
-//     )}
-//   </React.Fragment>
-// ))}
-
-{
-  /* <div className="hidden md:flex customCyan p-2 roundShadow items-center gap-2">
-<h3 className="flex items-center">Username</h3>
-<UserButton />
-</div> */
-}
-
-// <Sheet>
-// <SheetTrigger>
-//   <SquareMenu className="w-10 h-10 md:hidden" />
-// </SheetTrigger>
-// <SheetContent className="bg-white">
-//   <SheetHeader>
-//     <SheetTitle>Title</SheetTitle>
-//     <SheetDescription className="mt-4">
-//       <ul>
-//         {links.map((link, index) => (
-//           <li
-//             key={index}
-//             className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3"
-//           >
-//             <Link
-//               href={link.link}
-//               className="hover:text-blue-700 text-slate-800 block font-medium text-lg"
-//             >
-//               {link.name}
-//             </Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </SheetDescription>
-//   </SheetHeader>
-// </SheetContent>
-// </Sheet>
