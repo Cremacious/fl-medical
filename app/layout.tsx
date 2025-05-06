@@ -1,14 +1,9 @@
 import { type Metadata } from 'next';
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
 } from '@clerk/nextjs';
-import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
+import Header from '@/components/shared/header/header';
 
 export const metadata: Metadata = {
   title: 'Clerk Next.js Quickstart',
@@ -24,6 +19,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
+          <Header />
           {children}
           <Toaster />
         </body>
