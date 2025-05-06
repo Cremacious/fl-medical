@@ -79,7 +79,7 @@ const UserHeader = async () => {
               <SheetTrigger>
                 <SquareMenu className="w-10 h-10 md:hidden textOrange" />
               </SheetTrigger>
-              <SheetContent className="bg-white">
+              <SheetContent className="customBlue">
                 <SheetHeader>
                   <SheetTitle>Title</SheetTitle>
                   <SheetDescription className="mt-4">
@@ -91,7 +91,7 @@ const UserHeader = async () => {
                         >
                           <Link
                             href={link.link}
-                            className="hover:text-blue-700 text-slate-800 block font-medium text-lg"
+                            className="textOrange block font-medium text-lg"
                           >
                             {link.name}
                           </Link>
