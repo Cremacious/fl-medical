@@ -12,7 +12,7 @@ import Link from 'next/link';
 const HistorySearch = () => {
   return (
     <div className="flex justify-center">
-      <div className="customBlue mb-4 container mx-auto">
+      <div className="customBlue container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center p-4">
           <div className="flex flex-row gap-2 mb-4 md:mb-0 w-full">
             <Button asChild className="w-full md:w-auto">

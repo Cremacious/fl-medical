@@ -59,7 +59,7 @@ const UserHeader = async () => {
                 <div className="max-lg:py-3 px-1 hover:bg-[#3e9495] rounded-md">
                   <Link
                     href={link.link}
-                    className="textOrange block font-bold mt-[2px] text-md p-1"
+                    className="textOrange block font-bold mt-[2px] px-2 text-md p-1"
                   >
                     {link.name}
                   </Link>
