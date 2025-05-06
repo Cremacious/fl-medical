@@ -4,11 +4,15 @@ import UsageChart from '@/components/usage-chart';
 import Image from 'next/image';
 import stock from '@/public/avatar.png';
 import TimelineRow from '@/components/timeline/timeline-row';
+import { UserButton } from '@clerk/nextjs';
 
 const DashboardPage = () => {
   return (
     <>
-      <div className="bg-white">Welcome, Name!</div>
+      <div className="bg-white">
+        Welcome, Name!
+        <UserButton />
+      </div>
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
           <div className="items-center bg-white flex flex-col p-8">
