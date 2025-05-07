@@ -27,7 +27,7 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
             <div className="ml-4 mt-4 md:ml-0 md:mt-0">
               <Card className="customCyan max-w-sm border-none shadow-none">
                 <CardHeader>
-                  <CardTitle className="font-bold text-xl text-white">
+                  <CardTitle className="font-bold text-xl textOrange">
                     {purchase.date.toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
@@ -63,9 +63,10 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
               </Card>
             </div>
 
-            <div className="grid grid-cols-1 col-span-2 md:grid-cols-2 gap-4 w-full">
+            <div className="grid grid-cols-1 col-span-2 md:grid-cols-2 gap-4 w-full md:pl-12">
               {purchase.purchaseItems.map((item) => (
                 <PurchaseCard
+                  key={item.id}
                   purchase={{
                     ...item,
                     thc: item.thc.toString(),

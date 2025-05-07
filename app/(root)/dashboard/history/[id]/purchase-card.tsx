@@ -1,20 +1,27 @@
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
+import ProductCard from '@/components/shared/products/product-card';
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
+
 import { PurchaseItem } from '@/lib/types';
 
 const PurchaseCard = ({ purchase }: { purchase: PurchaseItem }) => {
   return (
-    <Card className="customBlue mx-2 md:mx-0">
+    <Card className="customBlue mx-2 md:mx-0 animationEffect">
       <CardHeader>
-        <CardTitle className="text-white font-extrabold">Title</CardTitle>
+        <CardTitle className="textOrange font-extrabold">
+          {purchase.name}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-2">
@@ -52,9 +59,26 @@ const PurchaseCard = ({ purchase }: { purchase: PurchaseItem }) => {
             <div className="font-extrabold textOrange">Price Per</div>
             <div className="text-white font-bold">${purchase.price}</div>
           </div>
-          <div className="flex flex-row justify-between border-t-2  border-b-slate-200 pt-2">
-            <div className="font-extrabold textOrange">Details</div>
-            <div className="text-white font-bold">View</div>
+
+          <div className="flex justify-center mt-4">
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Button className="font-bold">View Details</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="customBlue border-none">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="textOrange font-bold">
+                    {purchase.name}'s details...
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="text-white">
+                    {purchase.details}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogAction>Close</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </CardContent>
