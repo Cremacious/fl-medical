@@ -388,6 +388,7 @@ const AddPurchaseForm = () => {
                 type="button"
                 onClick={() =>
                   append({
+                    id: crypto.randomUUID(), // Add a unique ID
                     name: '',
                     category: '',
                     type: '',
