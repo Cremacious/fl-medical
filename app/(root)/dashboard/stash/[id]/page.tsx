@@ -3,7 +3,7 @@ import icon from '@/assets/images/icons/flower-yellow.png';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { currentUser } from '@clerk/nextjs/server';
-import { formatUsername } from '@/lib/utils';
+import { capitalizeFirstLetter } from '@/lib/utils';
 
 const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
@@ -22,7 +22,7 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
               {item.name}
             </h1>
             <p className="textOrange font-bold">
-              {formatUsername(user?.username ?? 'No Username')} thinks...
+              {capitalizeFirstLetter(user?.username || 'No Username')} thinks...
             </p>
             <p className="mb-6 mt-2 text-white">
               {item.thoughts && item.thoughts.trim() !== ''
@@ -36,14 +36,14 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
                 <div className="text-white font-bold">
                   {' '}
                   {item.category && item.category.trim() !== ''
-                    ? item.category
+                    ? capitalizeFirstLetter(item.category)
                     : 'N/A'}
                 </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">Type</div>
                 <div className="text-white font-bold">
-                  {item.type && item.type.trim() !== '' ? item.type : 'N/A'}
+                  {item.type && item.type.trim() !== '' ? capitalizeFirstLetter(item.type) : 'N/A'}
                 </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
@@ -55,7 +55,7 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">THC</div>
                 <div className="text-white font-bold">
-                  {item.thc && item.thc.trim() !== '' ? item.thc = '%' : 'N/A'}
+                  {item.thc && item.thc.trim() !== '' ? item.thc + '%' : 'N/A'}
                 </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
