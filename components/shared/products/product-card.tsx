@@ -1,22 +1,20 @@
 import { Badge } from '@/components/ui/badge';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-import stock from '@/public/stock.jpg';
 import Link from 'next/link';
 import image from '@/assets/images/icons/flower-yellow.png';
+import { StashItem } from '@prisma/client';
 
-const ProductCard = () => {
+const ProductCard = ({ item }: { item: StashItem }) => {
   return (
     <Link href="/dashboard/stash/3">
       <Card className="animationEffect border-none roundShadow customBlue">
         <CardHeader>
-          <CardTitle className="textOrange text-center text-2xl font-bold">
-            Sour Diesel
+          <CardTitle
+            className="textOrange text-center font-bold truncate text-[clamp(0.8rem, 2vw, 1rem)]"
+            title={item.name} // Tooltip for full name on hover
+          >
+            {item.name}
           </CardTitle>
         </CardHeader>
         <CardContent className="px-0">
@@ -24,9 +22,9 @@ const ProductCard = () => {
             <Image
               className="object-cover"
               src={image}
-              alt="NIKE AIR"
-              height={200}
-              width={200}
+              alt={item.name}
+              height={100}
+              width={100}
             />
           </div>
         </CardContent>

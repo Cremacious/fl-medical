@@ -45,8 +45,8 @@ const HistoryPage = async () => {
                 ...purchase,
                 items: purchase.items.map((item) => ({
                   ...item,
-                  thc: item.thc.toString(),
-                  cbd: item.cbd.toString(),
+                  thc: item.thc ? item.thc.toString() : '0',
+                  cbd: item.cbd ? item.cbd.toString() : '0',
                 })),
               })) as Purchase[]
             }
