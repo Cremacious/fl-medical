@@ -7,7 +7,7 @@ import { StashItem } from '@prisma/client';
 
 const ProductCard = ({ item }: { item: StashItem }) => {
   return (
-    <Link href="/dashboard/stash/3">
+    <Link href={`/dashboard/stash/${item.id}`} className="flex flex-col">
       <Card className="animationEffect border-none roundShadow customBlue">
         <CardHeader>
           <CardTitle

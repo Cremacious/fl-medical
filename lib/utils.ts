@@ -24,3 +24,8 @@ export function formatError(error: any) {
       : JSON.stringify(error.message);
   }
 }
+
+export function formatUsername(username: string) {
+  if (!username) return '';
+  return username.charAt(0).toUpperCase() + username.slice(1);
+}

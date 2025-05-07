@@ -1,16 +1,15 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { StashItem } from '@/lib/types';
 import icon from '@/assets/images/icons/flower-yellow.png';
 import Image from 'next/image';
+import { getStashItemById } from '@/lib/actions/stash.actions';
+import { currentUser } from '@clerk/nextjs/server';
+import { formatUsername } from '@/lib/utils';
 
-const ItemPage = () => {
+const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
+  const { id } = await props.params;
+  const item = await getStashItemById(id);
+  const user = await currentUser();
+
   return (
     <div className="newPage">
       <div className="flex justify-center">
@@ -20,47 +19,58 @@ const ItemPage = () => {
               <Image src={icon} alt="image" height={100} width={100} />
             </div>
             <h1 className="text-3xl text-center textOrange mb-4 font-extrabold">
-              Sour Diesel
+              {item.name}
             </h1>
-            <p className="textOrange font-bold">UserNameHere thinks...</p>
-            <p className="mb-4 text-white">
-              Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-              sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo
-              juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-              seitan poutine tumeric. Gastropub blue bottle austin listicle
-              pour-over, neutra jean.
+            <p className="textOrange font-bold">
+              {formatUsername(user?.username ?? 'No Username')} thinks...
+            </p>
+            <p className="mb-6 mt-2 text-white">
+              {item.thoughts && item.thoughts.trim() !== ''
+                ? item.thoughts
+                : 'Nothing to say... yet!'}
             </p>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 mt-4">
               <div className="flex flex-row justify-between">
                 <div className="font-extrabold textOrange">Category</div>
-                <div className="text-white font-bold">Topical</div>
+                <div className="text-white font-bold">
+                  {' '}
+                  {item.category && item.category.trim() !== ''
+                    ? item.category
+                    : 'N/A'}
+                </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">Type</div>
-                <div className="text-white font-bold">Hybrid</div>
+                <div className="text-white font-bold">
+                  {item.type && item.type.trim() !== '' ? item.type : 'N/A'}
+                </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">Size</div>
-                <div className="text-white font-bold">1G</div>
+                <div className="text-white font-bold">
+                  {item.size && item.size.trim() !== '' ? item.size : 'N/A'}
+                </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">THC</div>
-                <div className="text-white font-bold">22%</div>
+                <div className="text-white font-bold">
+                  {item.thc && item.thc.trim() !== '' ? item.thc = '%' : 'N/A'}
+                </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">CBD</div>
-                <div className="text-white font-bold">10%</div>
+                <div className="text-white font-bold">
+                  {item.cbd && item.cbd.trim() !== '' ? item.cbd + '%' : 'N/A'}
+                </div>
               </div>
               <div className="flex flex-row justify-between border-t-2 border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">Lineage</div>
                 <div className="flex-1 text-right break-words text-white font-bold">
-                  Girl Scout Cookies x Pineapple Express
+                  {item.lineage && item.lineage.trim() !== ''
+                    ? item.lineage
+                    : 'N/A'}
                 </div>
-              </div>
-              <div className="flex flex-row justify-between border-t-2  border-b-slate-200 pt-2">
-                <div className="font-extrabold textOrange">Purchased From</div>
-                <div className="text-white font-bold">Trulieve</div>
               </div>
             </div>
           </div>

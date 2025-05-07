@@ -29,3 +29,35 @@ export async function getAllStashItems() {
     return [];
   }
 }
+
+export async function getStashItemById(id: string) {
+  try {
+    const user = await auth();
+    if (!user) {
+      throw new Error('No logged-in user found.');
+    }
+    const existingUser = await db.user.findUnique({
+      where: {
+        clerkUserId: user.userId ?? undefined,
+      },
+    });
+    if (!existingUser) {
+      throw new Error('User not found');
+    }
+
+    const stashItem = await db.stashItem.findUnique({
+      where: {
+        id: id,
+        userId: existingUser.id,
+      },
+    });
+
+    if (!stashItem) {
+      throw new Error('Stash item not found');
+    }
+
+    return stashItem;
+  } catch (error) {
+    throw new Error(formatError(error));
+  }
+}
