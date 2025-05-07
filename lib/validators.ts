@@ -14,28 +14,28 @@ export const signUpFormSchema = z
   });
 
 export const insertStashItemSchema = z.object({
-  id: z.string().min(3, 'ID must be at least 3 characters'),
+  id: z.string().min(3, 'ID must be at least 3 characters').optional(),
   name: z.string().min(1, { message: 'Name is required' }),
-  category: z.string().min(1, { message: 'Category is required' }),
-  type: z.string().min(1, { message: 'Type is required' }),
-  size: z.string().min(1, { message: 'Size is required' }),
-  thc: z.string().min(1, { message: 'THC is required' }),
-  cbd: z.string().min(1, { message: 'CBD is required' }),
-  lineage: z.string().min(1, { message: 'Lineage is required' }),
-  thoughts: z.string().min(1, { message: 'Thoughts are required' }),
+  category: z.string().optional().or(z.literal('')),
+  type: z.string().optional().or(z.literal('')),
+  size: z.string().optional().or(z.literal('')),
+  thc: z.string().optional().or(z.literal('')),
+  cbd: z.string().optional().or(z.literal('')),
+  lineage: z.string().optional().or(z.literal('')),
+  thoughts: z.string().optional().or(z.literal('')),
 });
 
 export const purchaseItemSchema = z.object({
   id: z.string().min(3, 'ID must be at least 3 characters'),
   name: z.string().min(1, { message: 'Name is required' }),
-  category: z.string().min(1, { message: 'Category is required' }),
-  type: z.string().min(1, { message: 'Type is required' }),
-  size: z.string().min(1, { message: 'Size is required' }),
-  quantity: z.number().min(1, { message: 'Quantity is required' }),
-  price: z.number().min(0, { message: 'Price is required' }),
-  thc: z.string().min(1, { message: 'THC is required' }),
-  cbd: z.string().min(1, { message: 'CBD is required' }),
-  lineage: z.string().min(1, { message: 'Lineage is required' }),
+  category: z.string().min(1, { message: 'Category is required' }).optional(),
+  type: z.string().min(1, { message: 'Type is required' }).optional(),
+  size: z.string().min(1, { message: 'Size is required' }).optional(),
+  quantity: z.number().min(1, { message: 'Quantity is required' }).optional(),
+  price: z.number().min(0, { message: 'Price is required' }).optional(),
+  thc: z.string().min(1, { message: 'THC is required' }).optional(),
+  cbd: z.string().min(1, { message: 'CBD is required' }).optional(),
+  lineage: z.string().min(1, { message: 'Lineage is required' }).optional(),
   details: z.string().optional(),
 });
 

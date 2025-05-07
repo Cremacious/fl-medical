@@ -39,15 +39,15 @@ model PurchaseItem {
   id         String   @id @default(uuid())
   purchaseId String
   name      String
-  category String
-  type     String
-  size     String
-  quantity Int
-  price    Float
-  thc     Float
-  cbd     Float
-  lineage String
-  details String
+  category String?
+  type     String?
+  size     String?
+  quantity Int?
+  price    Float?
+  thc     Float?
+  cbd     Float?
+  lineage String?
+  details String?
 
   purchase Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
 }
@@ -56,13 +56,13 @@ model StashItem {
   id         String   @id @default(uuid())
   userId     String
   name       String
-  category   String
-  type       String
-  size       String
-  thc        String
-  cbd        String
-  lineage    String
-  thoughts    String
+  category   String?
+  type       String?
+  size       String?
+  thc        String?
+  cbd        String?
+  lineage    String?
+  thoughts    String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

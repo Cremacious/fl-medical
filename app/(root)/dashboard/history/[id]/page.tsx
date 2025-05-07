@@ -55,9 +55,7 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
                         ${purchase.total}
                       </div>
                     </div>
-                    <Button className="customOrange cursor-pointer font-bold hover:bg-orange-300 text-slate-800">
-                      Edit Purchase
-                    </Button>
+                    <Button className="font-bold">Edit Purchase</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -69,8 +67,15 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
                   key={item.id}
                   purchase={{
                     ...item,
-                    thc: item.thc.toString(),
-                    cbd: item.cbd.toString(),
+                    thc: item.thc ? item.thc.toString() : '0',
+                    cbd: item.cbd ? item.cbd.toString() : '0',
+                    category: item.category ?? undefined,
+                    type: item.type ?? undefined,
+                    size: item.size ?? undefined,
+                    quantity: item.quantity ?? undefined,
+                    price: item.price ?? undefined,
+                    lineage: item.lineage ?? undefined,
+                    details: item.details ?? undefined,
                   }}
                 />
               ))}
