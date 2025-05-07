@@ -2,8 +2,9 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
-import image from '@/assets/images/icons/flower-yellow.png';
+import image from '@/assets/images/icons/stash/flower.png';
 import { StashItem } from '@prisma/client';
+import { stashIcons } from '@/lib/constants';
 
 const ProductCard = ({ item }: { item: StashItem }) => {
   return (
@@ -12,7 +13,7 @@ const ProductCard = ({ item }: { item: StashItem }) => {
         <CardHeader>
           <CardTitle
             className="textOrange text-center font-bold truncate text-[clamp(0.8rem, 2vw, 1rem)]"
-            title={item.name} // Tooltip for full name on hover
+            title={item.name}
           >
             {item.name}
           </CardTitle>

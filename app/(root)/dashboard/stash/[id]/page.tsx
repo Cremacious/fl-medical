@@ -1,5 +1,5 @@
 import { StashItem } from '@/lib/types';
-import icon from '@/assets/images/icons/flower-yellow.png';
+import icon from '@/assets/images/icons/stash/flower.png';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { currentUser } from '@clerk/nextjs/server';
