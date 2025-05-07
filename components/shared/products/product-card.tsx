@@ -2,36 +2,10 @@ import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 import { StashItem } from '@prisma/client';
-import defaultIcon from '@/assets/images/icons/stash/default.png';
-import flowerIcon from '@/assets/images/icons/stash/flower.png';
-import vapeIcon from '@/assets/images/icons/stash/vape.png';
-import concentrateIcon from '@/assets/images/icons/stash/concentrate.png';
-import edibleIcon from '@/assets/images/icons/stash/edible.png';
-import topicalIcon from '@/assets/images/icons/stash/topical.png';
+import { getCategoryIcon } from '@/lib/utils';
 
 const ProductCard = ({ item }: { item: StashItem }) => {
-  let imageIcon;
-
-  switch (item.category) {
-    case 'flower':
-      imageIcon = flowerIcon;
-      break;
-    case 'vape':
-      imageIcon = vapeIcon;
-      break;
-    case 'concentrate':
-      imageIcon = concentrateIcon;
-      break;
-    case 'edible':
-      imageIcon = edibleIcon;
-      break;
-    case 'topical':
-      imageIcon = topicalIcon;
-      break;
-    default:
-      imageIcon = defaultIcon;
-      break;
-  }
+  const imageIcon = getCategoryIcon(item.category);
 
   return (
     <Link href={`/dashboard/stash/${item.id}`} className="flex flex-col">

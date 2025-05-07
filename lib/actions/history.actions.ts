@@ -69,3 +69,31 @@ export async function getPurchaseById(id: string) {
     return null;
   }
 }
+
+export async function getAllPurchaseItemsFromHistory() {
+  try {
+    const user = await auth();
+    if (!user) {
+      throw new Error('No logged-in user found.');
+    }
+    const existingUser = await db.user.findUnique({
+      where: {
+        clerkUserId: user.userId ?? undefined,
+      },
+    });
+    if (!existingUser) {
+      throw new Error('User not found');
+    }
+    const purchases = await db.purchase.findMany({
+      where: {
+        userId: existingUser.id,
+      },
+      include: {
+        purchaseItems: true,
+      },
+    });
+    return purchases.flatMap((purchase) => purchase.purchaseItems);
+  } catch (error) {
+    return [];
+  }
+}

@@ -3,20 +3,21 @@ import icon from '@/assets/images/icons/stash/flower.png';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { currentUser } from '@clerk/nextjs/server';
-import { capitalizeFirstLetter } from '@/lib/utils';
+import { capitalizeFirstLetter, getCategoryIcon } from '@/lib/utils';
 
 const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
   const item = await getStashItemById(id);
   const user = await currentUser();
+  const imageIcon = getCategoryIcon(item.category);
 
   return (
-    <div className="newPage">
+    <div className="newPage min-h-screen">
       <div className="flex justify-center">
         <div className="customCyan md:w-1/2 px-4 py-8 roundShadow">
           <div className="customBlue roundShadow p-6">
             <div className="flex justify-center mb-4">
-              <Image src={icon} alt="image" height={100} width={100} />
+              <Image src={imageIcon} alt="image" height={100} width={100} />
             </div>
             <h1 className="text-3xl text-center textOrange mb-4 font-extrabold">
               {item.name}
@@ -43,7 +44,9 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
                 <div className="font-extrabold textOrange">Type</div>
                 <div className="text-white font-bold">
-                  {item.type && item.type.trim() !== '' ? capitalizeFirstLetter(item.type) : 'N/A'}
+                  {item.type && item.type.trim() !== ''
+                    ? capitalizeFirstLetter(item.type)
+                    : 'N/A'}
                 </div>
               </div>
               <div className="flex flex-row justify-between border-t-2  border-gray-200 pt-2">
