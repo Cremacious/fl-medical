@@ -93,10 +93,13 @@ export async function addHistoryPurchase(data: z.infer<typeof purchaseSchema>) {
         dispensary: purchase.dispensary,
         date: purchase.date,
         total: purchase.items.reduce(
-          (sum, item) => sum + item.price * item.quantity,
+          (sum, item) => sum + (item.price ?? 0) * (item.quantity ?? 0),
           0
         ),
-        quantity: purchase.items.reduce((sum, item) => sum + item.quantity, 0),
+        quantity: purchase.items.reduce(
+          (sum, item) => sum + (item.quantity ?? 0),
+          0
+        ),
         purchaseItems: {
           create: purchase.items.map((item) => ({
             name: item.name,
@@ -105,8 +108,8 @@ export async function addHistoryPurchase(data: z.infer<typeof purchaseSchema>) {
             size: item.size,
             quantity: item.quantity,
             price: item.price,
-            thc: parseFloat(item.thc),
-            cbd: parseFloat(item.cbd),
+            thc: parseFloat(item.thc ?? '0'),
+            cbd: parseFloat(item.cbd ?? '0'),
             lineage: item.lineage,
             details: item.details ?? '',
           })),
