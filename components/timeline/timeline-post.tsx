@@ -1,9 +1,6 @@
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import stock from '@/public/stock.jpg';
-import { Badge } from '../ui/badge';
-import TimelineComment from './timeline-comment';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import image from '@/assets/images/icons/eating.png';
 

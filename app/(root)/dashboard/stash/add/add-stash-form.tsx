@@ -104,7 +104,6 @@ const AddStashForm = () => {
                       <SelectItem value="vape">Vape</SelectItem>
                       <SelectItem value="concentrate">Concentrate</SelectItem>
                       <SelectItem value="edible">Edible</SelectItem>
-                      <SelectItem value="oral">Oral</SelectItem>
                       <SelectItem value="topical">Topical</SelectItem>
                     </SelectContent>
                   </Select>

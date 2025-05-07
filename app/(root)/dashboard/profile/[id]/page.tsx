@@ -1,6 +1,6 @@
 import TimelinePost from '@/components/timeline/timeline-post';
 import Image from 'next/image';
-import stock from '@/public/stock.jpg';
+
 
 const ProfilePage = () => {
   return (
@@ -11,13 +11,13 @@ const ProfilePage = () => {
             <div className="col-span-4 sm:col-span-3">
               <div className="customBlue roundShadow p-6">
                 <div className="flex flex-col items-center">
-                  <Image
+                  {/* <Image
                     src={stock}
                     className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
                     width={128}
                     height={128}
                     alt="image"
-                  />
+                  /> */}
                   <h1 className="text-xl font-bold">NAME</h1>
                   {/* <p className="text-gray-700">Software Developer</p> */}
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">

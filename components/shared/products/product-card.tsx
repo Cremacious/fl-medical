@@ -1,12 +1,13 @@
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
-import image from '@/assets/images/icons/stash/flower.png';
 import { StashItem } from '@prisma/client';
-import flowerIcon from '@/public/flower.png';
-import vapeIcon from '@/public/vape.png';
-import defaultIcon from '@/public/default.png';
-import vapeIcon2 from '@/public/vape2.png';
+import defaultIcon from '@/assets/images/icons/stash/default.png';
+import flowerIcon from '@/assets/images/icons/stash/flower.png';
+import vapeIcon from '@/assets/images/icons/stash/vape.png';
+import concentrateIcon from '@/assets/images/icons/stash/concentrate.png';
+import edibleIcon from '@/assets/images/icons/stash/edible.png';
+import topicalIcon from '@/assets/images/icons/stash/topical.png';
 
 const ProductCard = ({ item }: { item: StashItem }) => {
   let imageIcon;
@@ -16,7 +17,16 @@ const ProductCard = ({ item }: { item: StashItem }) => {
       imageIcon = flowerIcon;
       break;
     case 'vape':
-      imageIcon = vapeIcon2;
+      imageIcon = vapeIcon;
+      break;
+    case 'concentrate':
+      imageIcon = concentrateIcon;
+      break;
+    case 'edible':
+      imageIcon = edibleIcon;
+      break;
+    case 'topical':
+      imageIcon = topicalIcon;
       break;
     default:
       imageIcon = defaultIcon;
@@ -25,7 +35,7 @@ const ProductCard = ({ item }: { item: StashItem }) => {
 
   return (
     <Link href={`/dashboard/stash/${item.id}`} className="flex flex-col">
-      <Card className="animationEffect border-none roundShadow customBlue">
+      <Card className="animationEffect border-none roundShadow customBlue min-w-[200px] ">
         <CardHeader>
           <CardTitle
             className="textOrange text-center font-bold truncate text-[clamp(0.8rem, 2vw, 1rem)]"
@@ -46,28 +56,6 @@ const ProductCard = ({ item }: { item: StashItem }) => {
           </div>
         </CardContent>
       </Card>
-      {/* 
-      <Image
-        className="object-cover"
-        src={flowerIcon}
-        alt={item.name}
-        height={100}
-        width={100}
-      />
-      <Image
-        className="object-cover"
-        src={vapeIcon2}
-        alt={item.name}
-        height={100}
-        width={100}
-      />
-      <Image
-        className="object-cover"
-        src={defaultIcon}
-        alt={item.name}
-        height={100}
-        width={100}
-      /> */}
     </Link>
   );
 };
