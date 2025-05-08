@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { StashItem } from '@prisma/client';
 import { getCategoryIcon } from '@/lib/utils';
 
-const ProductCard = ({ item }: { item: StashItem }) => {
+const ProductCard = ({ item }: { item: Omit<StashItem, 'userId'> | StashItem }) => {
   const imageIcon = getCategoryIcon(item.category);
 
   return (

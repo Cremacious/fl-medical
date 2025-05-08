@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/select';
 import { useState } from 'react';
 import { StashItem } from '@/lib/types';
+import ProductCard from '@/components/shared/products/product-card';
 
 type StashSearchProps = {
   stashItems: StashItem[];
@@ -18,9 +19,10 @@ type StashSearchProps = {
 const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
   const [searchParams, setSearchParams] = useState({
     name: '',
-    category: 'all', // Default to "all" instead of an empty string
-    type: 'all', // Default to "all" instead of an empty string
+    category: 'all',
+    type: 'all',
   });
+  console.log('client', stashItems);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -58,6 +60,7 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
           placeholder="Search by name"
           value={searchParams.name}
           onChange={handleInputChange}
+          className="bg-white w-[200px]"
         />
 
         {/* Filter by Category */}
@@ -98,10 +101,27 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
       </div>
 
       {/* Display Filtered Items */}
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-4 justify-center">
-        {filteredItems.map((item) => (
-          <div key={item.id}>{item.name}</div> // Replace with ProductCard if needed
-        ))}
+      <div className=" customCyan p-6 roundShadow min-h-screen">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-4 justify-center">
+          {filteredItems.map((item) => (
+            <ProductCard
+              item={{
+                id: item.id || '',
+                name: item.name,
+                category: item.category || null,
+                type: item.type || null,
+                size: item.size || null,
+                thc: item.thc || null,
+                cbd: item.cbd || null,
+                lineage: item.lineage || null,
+                thoughts: item.thoughts || null,
+                createdAt: item.createdAt || new Date(),
+                userId: '',
+              }}
+              key={item.id || ''}
+            />
+          ))}
+        </div>
       </div>
     </>
   );

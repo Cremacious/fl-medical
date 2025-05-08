@@ -5,6 +5,7 @@ import { getAllStashItems } from '@/lib/actions/stash.actions';
 
 const StashPage = async () => {
   const stashItems = await getAllStashItems();
+  console.log(stashItems);
 
   return (
     <>
@@ -20,6 +21,7 @@ const StashPage = async () => {
               cbd: item.cbd ?? undefined,
               lineage: item.lineage ?? undefined,
               thoughts: item.thoughts ?? undefined,
+              userId: item.userId,
             }))}
           />
 
