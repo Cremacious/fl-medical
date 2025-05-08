@@ -16,7 +16,7 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
 
   return (
     <div className="newPage min-h-screen">
-      <div className="customCyan max-w-lg mx-auto px-4 py-8 roundShadow">
+      <div className="customCyan max-w-lg mx-auto px-4 pt-8 pb-2 roundShadow">
         <div className="customBlue roundShadow p-6">
           <div className="flex justify-center mb-4">
             <Image src={imageIcon} alt="image" height={100} width={100} />
@@ -79,11 +79,8 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
             </div>
           </div>
         </div>
-      </div>
-      {/* User buttons */}
-      <div className="flex justify-center mt-2">
-        <div className="customCyan p-2 roundShadow ">
-          <div className="flex flex-row gap-8 justify-evenly px-6 py-2 roundShadow customBlue max-w-sm">
+        <div className="flex justify-center mt-2">
+          <div className="flex flex-row gap-8 justify-evenly px-6 py-2 roundShadow customBlue">
             <Button asChild>
               <Link href={`/dashboard/stash/edit/${item.id}`}>Edit Item</Link>
             </Button>
