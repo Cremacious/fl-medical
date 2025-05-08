@@ -32,10 +32,13 @@ const AddPurchaseForm = () => {
   const form = useForm<z.infer<typeof purchaseSchema>>({
     resolver: zodResolver(purchaseSchema),
     defaultValues: {
+      id: undefined, // Set to undefined to bypass validation
       dispensary: '',
       date: new Date(),
+      total: 0,
       items: [
         {
+          id: crypto.randomUUID(), // Generate a valid UUID for each item
           name: '',
           category: '',
           type: '',
@@ -59,7 +62,17 @@ const AddPurchaseForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof purchaseSchema>> = async (
     data
   ) => {
-    const response = await addHistoryPurchase(data);
+    const id = crypto.randomUUID(); // Generate a valid UUID
+    const total = data.items.reduce(
+      (sum, item) => sum + (item.price ?? 0) * (item.quantity ?? 1),
+      0
+    );
+
+    const purchaseData = { ...data, id, total };
+
+    console.log('Form Submitted:', purchaseData);
+
+    const response = await addHistoryPurchase(purchaseData);
     if (response.success) {
       toast.success(response.message);
       form.reset();
@@ -68,13 +81,14 @@ const AddPurchaseForm = () => {
       toast.error(response.message);
     }
   };
+  console.log('Date Field Value:', form.getValues('date'));
+  console.log('Validation Errors:', form.formState.errors);
 
   return (
     <div className="flex items-center justify-center">
       <div className="rounded-lg">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            {/* Dispensary and Date */}
             <div className="grid grid-cols-3 gap-4 customBlue p-4 roundShadow mb-4">
               <FormField
                 control={form.control}
@@ -118,8 +132,6 @@ const AddPurchaseForm = () => {
                 )}
               />
             </div>
-
-            {/* Purchase Items */}
             {fields.map((item, index) => (
               <div key={item.id} className="customBlue p-4 roundShadow my-4">
                 <div className="flex flex-col items-end mb-2">
@@ -151,7 +163,6 @@ const AddPurchaseForm = () => {
                       </FormItem>
                     )}
                   />
-
                   <FormField
                     control={form.control}
                     name={`items.${index}.category`}
@@ -291,10 +302,10 @@ const AddPurchaseForm = () => {
                             className="bg-white"
                             type="number"
                             placeholder="0"
-                            value={field.value || ''} // Ensure the value is not undefined
+                            value={field.value || ''}
                             onChange={(e) =>
                               field.onChange(parseFloat(e.target.value) || 0)
-                            } // Convert to number
+                            }
                           />
                         </FormControl>
                         <FormMessage />
@@ -381,14 +392,12 @@ const AddPurchaseForm = () => {
                 />
               </div>
             ))}
-
-            {/* Add Item Button */}
             <div className="flex justify-center mt-4">
               <button
                 type="button"
                 onClick={() =>
                   append({
-                    id: crypto.randomUUID(), // Add a unique ID
+                    id: crypto.randomUUID(),
                     name: '',
                     category: '',
                     type: '',
@@ -406,8 +415,6 @@ const AddPurchaseForm = () => {
                 <CirclePlus size={40} />
               </button>
             </div>
-
-            {/* Submit Button */}
             <div className="flex justify-center mt-4">
               <Button type="submit">Submit</Button>
             </div>
