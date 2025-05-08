@@ -4,14 +4,25 @@ import Link from 'next/link';
 import { getAllStashItems } from '@/lib/actions/stash.actions';
 
 const StashPage = async () => {
-  // const stashItems = await getAllStashItems();
+  const stashItems = await getAllStashItems();
 
   return (
     <>
       <div className="newPage min-h-screen">
         <div className="customBlue px-4 pt-4 pb-8 roundShadow">
-          {/* <StashSearch stashItems={stashItems} /> */}
-          <StashSearch />
+          <StashSearch
+            stashItems={stashItems.map((item) => ({
+              ...item,
+              category: item.category ?? undefined,
+              type: item.type ?? undefined,
+              size: item.size ?? undefined,
+              thc: item.thc ?? undefined,
+              cbd: item.cbd ?? undefined,
+              lineage: item.lineage ?? undefined,
+              thoughts: item.thoughts ?? undefined,
+            }))}
+          />
+
           <div className=" customCyan p-6 roundShadow min-h-screen">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-4 justify-center ">
               {/* {stashItems.map((item) => (
