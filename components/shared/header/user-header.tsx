@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SquareMenu } from 'lucide-react';
+import { SquareMenu, Menu } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -14,10 +14,7 @@ import {
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
-import name from '@/public/logo-name.png';
 import { checkUserExists } from '@/lib/actions/user.actions';
-import { auth, currentUser } from '@clerk/nextjs/server';
-import { UserButton } from '@clerk/nextjs';
 import { SignOutButton } from '@clerk/nextjs';
 
 const UserHeader = async () => {
@@ -29,13 +26,7 @@ const UserHeader = async () => {
     { name: 'Friends', link: '/dashboard/friends' },
     { name: 'Settings', link: '/dashboard/settings' },
   ];
-  await checkUserExists();
-
-  // const { userId } = await auth();
-
-  // if (!userId) {
-  //   return null;
-  // }
+  // await checkUserExists();
 
   return (
     <>
@@ -74,10 +65,10 @@ const UserHeader = async () => {
             ))}
           </div>
 
-          <div className="flex space-x-4">
+          <div className="flex">
             <Sheet>
               <SheetTrigger>
-                <SquareMenu className="w-10 h-10 lg:hidden textOrange" />
+                <Menu className="w-10 h-10 lg:hidden textOrange" />
               </SheetTrigger>
               <SheetContent className="customBlue">
                 <SheetHeader>

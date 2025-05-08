@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { currentUser } from '@clerk/nextjs/server';
 import { capitalizeFirstLetter, getCategoryIcon } from '@/lib/utils';
+import { EllipsisVertical } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
@@ -14,8 +17,14 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
   return (
     <div className="newPage min-h-screen">
       <div className="flex justify-center">
-        <div className="customCyan md:w-1/2 px-4 py-8 roundShadow">
+        <div className="customCyan px-4 py-8 roundShadow">
           <div className="customBlue roundShadow p-6">
+            {/* <div className="flex justify-end">
+              <EllipsisVertical
+                size={50}
+                className="textOrange customCyan p-2 rounded-full animationEffect"
+              />
+            </div> */}
             <div className="flex justify-center mb-4">
               <Image src={imageIcon} alt="image" height={100} width={100} />
             </div>
@@ -79,40 +88,18 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
       </div>
+      <div className="flex justify-center mt-2">
+        <div className="customCyan p-2 roundShadow ">
+          <div className="flex flex-row gap-8 justify-evenly px-6 py-2 roundShadow customBlue max-w-sm">
+            <Button asChild>
+              <Link href={`/dashboard/stash/edit/${item.id}`}>Edit Item</Link>
+            </Button>
+            <Button variant="destructive">Delete</Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default ItemPage;
-
-{
-  /* <h1 className="text-3xl title-font font-medium mb-4">
-Sour Diesel
-</h1>
-<p>User thinks...</p>
-<p className="mb-4">
-Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo
-juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-seitan poutine tumeric. Gastropub blue bottle austin listicle
-pour-over, neutra jean.
-</p>
-<div className="flex border-t border-gray-200 py-2">
-<p className="text-gray-500">Supplier</p>
-<p className="ml-auto text-gray-900">Trulieve</p>
-</div>
-<div className="flex border-t border-gray-200 py-2">
-<p className="text-gray-500">Type</p>
-<p className="ml-auto text-gray-900">Vape</p>
-</div>
-<div className="flex border-t border-gray-200 py-2">
-<p className="text-gray-500"></p>
-<p className="ml-auto text-gray-900">Vape</p>
-</div>
-</div>
-<img
-alt="ecommerce"
-className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-src="https://dummyimage.com/400x400"
-/> */
-}
