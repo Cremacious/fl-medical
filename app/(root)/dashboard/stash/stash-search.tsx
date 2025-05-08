@@ -18,7 +18,7 @@ type StashSearchProps = {
   stashItems: StashItem[];
 };
 
-const ITEMS_PER_PAGE = 16;
+const ITEMS_PER_PAGE = 4;
 
 const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
   const [searchParams, setSearchParams] = useState({
@@ -76,7 +76,7 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
     <>
       <div className="flex flex-col md:flex-row gap-2 mb-4 justify-between">
         <div className="flex justify-center w-full lg:w-[200px] flex-row gap-2 md:gap-4 ">
-          <Button asChild className="w-[300px] lg:w-[200px]">
+          <Button asChild className="w-[300px] lg:w-[200px] animationEffect font-bold ">
             <Link href="/dashboard/stash/add">Add New Item</Link>
           </Button>
         </div>
@@ -160,7 +160,7 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
               <button
                 key={index + 1}
                 onClick={() => handlePageChange(index + 1)}
-                className={`px-4 py-2 rounded ${
+                className={`px-4 py-2 rounded animationEffect font-bold ${
                   currentPage === index + 1
                     ? 'bg-[#f7c062] text-slate-800'
                     : 'bg-[#3e9495] text-white'
