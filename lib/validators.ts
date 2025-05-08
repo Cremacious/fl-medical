@@ -23,6 +23,7 @@ export const insertStashItemSchema = z.object({
   cbd: z.string().optional().or(z.literal('')),
   lineage: z.string().optional().or(z.literal('')),
   thoughts: z.string().optional().or(z.literal('')),
+  createdAt: z.date().optional(), 
 });
 
 export const purchaseItemSchema = z.object({
