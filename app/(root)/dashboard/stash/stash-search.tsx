@@ -25,7 +25,6 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
     type: 'all',
   });
 
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -77,7 +76,9 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
                 <SelectItem value="all">All Categories</SelectItem>
                 <SelectItem value="flower">Flower</SelectItem>
                 <SelectItem value="vape">Vape</SelectItem>
+                <SelectItem value="concentrate">Concentrate</SelectItem>
                 <SelectItem value="edible">Edible</SelectItem>
+                <SelectItem value="topical">Topical</SelectItem>
               </SelectContent>
             </Select>
             <Select
@@ -101,7 +102,7 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
           <Input
             type="text"
             name="name"
-            placeholder="Search by name"
+            placeholder="Search By Name"
             value={searchParams.name}
             onChange={handleInputChange}
             className="bg-white  md:w-[250px]"
