@@ -24,7 +24,7 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
     category: 'all',
     type: 'all',
   });
-  console.log('client', stashItems);
+
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

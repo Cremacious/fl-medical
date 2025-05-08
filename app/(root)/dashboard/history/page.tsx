@@ -7,7 +7,6 @@ import { Purchase, PurchaseItem } from '@/lib/types';
 
 const HistoryPage = async () => {
   const userHistory = await getHistory();
-  console.log('userHistory', userHistory);
   // if (!userHistory) {
   //   return (
   //     <div className="flex justify-center items-center h-screen">

@@ -12,7 +12,7 @@ const DashboardPage = async () => {
   const user = await currentUser();
   const email = user?.emailAddresses[0]?.emailAddress;
 
-  console.log(email);
+
   return (
     <>
       <div className="bg-white">
