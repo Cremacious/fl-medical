@@ -7,35 +7,34 @@ import { revalidatePath } from 'next/cache';
 import { formatError } from '../utils';
 import {
   insertStashItemSchema,
-  purchaseItemSchema,
   purchaseSchema,
 } from '../validators';
 
-export const checkUserExists = async () => {
-  const user = await currentUser();
-  if (!user) {
-    throw new Error('No logged-in user found.');
-  }
-  const existingUser = await db.user.findUnique({
-    where: {
-      clerkUserId: user.id,
-    },
-  });
+// export const checkUserExists = async () => {
+//   const user = await currentUser();
+//   if (!user) {
+//     throw new Error('No logged-in user found.');
+//   }
+//   const existingUser = await db.user.findUnique({
+//     where: {
+//       clerkUserId: user.id,
+//     },
+//   });
 
-  if (existingUser) {
-    return existingUser;
-  }
-  const newUser = await db.user.create({
-    data: {
-      clerkUserId: user.id,
-      username: user.username || `user_${user.id}`,
-      email: user.emailAddresses[0]?.emailAddress || '',
-      role: 'user',
-    },
-  });
+//   if (existingUser) {
+//     return existingUser;
+//   }
+//   const newUser = await db.user.create({
+//     data: {
+//       clerkUserId: user.id,
+//       username: user.username || `user_${user.id}`,
+//       email: user.emailAddresses[0]?.emailAddress || '',
+//       role: 'user',
+//     },
+//   });
 
-  return newUser;
-};
+//   return newUser;
+// };
 
 export async function addStashItem(
   data: z.infer<typeof insertStashItemSchema>

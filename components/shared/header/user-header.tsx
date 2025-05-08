@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
-import { checkUserExists } from '@/lib/actions/user.actions';
 import { SignOutButton } from '@clerk/nextjs';
 
 const UserHeader = async () => {
