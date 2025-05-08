@@ -52,7 +52,7 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row gap-4 mb-4">
+      <div className="flex flex-col md:flex-row gap-4 mb-4 justify-between">
         {/* Search by Name */}
         <Input
           type="text"
@@ -60,44 +60,44 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
           placeholder="Search by name"
           value={searchParams.name}
           onChange={handleInputChange}
-          className="bg-white w-[200px]"
+          className="bg-white w-full md:w-[250px]"
         />
 
-        {/* Filter by Category */}
-        <Select
-          value={searchParams.category}
-          onValueChange={(value) =>
-            setSearchParams((prev) => ({ ...prev, category: value }))
-          }
-        >
-          <SelectTrigger className="bg-white w-[120px]">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="flower">Flower</SelectItem>
-            <SelectItem value="vape">Vape</SelectItem>
-            <SelectItem value="edible">Edible</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex flex-row gap-4 justify-center">
+          <Select
+            value={searchParams.category}
+            onValueChange={(value) =>
+              setSearchParams((prev) => ({ ...prev, category: value }))
+            }
+          >
+            <SelectTrigger className="bg-white w-[150px]">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
 
-        {/* Filter by Type */}
-        <Select
-          value={searchParams.type}
-          onValueChange={(value) =>
-            setSearchParams((prev) => ({ ...prev, type: value }))
-          }
-        >
-          <SelectTrigger className="bg-white w-[120px]">
-            <SelectValue placeholder="Type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="sativa">Sativa</SelectItem>
-            <SelectItem value="indica">Indica</SelectItem>
-            <SelectItem value="hybrid">Hybrid</SelectItem>
-          </SelectContent>
-        </Select>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              <SelectItem value="flower">Flower</SelectItem>
+              <SelectItem value="vape">Vape</SelectItem>
+              <SelectItem value="edible">Edible</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select
+            value={searchParams.type}
+            onValueChange={(value) =>
+              setSearchParams((prev) => ({ ...prev, type: value }))
+            }
+          >
+            <SelectTrigger className="bg-white w-[120px]">
+              <SelectValue placeholder="Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="sativa">Sativa</SelectItem>
+              <SelectItem value="indica">Indica</SelectItem>
+              <SelectItem value="hybrid">Hybrid</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Display Filtered Items */}
