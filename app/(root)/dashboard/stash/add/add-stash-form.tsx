@@ -182,7 +182,7 @@ const AddStashForm = () => {
               )}
             />
           </div>
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="mt-4 grid grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="thc"
@@ -223,7 +223,7 @@ const AddStashForm = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full bg-white"
+                      className="w-[225px] bg-white"
                       placeholder="i.e. Cookies x Kush Mints"
                       {...field}
                     />
