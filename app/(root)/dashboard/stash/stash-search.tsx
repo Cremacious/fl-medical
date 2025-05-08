@@ -37,7 +37,13 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
     setCurrentPage(1);
   };
 
-  const filteredItems = stashItems.filter((item) => {
+  const sortedItems = [...stashItems].sort(
+    (a, b) =>
+      new Date(b.createdAt || 0).getTime() -
+      new Date(a.createdAt || 0).getTime()
+  );
+
+  const filteredItems = sortedItems.filter((item) => {
     if (
       searchParams.name &&
       !item.name.toLowerCase().includes(searchParams.name.toLowerCase())

@@ -21,6 +21,7 @@ const StashPage = async () => {
               lineage: item.lineage ?? undefined,
               thoughts: item.thoughts ?? undefined,
               userId: item.userId,
+              createdAt: item.createdAt ?? new Date(),
             }))}
           />
         </div>
