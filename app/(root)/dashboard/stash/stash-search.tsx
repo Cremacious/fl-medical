@@ -56,8 +56,8 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
     <>
       <div className="flex flex-col md:flex-row gap-2 mb-4 justify-between">
         <div className="flex justify-center w-full lg:w-[200px] flex-row gap-2 md:gap-4 ">
-          <Button asChild className="w-[300px]">
-            <Link href="/dashboard/stash/add">Add New</Link>
+          <Button asChild className="w-[300px] lg:w-[200px]">
+            <Link href="/dashboard/stash/add">Add New Item</Link>
           </Button>
         </div>
 
