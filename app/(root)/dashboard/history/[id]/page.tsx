@@ -21,11 +21,11 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
   }
   return (
     <>
-      <div className="newPage">
+      <div className="newPage min-h-screen ">
         <div className="flex justify-center customBlue px-4 py-8 roundShadow">
-          <div className="customCyan roundShadow grid grid-cols-1 md:grid-cols-3 gap-4 w-full md:p-8">
+          <div className="customCyan roundShadow grid grid-cols-1 md:grid-cols-3 gap-4 w-full p-4 md:p-8">
             <div className="ml-4 mt-4 md:ml-0 md:mt-0">
-              <Card className="customCyan max-w-sm border-none shadow-none">
+              <Card className="customBlue roundShadow border-none max-w-sm ">
                 <CardHeader>
                   <CardTitle className="font-bold text-xl textOrange">
                     {purchase.date.toLocaleDateString('en-US', {

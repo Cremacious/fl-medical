@@ -17,7 +17,7 @@ import { PurchaseItem } from '@/lib/types';
 
 const PurchaseCard = ({ purchase }: { purchase: PurchaseItem }) => {
   return (
-    <Card className="customBlue mx-2 md:mx-0 animationEffect">
+    <Card className="customBlue border-none mx-2 md:mx-0 animationEffect">
       <CardHeader>
         <CardTitle className="textOrange font-extrabold">
           {purchase.name}
