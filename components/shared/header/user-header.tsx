@@ -1,17 +1,8 @@
-import { Button } from '@/components/ui/button';
+import logoName from '@/public/name-logo.png';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SquareMenu, Menu } from 'lucide-react';
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetFooter,
-} from '@/components/ui/sheet';
+import Sidebar from './sidebar';
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
 import { SignOutButton } from '@clerk/nextjs';
@@ -25,7 +16,6 @@ const UserHeader = async () => {
     { name: 'Friends', link: '/dashboard/friends' },
     { name: 'Settings', link: '/dashboard/settings' },
   ];
-  // await checkUserExists();
 
   return (
     <>
@@ -39,7 +29,8 @@ const UserHeader = async () => {
             <Link href="/" className="hidden max-sm:block">
               <Image src={logo} alt="logo" className="w-9 rounded-full" />
             </Link>
-            <div className="flex justify-center text-lg items-center textOrange font-bold">
+            {/* <Image src={logoName} alt="Sunset" height={20} width={100} /> */}
+            <div className="flex justify-center text-lg items-center textOrange font-bold font-chango">
               Sunset Stash
             </div>
           </div>
@@ -65,38 +56,7 @@ const UserHeader = async () => {
           </div>
 
           <div className="flex">
-            <Sheet>
-              <SheetTrigger>
-                <Menu className="w-10 h-10 lg:hidden textOrange" />
-              </SheetTrigger>
-              <SheetContent className="customBlue">
-                <SheetHeader>
-                  <SheetTitle>Title</SheetTitle>
-                  <SheetDescription className="mt-4">
-                    <ul>
-                      {links.map((link, index) => (
-                        <li
-                          key={index}
-                          className="max-lg:border-b max-lg:border-customCyan max-lg:py-3 px-3"
-                        >
-                          <Link
-                            href={link.link}
-                            className="textOrange block font-medium text-lg"
-                          >
-                            {link.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </SheetDescription>
-                </SheetHeader>
-                <SheetFooter>
-                  <div className="customOrange text-center p-2 roundShadow items-center gap-2">
-                    <SignOutButton />
-                  </div>
-                </SheetFooter>
-              </SheetContent>
-            </Sheet>
+            <Sidebar links={links} />
             <div className="hidden lg:flex customOrange roundShadow items-center py-1 px-2">
               <SignOutButton />
             </div>

@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import '@fontsource-variable/ubuntu-sans';
+@import '@fontsource/chango';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -144,6 +145,12 @@ body {
 
 body {
   font-family: 'Ubuntu Sans Variable', sans-serif;
+}
+
+@layer utilities {
+  .font-chango {
+    font-family: 'Chango', system-ui;
+  }
 }
 
 @layer utilities {
