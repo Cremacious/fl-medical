@@ -38,7 +38,7 @@ const Sidebar = ({ links }: { links: Link[] }) => {
             <Link href="/" className="max-sm:hidden">
               <Image src={logo} alt="logo" className="w-9 rounded-full" />
             </Link>
-            <SheetTitle className="textOrange font-chango">
+            <SheetTitle className="textOrange text-lg font-chango">
               Sunset Stash
             </SheetTitle>
             <SheetDescription className="mt-4">
