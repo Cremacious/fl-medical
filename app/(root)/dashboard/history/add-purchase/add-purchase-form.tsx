@@ -89,7 +89,7 @@ const AddPurchaseForm = () => {
       <div className="rounded-lg">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-3 gap-4 customBlue p-4 roundShadow mb-4">
+            <div className="grid grid-cols-2 gap-4 customBlue p-4 justify-center roundShadow mb-4">
               <FormField
                 control={form.control}
                 name="dispensary"
@@ -133,11 +133,14 @@ const AddPurchaseForm = () => {
               />
             </div>
             {fields.map((item, index) => (
-              <div key={item.id} className="customBlue p-4 roundShadow my-4">
-                <div className="flex flex-col items-end mb-2">
+              <div
+                key={item.id}
+                className="customBlue pb-4 pt-2 px-4 roundShadow my-4"
+              >
+                <div className="flex flex-col items-end mb-4 border-b-4 mx-2">
                   <button
                     onClick={() => remove(index)}
-                    className="mt-4"
+                    className="mt-2 mb-4"
                     type="button"
                   >
                     <MinusCircle className="textOrange" size={40} />
@@ -352,26 +355,26 @@ const AddPurchaseForm = () => {
                       )}
                     />
                   </div>
-                  <FormField
-                    control={form.control}
-                    name={`items.${index}.lineage`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="textOrange text-md font-bold">
-                          Lineage
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            className=" bg-white"
-                            placeholder="i.e. Cookies x Kush Mints"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
                 </div>
+                <FormField
+                  control={form.control}
+                  name={`items.${index}.lineage`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="textOrange text-md font-bold">
+                        Lineage
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          className=" bg-white  max-w-sm"
+                          placeholder="i.e. Cookies x Kush Mints"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name={`items.${index}.details`}
@@ -416,7 +419,9 @@ const AddPurchaseForm = () => {
               </button>
             </div>
             <div className="flex justify-center mt-4">
-              <Button type="submit">Submit</Button>
+              <div className="flex flex-row gap-8 justify-evenly px-6 py-2 roundShadow customBlue">
+                <Button type="submit">Submit</Button>
+              </div>
             </div>
           </form>
         </Form>
