@@ -25,10 +25,12 @@ import {
 import { CirclePlus, MinusCircle } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-import { addHistoryPurchase } from '@/lib/actions/user.actions';
 import { redirect } from 'next/navigation';
+import { editPurchase } from '@/lib/actions/history.actions';
+import { Purchase } from '@/lib/types';
 
-const AddPurchaseForm = () => {
+const EditPurchaseForm = ({ purchase }: { purchase: Purchase }) => {
+  const {id, name, category, type, size, quantity, price, thc, cbd, lineage, details} = purchase.items[0];
   const form = useForm<z.infer<typeof purchaseSchema>>({
     resolver: zodResolver(purchaseSchema),
     defaultValues: {
@@ -62,7 +64,7 @@ const AddPurchaseForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof purchaseSchema>> = async (
     data
   ) => {
-    const id = crypto.randomUUID(); // Generate a valid UUID
+    const id = crypto.randomUUID(); 
     const total = data.items.reduce(
       (sum, item) => sum + (item.price ?? 0) * (item.quantity ?? 1),
       0
@@ -72,7 +74,7 @@ const AddPurchaseForm = () => {
 
     console.log('Form Submitted:', purchaseData);
 
-    const response = await addHistoryPurchase(purchaseData);
+    const response = await editPurchase(id, purchaseData);
     if (response.success) {
       toast.success(response.message);
       form.reset();
@@ -430,4 +432,4 @@ const AddPurchaseForm = () => {
   );
 };
 
-export default AddPurchaseForm;
+export default EditPurchaseForm;
