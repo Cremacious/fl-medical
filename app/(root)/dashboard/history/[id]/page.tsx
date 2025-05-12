@@ -3,6 +3,7 @@ import PurchaseCard from './purchase-card';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import { getPurchaseById } from '@/lib/actions/history.actions';
 import { Purchase } from '@/lib/types';
+import Link from 'next/link';
 
 const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
@@ -55,7 +56,11 @@ const ViewPurchase = async (props: { params: Promise<{ id: string }> }) => {
                         ${purchase.total}
                       </div>
                     </div>
-                    <Button className="font-bold">Edit Purchase</Button>
+                    <Button asChild className="font-bold">
+                      <Link href={`/dashboard/history/edit/${purchase.id}`}>
+                        Edit Purchase
+                      </Link>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

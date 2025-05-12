@@ -116,27 +116,75 @@ export async function editPurchase(
     if (!existingUser) {
       throw new Error('User not found');
     }
+
     const purchase = await db.purchase.findUnique({
       where: {
         id,
+      },
+      include: {
+        purchaseItems: true,
       },
     });
     if (!purchase) {
       throw new Error('Purchase not found');
     }
+
     const parsedData = purchaseSchema.parse(data);
+
+    const { items, ...purchaseData } = parsedData;
+
+    const updateData = {
+      ...purchaseData,
+      purchaseItems: {
+        upsert: items.map((item) => ({
+          where: { id: item.id },
+          update: {
+            name: item.name,
+            category: item.category,
+            type: item.type,
+            size: item.size,
+            quantity: item.quantity,
+            price: item.price,
+            thc: item.thc ? parseFloat(item.thc) : null,
+            cbd: item.cbd ? parseFloat(item.cbd) : null, 
+            lineage: item.lineage,
+            details: item.details,
+          },
+          create: {
+            id: item.id,
+            name: item.name,
+            category: item.category,
+            type: item.type,
+            size: item.size,
+            quantity: item.quantity,
+            price: item.price,
+            thc: item.thc ? parseFloat(item.thc) : null,
+            cbd: item.cbd ? parseFloat(item.cbd) : null, 
+            lineage: item.lineage,
+            details: item.details,
+          },
+        })),
+        deleteMany: purchase.purchaseItems
+          .filter(
+            (existingItem) => !items.some((item) => item.id === existingItem.id)
+          )
+          .map((item) => ({ id: item.id })),
+      },
+    };
     await db.purchase.update({
       where: {
         id,
       },
-      data: parsedData,
+      data: updateData,
     });
+
     revalidatePath('/dashboard/history');
     return {
       success: true,
       message: 'Purchase updated successfully',
     };
   } catch (error) {
+    console.error('Error updating purchase:', error);
     return { success: false, message: formatError(error) };
   }
 }
