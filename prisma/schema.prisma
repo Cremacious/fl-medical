@@ -17,9 +17,30 @@ model User {
   role          String    @default("user")
   stashItems    StashItem[]
   history       Purchase[]
+  posts        Post[]
+ sentRequests  FriendRequest[] @relation("SentRequests")
+  receivedRequests FriendRequest[] @relation("ReceivedRequests")
+
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model FriendRequest {
+  id         String   @id @default(uuid())
+  senderId   String
+  receiverId String
+  status     FriendRequestStatus @default(PENDING)
+  createdAt  DateTime @default(now())
+
+  sender     User @relation("SentRequests", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver   User @relation("ReceivedRequests", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
 }
  
  
@@ -66,5 +87,19 @@ model StashItem {
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post? @relation(fields: [postId], references: [id])
+  postId String?
 }
 
+model Post {
+  id         String   @id @default(uuid())
+  userId     String
+  activity   String
+  location   String   @default("N/A")
+  stashItems StashItem[]
+  content    String   @default("N/A")
+  date       DateTime @default(now())
+
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

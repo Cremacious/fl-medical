@@ -41,13 +41,13 @@ export const purchaseItemSchema = z.object({
 });
 
 export const purchaseSchema = z.object({
-  id: z.string().uuid().optional(), // Make `id` optional
+  id: z.string().uuid().optional(),
   dispensary: z.string().min(1, { message: 'Dispensary is required' }),
   date: z.date({ required_error: 'Date is required' }),
   items: z
     .array(
       z.object({
-        id: z.string().uuid().optional(), // Make item `id` optional
+        id: z.string().uuid().optional(),
         name: z.string().min(1, { message: 'Name is required' }),
         category: z.string().optional(),
         type: z.string().optional(),
@@ -62,4 +62,28 @@ export const purchaseSchema = z.object({
     )
     .min(1, { message: 'At least one item is required' }),
   total: z.number().min(0, { message: 'Total is required' }),
+});
+
+export const postSchema = z.object({
+  id: z.string().uuid().optional(),
+  activity: z.string().min(1, { message: 'Activity is required' }),
+  location: z.string().optional().default('N/A'),
+  stashItems: z
+    .array(
+      z.object({
+        id: z.string().uuid(),
+        name: z.string().min(1, { message: 'Name is required' }),
+        category: z.string().optional(),
+        type: z.string().optional(),
+        size: z.string().optional(),
+        thc: z.string().optional(),
+        cbd: z.string().optional(),
+        lineage: z.string().optional(),
+        thoughts: z.string().optional(),
+      })
+    )
+    .optional()
+    .default([]),
+  content: z.string().optional().default('N/A'),
+  date: z.date({ required_error: 'Date is required' }),
 });

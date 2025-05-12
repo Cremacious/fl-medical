@@ -6,7 +6,7 @@ import image from '@/assets/images/icons/eating.png';
 
 const TimelinePost = () => {
   return (
-    <Link href="/post/3">
+    <Link href="/dashboard/post/3">
       <Card className="animationEffect border-none roundShadow customBlue">
         <CardHeader>
           <CardTitle>

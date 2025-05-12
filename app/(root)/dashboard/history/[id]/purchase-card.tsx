@@ -61,24 +61,26 @@ const PurchaseCard = ({ purchase }: { purchase: PurchaseItem }) => {
           </div>
 
           <div className="flex justify-center mt-4">
-            <AlertDialog>
-              <AlertDialogTrigger>
-                <Button className="font-bold">View Details</Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="customBlue border-none">
-                <AlertDialogHeader>
-                  <AlertDialogTitle className="textOrange font-bold">
-                    {purchase.name}'s details...
-                  </AlertDialogTitle>
-                  <AlertDialogDescription className="text-white">
-                    {purchase.details}
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogAction>Close</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            {purchase.details && (
+              <AlertDialog>
+                <AlertDialogTrigger>
+                  <Button className="font-bold">View Details</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="customBlue border-none">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="textOrange font-bold">
+                      {purchase.name}'s details...
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="text-white">
+                      {purchase.details}
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogAction>Close</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
           </div>
         </div>
       </CardContent>
