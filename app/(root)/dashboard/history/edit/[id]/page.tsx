@@ -1,39 +1,41 @@
+import { getPurchaseById } from '@/lib/actions/history.actions';
+import EditPurchaseForm from './edit-purchase-form';
+import { Purchase } from '@/lib/types';
+const EditHistoryPage = async (props: { params: Promise<{ id: string }> }) => {
+  const { id } = await props.params;
+  const purchaseDataRaw = await getPurchaseById(id);
+  const purchaseData = purchaseDataRaw
+    ? {
+        ...purchaseDataRaw,
+        items: purchaseDataRaw.purchaseItems.map((item) => ({
+          name: item.name,
+          quantity: item.quantity || 0,
+          price: item.price || 0,
+          id: item.id,
+          category: item.category ?? undefined,
+          type: item.type ?? undefined,
+          size: item.size ?? undefined,
+          thc: item.thc != null ? item.thc.toString() : undefined,
+          cbd: item.cbd != null ? item.cbd.toString() : undefined,
+          lineage: item.lineage ?? undefined,
+          details: item.details ?? undefined,
+        })),
+      }
+    : null;
 
-import { getPurchaseById } from "@/lib/actions/history.actions";
-import EditPurchaseForm from "./edit-purchase-form";
-import { Purchase } from "@/lib/types";
-const EditHistoryPage = async (props: {params: Promise<{id: string}>}) => {
-
-    const {id} = await props.params;
-    const purchaseDataRaw = await getPurchaseById(id);
-    const purchaseData = purchaseDataRaw
-        ? {
-              ...purchaseDataRaw,
-              items: purchaseDataRaw.purchaseItems.map((item) => ({
-                  name: item.name,
-                  quantity: item.quantity || 0,
-                  price: item.price || 0,
-                  id: item.id,
-                  category: item.category ?? undefined,
-                  type: item.type ?? undefined,
-                  size: item.size ?? undefined,
-                  thc: item.thc != null ? item.thc.toString() : undefined,
-                  cbd: item.cbd != null ? item.cbd.toString() : undefined,
-                  lineage: item.lineage ?? undefined,
-                  details: item.details ?? undefined,
-              })),
-          }
-        : null;
-
-    return (
-        <>
+  return (
+      <div className="newPage min-h-screen">
+        <div className="customBlue roundShadow py-8 px-4">
+          <div className="customCyan roundShadow p-4">
             {purchaseData ? (
-                <EditPurchaseForm purchase={purchaseData} />
+              <EditPurchaseForm purchase={purchaseData} />
             ) : (
-                <p>Loading or no data available</p>
+              <p>Loading or no data available</p>
             )}
-        </>
-    );
-}
- 
+          </div>
+        </div>
+      </div>
+  );
+};
+
 export default EditHistoryPage;
