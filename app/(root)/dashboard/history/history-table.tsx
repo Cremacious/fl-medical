@@ -28,14 +28,19 @@ const HistoryTable = ({ purchases }: { purchases: Purchase[] }) => {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
 
-  // Extract unique years and months from purchases
+  const sortedPurchases = [...purchases].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
   const years = Array.from(
-    new Set(purchases.map((purchase) => new Date(purchase.date).getFullYear()))
-  ).sort((a, b) => b - a); // Sort years in descending order
+    new Set(
+      sortedPurchases.map((purchase) => new Date(purchase.date).getFullYear())
+    )
+  ).sort((a, b) => b - a);
 
   const months = Array.from(
     new Set(
-      purchases
+      sortedPurchases
         .filter((purchase) =>
           selectedYear
             ? new Date(purchase.date).getFullYear() === parseInt(selectedYear)
@@ -43,10 +48,9 @@ const HistoryTable = ({ purchases }: { purchases: Purchase[] }) => {
         )
         .map((purchase) => new Date(purchase.date).getMonth() + 1)
     )
-  ).sort((a, b) => a - b); // Sort months in ascending order
+  ).sort((a, b) => a - b);
 
-  // Filter purchases based on selected year and month
-  const filteredPurchases = purchases.filter((purchase) => {
+  const filteredPurchases = sortedPurchases.filter((purchase) => {
     const purchaseDate = new Date(purchase.date);
     const purchaseYear = purchaseDate.getFullYear();
     const purchaseMonth = purchaseDate.getMonth() + 1;
