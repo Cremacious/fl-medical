@@ -34,7 +34,9 @@ const DashboardPage = async () => {
               width={200}
             />
             <div className="">
-              <Button className="my-2">Create New Post</Button>
+              <Button asChild className="my-2">
+                <Link href='/dashboard/post/new'>Create New Post</Link>
+               </Button>
             </div>
             <div className="flex flex-row justify-center gap-4">
               <Button>Add Purchase</Button>

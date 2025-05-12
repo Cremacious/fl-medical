@@ -148,7 +148,8 @@ const StashSearch: React.FC<StashSearchProps> = ({ stashItems }) => {
                 lineage: item.lineage || null,
                 thoughts: item.thoughts || null,
                 createdAt: item.createdAt || new Date(),
-                userId: '',
+                userId: item.userId, 
+                postId: item.postId || null, 
               }}
               key={item.id || ''}
             />
