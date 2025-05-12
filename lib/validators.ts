@@ -26,8 +26,7 @@ export const insertStashItemSchema = z.object({
   createdAt: z.date().optional(),
 
   userId: z.string().uuid({ message: 'Invalid user ID' }),
-  postId: z.string().uuid({ message: 'Invalid post ID' }).nullable(), 
-
+  postId: z.string().uuid({ message: 'Invalid post ID' }).nullable(),
 });
 
 export const purchaseItemSchema = z.object({
@@ -69,16 +68,15 @@ export const purchaseSchema = z.object({
 });
 
 export const postSchema = z.object({
-  id: z.string().uuid().optional(),
-  activity: z.string().min(1, { message: 'Activity is required' }),
-  location: z.string().optional().default('N/A'),
+  activity: z.string(),
+  location: z.string().optional(),
   stashItems: z
     .array(
       z.object({
-        id: z.string().uuid(),
-        name: z.string().min(1, { message: 'Name is required' }),
-        category: z.string().optional(),
+        id: z.string(),
+        name: z.string(),
         type: z.string().optional(),
+        category: z.string().optional(),
         size: z.string().optional(),
         thc: z.string().optional(),
         cbd: z.string().optional(),
@@ -86,8 +84,8 @@ export const postSchema = z.object({
         thoughts: z.string().optional(),
       })
     )
-    .optional()
-    .default([]),
-  content: z.string().optional().default('N/A'),
-  date: z.date({ required_error: 'Date is required' }),
+    .optional(),
+  content: z.string().optional(),
+  date: z.date(),
+  id: z.string().optional(),
 });
