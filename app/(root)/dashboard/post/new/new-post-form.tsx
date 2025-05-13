@@ -22,6 +22,8 @@ import { postSchema } from '@/lib/validators';
 import useStashStore from '@/lib/store/stashStore';
 import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import { createPost } from '@/lib/actions/post.actions';
 
 const NewPostForm = () => {
   const { selectedStashItems } = useStashStore();
@@ -43,7 +45,7 @@ const NewPostForm = () => {
     const combinedItems = [
       ...selectedStashItems.map((item) => ({
         ...item,
-        id: item.id || crypto.randomUUID(), 
+        id: item.id || crypto.randomUUID(),
       })),
       ...manualItems.map((item, index) => ({
         id: `manual-${index}`,
@@ -55,13 +57,19 @@ const NewPostForm = () => {
 
   const onSubmit: SubmitHandler<z.infer<typeof postSchema>> = async (data) => {
     console.log('Form submitted:', data);
+    const response = await createPost(data);
+    if (response.success) {
+      toast.success('Post created successfully');
+      form.reset();
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (
     <div className="bg-red-100">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-
           <FormField
             control={form.control}
             name="date"
@@ -141,7 +149,7 @@ const NewPostForm = () => {
                       const items = e.target.value
                         .split(',')
                         .map((item) => item.trim())
-                        .filter((item) => item); 
+                        .filter((item) => item);
                       setManualItems(items);
                     }}
                   />
