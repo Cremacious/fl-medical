@@ -25,8 +25,8 @@ export const insertStashItemSchema = z.object({
   thoughts: z.string().optional().or(z.literal('')),
   createdAt: z.date().optional(),
 
-  userId: z.string().uuid({ message: 'Invalid user ID' }),
-  postId: z.string().uuid({ message: 'Invalid post ID' }).nullable(),
+  userId: z.string().uuid().optional(),
+  postId: z.string().uuid({ message: 'Invalid post ID' }).nullable().optional(),
 });
 
 export const purchaseItemSchema = z.object({

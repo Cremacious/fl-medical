@@ -9,21 +9,19 @@ generator client {
 }
  
 model User {
-  id       String   @id @default(uuid())
-  clerkUserId String   @unique
-  username String   @unique
-  imageUrl    String?
-  email     String?   @unique
-  role          String    @default("user")
-  stashItems    StashItem[]
-  history       Purchase[]
-  posts        Post[]
- sentRequests  FriendRequest[] @relation("SentRequests")
+  id             String   @id @default(uuid())
+  clerkUserId    String   @unique
+  username       String   @unique
+  imageUrl       String?
+  email          String?  @unique
+  role           String   @default("user")
+  stashItems     StashItem[]
+  history        Purchase[]
+  posts          Post[]
+  sentRequests   FriendRequest[] @relation("SentRequests")
   receivedRequests FriendRequest[] @relation("ReceivedRequests")
-
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model FriendRequest {
@@ -83,11 +81,11 @@ model StashItem {
   thc        String?
   cbd        String?
   lineage    String?
-  thoughts    String?
-  createdAt DateTime @default(now())
+  thoughts   String?
+  createdAt  DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  postId String?
+  postId String? 
 }
 
 model Post {

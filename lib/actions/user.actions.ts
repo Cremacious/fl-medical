@@ -49,13 +49,17 @@ export async function addStashItem(
     if (!existingUser) {
       throw new Error('User not found');
     }
-    const stashItem = insertStashItemSchema.parse(data);
-    await db.stashItem.create({
-      data: {
-        ...stashItem,
-        userId: existingUser.id,
-      },
+
+    const stashItem = insertStashItemSchema.parse({
+      ...data,
+      userId: existingUser.id,
+      postId: null,
     });
+
+    await db.stashItem.create({
+      data: stashItem,
+    });
+
     revalidatePath('/dashboard/stash');
     return {
       success: true,
