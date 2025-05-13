@@ -53,7 +53,7 @@ const AddStashForm = () => {
     }
   };
 
-  console.log(form.formState.errors);
+
 
   return (
     <div className="flex items-center justify-center ">

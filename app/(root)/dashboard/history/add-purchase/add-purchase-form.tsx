@@ -70,7 +70,6 @@ const AddPurchaseForm = () => {
 
     const purchaseData = { ...data, id, total };
 
-    console.log('Form Submitted:', purchaseData);
 
     const response = await addHistoryPurchase(purchaseData);
     if (response.success) {
@@ -81,8 +80,7 @@ const AddPurchaseForm = () => {
       toast.error(response.message);
     }
   };
-  console.log('Date Field Value:', form.getValues('date'));
-  console.log('Validation Errors:', form.formState.errors);
+
 
   return (
     <div className="flex items-center justify-center">

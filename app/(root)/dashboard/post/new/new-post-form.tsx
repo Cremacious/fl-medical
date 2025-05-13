@@ -56,7 +56,7 @@ const NewPostForm = () => {
   }, [selectedStashItems, manualItems, form]);
 
   const onSubmit: SubmitHandler<z.infer<typeof postSchema>> = async (data) => {
-    console.log('Form submitted:', data);
+
     const response = await createPost(data);
     if (response.success) {
       toast.success('Post created successfully');

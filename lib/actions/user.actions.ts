@@ -52,12 +52,15 @@ export async function addStashItem(
 
     const stashItem = insertStashItemSchema.parse({
       ...data,
-      userId: existingUser.id,
-      postId: null,
+      userId: existingUser.id, 
+      postId: null, 
     });
 
     await db.stashItem.create({
-      data: stashItem,
+      data: {
+        ...stashItem,
+        userId: stashItem.userId!, 
+      },
     });
 
     revalidatePath('/dashboard/stash');
