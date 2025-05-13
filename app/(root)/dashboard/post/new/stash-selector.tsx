@@ -2,26 +2,23 @@
 import { StashItem } from '@/lib/types';
 import icon from '@/assets/images/icons/stash/vape.png';
 import Image from 'next/image';
-import { useState } from 'react';
+import useStashStore from '@/lib/store/stashStore';
 
 const StashSelector = ({ stashItems }: { stashItems: StashItem[] }) => {
-  const [allSelectedStashItems, setAllSelectedStashItems] = useState<
-    StashItem[]
-  >([]);
+  const { selectedStashItems, addStashItem, removeStashItem } = useStashStore();
 
   const handleStashSelect = (stash: StashItem) => {
-    setAllSelectedStashItems((prev) => {
-      const isAlreadySelected = prev.some((item) => item.id === stash.id);
-      if (isAlreadySelected) {
-        return prev.filter((item) => item.id !== stash.id);
-      } else {
-        return [...prev, stash];
+    const isAlreadySelected = selectedStashItems.some(
+      (item) => item.id === stash.id
+    );
+    if (isAlreadySelected) {
+      if (stash.id) {
+        removeStashItem(stash.id);
       }
-    });
-  };
-
-  const handleClick = () => {
-    console.log('allSelectedStashItems', allSelectedStashItems);
+    } else {
+      addStashItem(stash);
+      console.log(selectedStashItems);
+    }
   };
 
   return (
@@ -30,7 +27,7 @@ const StashSelector = ({ stashItems }: { stashItems: StashItem[] }) => {
         <div>Select From Your Stash</div>
         <div className="flex flex-row gap-4 overflow-x-scroll">
           {stashItems.map((item) => {
-            const isSelected = allSelectedStashItems.some(
+            const isSelected = selectedStashItems.some(
               (selected) => selected.id === item.id
             );
             return (
@@ -59,12 +56,6 @@ const StashSelector = ({ stashItems }: { stashItems: StashItem[] }) => {
             );
           })}
         </div>
-        <button
-          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
-          onClick={handleClick}
-        >
-          Submit
-        </button>
       </div>
     </>
   );
