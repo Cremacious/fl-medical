@@ -45,10 +45,10 @@ const NewPostForm = () => {
     const combinedItems = [
       ...selectedStashItems.map((item) => ({
         ...item,
-        id: item.id || crypto.randomUUID(),
+        id: crypto.randomUUID(),
       })),
       ...manualItems.map((item, index) => ({
-        id: `manual-${index}`,
+        id: crypto.randomUUID(),
         name: item,
       })),
     ];

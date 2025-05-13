@@ -8,10 +8,13 @@ import { auth } from '@clerk/nextjs/server';
 
 export async function createPost(data: z.infer<typeof postSchema>) {
   try {
+    // Authenticate the user
     const user = await auth();
     if (!user) {
       throw new Error('User could not be found');
     }
+
+    // Check if the user exists in the database
     const existingUser = await db.user.findUnique({
       where: {
         clerkUserId: user.userId ?? undefined,
@@ -20,36 +23,45 @@ export async function createPost(data: z.infer<typeof postSchema>) {
     if (!existingUser) {
       throw new Error('Could not find user in database');
     }
+
+    // Validate the data using the postSchema
     const validatedData = postSchema.parse(data);
 
+    // Create the new post in the database
     await db.post.create({
       data: {
         activity: validatedData.activity,
         location: validatedData.location,
         content: validatedData.content,
         date: validatedData.date,
-        userId: existingUser.id,
+        userId: existingUser.id, // Associate the post with the user
         stashItems: {
-          create: validatedData.stashItems?.map((item) => ({
+          create: (validatedData.stashItems ?? []).map((item) => ({
             id: item.id,
             name: item.name,
-            type: item.type,
             category: item.category,
+            type: item.type,
             size: item.size,
             thc: item.thc,
             cbd: item.cbd,
             lineage: item.lineage,
             thoughts: item.thoughts,
-            user: { connect: { id: existingUser.id } },
+            user: { connect: { id: existingUser.id } }, // Include the user association
           })),
-        },
+        }, // Store stash items as nested create input
       },
     });
+
+    revalidatePath('/dashboard/post');
+
     return {
       success: true,
       message: 'Post created successfully',
     };
   } catch (error) {
-    return { success: false, message: formatError(error) };
+    return {
+      success: false,
+      message: formatError(error),
+    };
   }
 }
