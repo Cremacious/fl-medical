@@ -10,7 +10,7 @@ import { SignOutButton } from '@clerk/nextjs';
 const UserHeader = async () => {
   const links = [
     { name: 'Dashboard', link: '/dashboard' },
-    { name: 'Profile', link: '/dashboard/profile/3' },
+    { name: 'Profile', link: '/dashboard/profile' },
     { name: 'History', link: '/dashboard/history' },
     { name: 'Stash', link: '/dashboard/stash' },
     { name: 'Friends', link: '/dashboard/friends' },

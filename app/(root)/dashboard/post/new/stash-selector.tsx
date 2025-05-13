@@ -17,7 +17,6 @@ const StashSelector = ({ stashItems }: { stashItems: StashItem[] }) => {
       }
     } else {
       addStashItem(stash);
-      console.log(selectedStashItems);
     }
   };
 

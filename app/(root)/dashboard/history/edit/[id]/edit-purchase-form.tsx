@@ -68,8 +68,6 @@ const EditPurchaseForm = ({ purchase }: { purchase: Purchase }) => {
 
     const purchaseData = { ...data, total };
 
-    console.log('Form Submitted:', purchaseData);
-
     if (!purchase.id) {
       toast.error('Purchase ID is missing.');
       return;

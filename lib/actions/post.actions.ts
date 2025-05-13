@@ -8,13 +8,10 @@ import { auth } from '@clerk/nextjs/server';
 
 export async function createPost(data: z.infer<typeof postSchema>) {
   try {
-    // Authenticate the user
     const user = await auth();
     if (!user) {
       throw new Error('User could not be found');
     }
-
-    // Check if the user exists in the database
     const existingUser = await db.user.findUnique({
       where: {
         clerkUserId: user.userId ?? undefined,
@@ -23,18 +20,15 @@ export async function createPost(data: z.infer<typeof postSchema>) {
     if (!existingUser) {
       throw new Error('Could not find user in database');
     }
-
-    // Validate the data using the postSchema
     const validatedData = postSchema.parse(data);
 
-    // Create the new post in the database
     await db.post.create({
       data: {
         activity: validatedData.activity,
         location: validatedData.location,
         content: validatedData.content,
         date: validatedData.date,
-        userId: existingUser.id, // Associate the post with the user
+        userId: existingUser.id,
         stashItems: {
           create: (validatedData.stashItems ?? []).map((item) => ({
             id: item.id,
@@ -46,9 +40,9 @@ export async function createPost(data: z.infer<typeof postSchema>) {
             cbd: item.cbd,
             lineage: item.lineage,
             thoughts: item.thoughts,
-            user: { connect: { id: existingUser.id } }, // Include the user association
+            user: { connect: { id: existingUser.id } },
           })),
-        }, // Store stash items as nested create input
+        },
       },
     });
 
@@ -63,5 +57,30 @@ export async function createPost(data: z.infer<typeof postSchema>) {
       success: false,
       message: formatError(error),
     };
+  }
+}
+
+export async function getAllUserPosts() {
+  try {
+    const user = await auth();
+    if (!user) {
+      throw new Error('User could not be found');
+    }
+    const existingUser = await db.user.findUnique({
+      where: {
+        clerkUserId: user.userId ?? undefined,
+      },
+    });
+    if (!existingUser) {
+      throw new Error('Could not find user in database');
+    }
+    const posts = await db.post.findMany({
+      where: {
+        userId: existingUser.id,
+      },
+    });
+    return posts;
+  } catch (error) {
+    return [];
   }
 }

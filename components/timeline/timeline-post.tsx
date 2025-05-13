@@ -3,15 +3,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import image from '@/assets/images/icons/eating.png';
+import { Post } from '@/lib/types';
 
-const TimelinePost = () => {
+const TimelinePost = ({ post }: { post: Post }) => {
   return (
     <Link href="/dashboard/post/3">
       <Card className="animationEffect border-none roundShadow customBlue">
         <CardHeader>
           <CardTitle>
             <h3 className="textOrange text-center text-lg font-bold">
-              04/20/2025
+              {post.activity}
             </h3>
           </CardTitle>
         </CardHeader>

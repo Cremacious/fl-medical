@@ -1,8 +1,11 @@
 import TimelinePost from '@/components/timeline/timeline-post';
 import Image from 'next/image';
+import { getAllUserPosts } from '@/lib/actions/post.actions';
+// import { Post } from '@/lib/types';
 
+const ProfilePage = async () => {
+const posts = await getAllUserPosts();
 
-const ProfilePage = () => {
   return (
     <div className="newPage min-h-screen">
       <div className="customBlue min-h-screen px-4 py-8 roundShadow">
@@ -19,7 +22,6 @@ const ProfilePage = () => {
                     alt="image"
                   /> */}
                   <h1 className="text-xl font-bold">NAME</h1>
-                  {/* <p className="text-gray-700">Software Developer</p> */}
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <a
                       href="#"
@@ -34,14 +36,25 @@ const ProfilePage = () => {
             <div className="col-span-4 sm:col-span-9">
               <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  {/* <TimelinePost />
-                  <TimelinePost />
-                  <TimelinePost />
-                  <TimelinePost />
-                  <TimelinePost />
-                  <TimelinePost />
-                  <TimelinePost />
-                  <TimelinePost /> */}
+                {posts && posts.length > 0 ? (
+                    posts.map((post) => {
+                      const transformedPost = {
+                        ...post,
+                        stashItems: Array.isArray(post.stashItems)
+                          ? post.stashItems.filter(
+                              (item): item is { id: string; name: string; type?: string; category?: string; size?: string; thc?: string; cbd?: string; lineage?: string; thoughts?: string } =>
+                                typeof item === 'object' &&
+                                item !== null &&
+                                'id' in item &&
+                                'name' in item
+                            )
+                          : undefined,
+                      };
+                      return <TimelinePost key={post.id} post={transformedPost} />;
+                    })
+                  ) : (
+                    <p>No posts available</p>
+                  )}
                 </div>
               </div>
             </div>
