@@ -6,12 +6,67 @@ import { revalidatePath } from 'next/cache';
 import { formatError } from '../utils';
 import { auth } from '@clerk/nextjs/server';
 
+// export async function createPost(data: z.infer<typeof postSchema>) {
+//   try {
+//     const user = await auth();
+//     if (!user) {
+//       throw new Error('User could not be found');
+//     }
+//     const existingUser = await db.user.findUnique({
+//       where: {
+//         clerkUserId: user.userId ?? undefined,
+//       },
+//     });
+//     if (!existingUser) {
+//       throw new Error('Could not find user in database');
+//     }
+//     const validatedData = postSchema.parse(data);
+
+//     await db.post.create({
+//       data: {
+//         activity: validatedData.activity,
+//         location: validatedData.location,
+//         content: validatedData.content,
+//         date: validatedData.date,
+//         userId: existingUser.id,
+//         stashItems: {
+//           create: (validatedData.stashItems ?? []).map((item) => ({
+//             id: item.id,
+//             name: item.name,
+//             category: item.category,
+//             type: item.type,
+//             size: item.size,
+//             thc: item.thc,
+//             cbd: item.cbd,
+//             lineage: item.lineage,
+//             thoughts: item.thoughts,
+//             user: { connect: { id: existingUser.id } },
+//           })),
+//         },
+//       },
+//     });
+
+//     revalidatePath('/dashboard/post');
+
+//     return {
+//       success: true,
+//       message: 'Post created successfully',
+//     };
+//   } catch (error) {
+//     return {
+//       success: false,
+//       message: formatError(error),
+//     };
+//   }
+// }
+
 export async function createPost(data: z.infer<typeof postSchema>) {
   try {
     const user = await auth();
     if (!user) {
       throw new Error('User could not be found');
     }
+
     const existingUser = await db.user.findUnique({
       where: {
         clerkUserId: user.userId ?? undefined,
@@ -20,6 +75,7 @@ export async function createPost(data: z.infer<typeof postSchema>) {
     if (!existingUser) {
       throw new Error('Could not find user in database');
     }
+
     const validatedData = postSchema.parse(data);
 
     await db.post.create({
@@ -29,20 +85,7 @@ export async function createPost(data: z.infer<typeof postSchema>) {
         content: validatedData.content,
         date: validatedData.date,
         userId: existingUser.id,
-        stashItems: {
-          create: (validatedData.stashItems ?? []).map((item) => ({
-            id: item.id,
-            name: item.name,
-            category: item.category,
-            type: item.type,
-            size: item.size,
-            thc: item.thc,
-            cbd: item.cbd,
-            lineage: item.lineage,
-            thoughts: item.thoughts,
-            user: { connect: { id: existingUser.id } },
-          })),
-        },
+        stashItems: validatedData.stashItems || [],
       },
     });
 
@@ -82,5 +125,30 @@ export async function getAllUserPosts() {
     return posts;
   } catch (error) {
     return [];
+  }
+}
+
+export async function getPostById(id: string) {
+  try {
+    const user = await auth();
+    if (!user) {
+      throw new Error('User could not be found');
+    }
+    const existingUser = await db.user.findUnique({
+      where: {
+        clerkUserId: user.userId ?? undefined,
+      },
+    });
+    if (!existingUser) {
+      throw new Error('Could not find user in database');
+    }
+    const post = await db.post.findUnique({
+      where: {
+        id,
+      },
+    });
+    return post;
+  } catch (error) {
+    return null;
   }
 }

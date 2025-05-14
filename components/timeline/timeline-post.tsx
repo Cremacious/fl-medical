@@ -7,13 +7,11 @@ import { Post } from '@/lib/types';
 
 const TimelinePost = ({ post }: { post: Post }) => {
   return (
-    <Link href="/dashboard/post/3">
-      <Card className="animationEffect border-none roundShadow customBlue">
+    <Link href={`/dashboard/post/${post.id}`}>
+      <Card className="animationEffect border-none roundShadow customBlue min-w-[250px] ">
         <CardHeader>
-          <CardTitle>
-            <h3 className="textOrange text-center text-lg font-bold">
-              {post.activity}
-            </h3>
+          <CardTitle className="textOrange text-center font-bold truncate text-[clamp(0.8rem, 2vw, 1rem)]">
+            {post.date ? new Date(post.date).toLocaleDateString() : 'No Date'}
           </CardTitle>
         </CardHeader>
         <CardContent className="px-0">
@@ -21,9 +19,9 @@ const TimelinePost = ({ post }: { post: Post }) => {
             <Image
               className="object-cover"
               src={image}
-              alt="NIKE AIR"
-              height={200}
-              width={200}
+              alt={post.activity}
+              height={100}
+              width={100}
             />
           </div>
         </CardContent>
