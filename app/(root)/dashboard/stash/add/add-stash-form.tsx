@@ -22,7 +22,7 @@ import { Input } from '@/components/ui/input';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import { addStashItem } from '@/lib/actions/user.actions';
+import { addStashItem } from '@/lib/actions/stash.actions';
 import { redirect } from 'next/navigation';
 
 const AddStashForm = () => {
