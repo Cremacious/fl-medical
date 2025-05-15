@@ -11,9 +11,11 @@ import {
   SheetFooter,
 } from '@/components/ui/sheet';
 import Link from 'next/link';
-// import { SignOutButton } from '@clerk/nextjs';
+import SignOutButton from './signout-button';
 import logo from '@/public/logo.jpeg';
 import Image from 'next/image';
+import { signOutUser } from '@/lib/actions/user.actions';
+import { Button } from '@/components/ui/button';
 
 interface Link {
   name: string;
@@ -25,6 +27,10 @@ const Sidebar = ({ links }: { links: Link[] }) => {
 
   const handleClose = () => {
     setIsOpen(false);
+  };
+
+  const handleClick = () => {
+    signOutUser();
   };
 
   return (
@@ -61,9 +67,9 @@ const Sidebar = ({ links }: { links: Link[] }) => {
             </SheetDescription>
           </SheetHeader>
           <SheetFooter>
-            <div className="customOrange text-center p-2 roundShadow items-center gap-2">
-              {/* <SignOutButton /> */}
-            </div>
+            <Button onClick={handleClick} className="w-full font-bold">
+              Sign Out
+            </Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>

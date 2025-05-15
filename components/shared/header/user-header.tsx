@@ -11,11 +11,11 @@ import SignOutButton from './signout-button';
 const UserHeader = () => {
   const links = [
     { name: 'Dashboard', link: '/dashboard' },
-    { name: 'Profile', link: '/dashboard/profile' },
+    // { name: 'Profile', link: '/dashboard/profile' },
     { name: 'History', link: '/dashboard/history' },
     { name: 'Stash', link: '/dashboard/stash' },
-    { name: 'Friends', link: '/dashboard/friends' },
-    { name: 'Settings', link: '/dashboard/settings' },
+    // { name: 'Friends', link: '/dashboard/friends' },
+    // { name: 'Settings', link: '/dashboard/settings' },
   ];
 
   return (
@@ -58,9 +58,8 @@ const UserHeader = () => {
 
           <div className="flex">
             <Sidebar links={links} />
-            <div className="hidden lg:flex customOrange roundShadow items-center py-1 px-2">
-              {/* <SignOutButton /> */}
-         <SignOutButton/>
+            <div className="hidden lg:flex items-center py-1 px-2">
+              <SignOutButton />
             </div>
           </div>
         </div>
