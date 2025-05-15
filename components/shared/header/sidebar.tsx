@@ -11,7 +11,7 @@ import {
   SheetFooter,
 } from '@/components/ui/sheet';
 import Link from 'next/link';
-import { SignOutButton } from '@clerk/nextjs';
+// import { SignOutButton } from '@clerk/nextjs';
 import logo from '@/public/logo.jpeg';
 import Image from 'next/image';
 
@@ -62,7 +62,7 @@ const Sidebar = ({ links }: { links: Link[] }) => {
           </SheetHeader>
           <SheetFooter>
             <div className="customOrange text-center p-2 roundShadow items-center gap-2">
-              <SignOutButton />
+              {/* <SignOutButton /> */}
             </div>
           </SheetFooter>
         </SheetContent>

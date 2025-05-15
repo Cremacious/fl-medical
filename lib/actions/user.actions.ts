@@ -1,7 +1,8 @@
 'use server';
 
 import { currentUser, auth } from '@clerk/nextjs/server';
-import { db } from '@/lib/db';
+// import { db } from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { formatError } from '../utils';
@@ -12,7 +13,7 @@ export const checkUserExists = async () => {
   if (!user) {
     throw new Error('No logged-in user found.');
   }
-  const existingUser = await db.user.findUnique({
+  const existingUser = await prisma.user.findUnique({
     where: {
       clerkUserId: user.id,
     },
@@ -21,7 +22,7 @@ export const checkUserExists = async () => {
   if (existingUser) {
     return existingUser;
   }
-  const newUser = await db.user.create({
+  const newUser = await prisma.user.create({
     data: {
       clerkUserId: user.id,
       username: user.username || `user_${user.id}`,
@@ -29,7 +30,7 @@ export const checkUserExists = async () => {
       role: 'user',
     },
   });
-
+  console.log('newUser', newUser);
   return newUser;
 };
 
@@ -41,7 +42,7 @@ export async function addStashItem(
     if (!user) {
       throw new Error('No logged-in user found.');
     }
-    const existingUser = await db.user.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: {
         clerkUserId: user.userId ?? undefined,
       },
@@ -52,14 +53,14 @@ export async function addStashItem(
 
     const stashItem = insertStashItemSchema.parse({
       ...data,
-      userId: existingUser.id, 
-      postId: null, 
+      userId: existingUser.id,
+      postId: null,
     });
 
-    await db.stashItem.create({
+    await prisma.stashItem.create({
       data: {
         ...stashItem,
-        userId: stashItem.userId!, 
+        userId: stashItem.userId!,
       },
     });
 
@@ -82,7 +83,7 @@ export async function addHistoryPurchase(data: z.infer<typeof purchaseSchema>) {
     if (!user) {
       throw new Error('No logged-in user found.');
     }
-    const existingUser = await db.user.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: {
         clerkUserId: user.userId ?? undefined,
       },
@@ -90,7 +91,7 @@ export async function addHistoryPurchase(data: z.infer<typeof purchaseSchema>) {
     if (!existingUser) throw new Error('User not found');
     const purchase = purchaseSchema.parse(data);
 
-    await db.purchase.create({
+    await prisma.purchase.create({
       data: {
         userId: existingUser.id,
         dispensary: purchase.dispensary,

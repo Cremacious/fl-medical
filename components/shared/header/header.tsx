@@ -1,13 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/public/logo.jpeg';
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  SignOutButton
-} from '@clerk/nextjs';
+
 import { Button } from '@/components/ui/button';
 
 const Header = () => {
@@ -28,7 +22,7 @@ const Header = () => {
             </div>
           </div>
           <div className="flex max-lg:ml-auto space-x-2">
-            <SignedIn>
+            {/* <SignedIn>
               <Button asChild>
                 <Link href="/dashboard">
                   Dashboard
@@ -44,7 +38,7 @@ const Header = () => {
                   Sign Up
                 </Button>
               </SignUpButton>
-            </SignedOut>
+            </SignedOut> */}
           </div>
         </div>
       </header>

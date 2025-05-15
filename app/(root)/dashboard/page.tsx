@@ -4,7 +4,7 @@ import UsageChart from '@/components/usage-chart';
 import Image from 'next/image';
 import stock from '@/public/avatar.png';
 import TimelineRow from '@/components/timeline/timeline-row';
-import { UserButton } from '@clerk/nextjs';
+// import { UserButton } from '@clerk/nextjs';
 import Gravatar from '@/components/shared/gravatar';
 import { currentUser } from '@clerk/nextjs/server';
 
@@ -12,12 +12,11 @@ const DashboardPage = async () => {
   const user = await currentUser();
   const email = user?.emailAddresses[0]?.emailAddress;
 
-
   return (
     <>
       <div className="bg-white">
         Welcome, Name!
-        <UserButton />
+        {/* <UserButton /> */}
       </div>
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
@@ -35,8 +34,8 @@ const DashboardPage = async () => {
             />
             <div className="">
               <Button asChild className="my-2">
-                <Link href='/dashboard/post/new'>Create New Post</Link>
-               </Button>
+                <Link href="/dashboard/post/new">Create New Post</Link>
+              </Button>
             </div>
             <div className="flex flex-row justify-center gap-4">
               <Button>Add Purchase</Button>

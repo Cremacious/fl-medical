@@ -1,7 +1,5 @@
 import { type Metadata } from 'next';
-import {
-  ClerkProvider,
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from '@/components/ui/sonner';
 import Header from '@/components/shared/header/header';
 
@@ -16,13 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body>
-          {children}
-          <Toaster />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body>
+        {children}
+        <Toaster />
+      </body>
+    </html>
   );
 }
