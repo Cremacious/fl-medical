@@ -11,7 +11,6 @@ import Link from 'next/link';
 const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
   const item = await getStashItemById(id);
-  const user = await currentUser();
   const imageIcon = getCategoryIcon(item.category);
 
   return (
@@ -25,7 +24,7 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
             {item.name}
           </h1>
           <p className="textOrange font-bold">
-            {capitalizeFirstLetter(user?.username || 'No Username')} thinks...
+            {/* {capitalizeFirstLetter(user?.username || 'No Username')} thinks... */}
           </p>
           <p className="mb-6 mt-2 text-white">
             {item.thoughts && item.thoughts.trim() !== ''

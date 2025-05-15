@@ -7,13 +7,16 @@ import TimelineRow from '@/components/timeline/timeline-row';
 // import { UserButton } from '@clerk/nextjs';
 import Gravatar from '@/components/shared/gravatar';
 import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@/lib/auth';
 
 const DashboardPage = async () => {
+
+  const session = await auth()
+
   return (
     <>
       <div className="bg-white">
-        Welcome, Name!
-        {/* <UserButton /> */}
+        Welcome, {session?.user?.name}
       </div>
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">

@@ -39,96 +39,86 @@ export async function addStashItem(
   }
 }
 
-// export async function getAllStashItems() {
-//   try {
-//     const session = await auth()
+export async function getAllStashItems() {
+  try {
+    const session = await auth();
+    if (!session) throw new Error('Session not found');
+    if (!session.user?.id) {
+      throw new Error('User ID is undefined');
+    }
+    const existingUser = prisma.user.findUnique({
+      where: {
+        id: session.user?.id,
+      },
+    });
+    if (!existingUser) throw new Error('No user found');
+    const stashItems = await prisma.stashItem.findMany({
+      where: {
+        userId: session.user.id,
+      },
+    });
+    return stashItems;
+  } catch (error) {
+    return [];
+  }
+}
 
-//     if (!session) {
-//       throw new Error('No logged-in user found.');
-//     }
-//     const existingUser = await db.user.findUnique({
-//       where: {
-//         clerkUserId: user.userId ?? undefined,
-//       },
-//     });
-//     if (!existingUser) {
-//       throw new Error('User not found');
-//     }
-//     const stashItems = await db.stashItem.findMany({
-//       where: {
-//         userId: existingUser.id,
-//       },
-//     });
-//     return stashItems;
-//   } catch (error) {
-//     return [];
-//   }
-// }
+export async function getStashItemById(id: string) {
+  try {
+   const session = await auth()
+   if (!session) throw new Error('No session found')
+    if (!session.user?.id) throw new Error('User not found')
 
-// export async function getStashItemById(id: string) {
-//   try {
-//     const user = await auth();
-//     if (!user) {
-//       throw new Error('No logged-in user found.');
-//     }
-//     const existingUser = await db.user.findUnique({
-//       where: {
-//         clerkUserId: user.userId ?? undefined,
-//       },
-//     });
-//     if (!existingUser) {
-//       throw new Error('User not found');
-//     }
+    const stashItem = await prisma.stashItem.findUnique({
+      where: {
+        id: id,
+        userId: session.user.id
+      },
+    });
 
-//     const stashItem = await db.stashItem.findUnique({
-//       where: {
-//         id: id,
-//         userId: existingUser.id,
-//       },
-//     });
+    if (!stashItem) {
+      throw new Error('Stash item not found');
+    }
 
-//     if (!stashItem) {
-//       throw new Error('Stash item not found');
-//     }
+    return stashItem;
+  } catch (error) {
+    throw new Error(formatError(error));
+  }
+}
 
-//     return stashItem;
-//   } catch (error) {
-//     throw new Error(formatError(error));
-//   }
-// }
+export async function editStashItem(
+  id: string,
+  data: z.infer<typeof insertStashItemSchema>
+) {
+  try {
+    const session = await auth();
+    if (!session) {
+      throw new Error('No session found.');
+    }
+    if (!session.user?.id) throw new Error('No user found')
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        id: session.user.id
+      },
+    });
+    if (!existingUser) {
+      throw new Error('User not found');
+    }
 
-// export async function editStashItem(
-//   id: string,
-//   data: z.infer<typeof insertStashItemSchema>
-// ) {
-//   try {
-//     const user = await auth();
-//     if (!user) {
-//       throw new Error('No logged-in user found.');
-//     }
-//     const existingUser = await db.user.findUnique({
-//       where: {
-//         clerkUserId: user.userId ?? undefined,
-//       },
-//     });
-//     if (!existingUser) {
-//       throw new Error('User not found');
-//     }
+    const stashItem = await prisma.stashItem.update({
+      where: {
+        id: id,
+        userId: existingUser.id,
+      },
+      data: {
+        ...data,
+      },
+    });
 
-//     const stashItem = await db.stashItem.update({
-//       where: {
-//         id: id,
-//         userId: existingUser.id,
-//       },
-//       data: {
-//         ...data,
-//       },
-//     });
+    revalidatePath('/dashboard/stash');
 
-//     revalidatePath('/dashboard/stash');
-
-//     return { success: true, message: `${stashItem.name} updated successfully` };
-//   } catch (error) {
-//     return { success: false, message: formatError(error) };
-//   }
-// }
+    return { success: true, message: `${stashItem.name} updated successfully` };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
