@@ -1,4 +1,4 @@
-import { hashSync } from 'bcrypt-ts-edge'; // Import the hashSync function from the bcrypt-ts-edge library
+import { hashSync } from 'bcrypt-ts-edge'; 
 
 export const sampleData = {
   users: [
