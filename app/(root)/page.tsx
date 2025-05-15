@@ -2,8 +2,13 @@ import Link from 'next/link';
 import logo from '@/public/logo.jpeg';
 import Image from 'next/image';
 import Header from '@/components/shared/header/header';
+import SignOutButton from '@/components/shared/header/signout-button';
+import { auth } from '@/lib/auth';
 
-const Homepage = () => {
+const Homepage = async () => {
+  const session = await auth();
+  console.log(session?.user);
+
   return (
     <>
       <Header />
@@ -18,6 +23,7 @@ const Homepage = () => {
         <Link href="/dashboard">Dashboard</Link>
         <Link href="/sign-in">Sign In</Link>
         <Link href="/sign-up">Sign Up</Link>
+        <SignOutButton />
       </div>
     </>
   );

@@ -8,16 +8,17 @@ import TimelineRow from '@/components/timeline/timeline-row';
 import Gravatar from '@/components/shared/gravatar';
 import { currentUser } from '@clerk/nextjs/server';
 import { auth } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
 const DashboardPage = async () => {
-
-  const session = await auth()
+  const session = await auth();
+  // if (!session) {
+  //   redirect('/sign-in');
+  // }
 
   return (
     <>
-      <div className="bg-white">
-        Welcome, {session?.user?.name}
-      </div>
+      <div className="bg-white">Welcome, {session?.user?.name}</div>
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
           <div className="items-center bg-white flex flex-col p-8">
