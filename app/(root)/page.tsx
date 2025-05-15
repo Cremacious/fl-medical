@@ -24,6 +24,7 @@ const Homepage = async () => {
         <Link href="/sign-in">Sign In</Link>
         <Link href="/sign-up">Sign Up</Link>
         <SignOutButton />
+        <div>Hello {session?.user?.name || 'NO NAME'}</div>
       </div>
     </>
   );

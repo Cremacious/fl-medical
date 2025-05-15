@@ -6,7 +6,6 @@ import { redirect } from 'next/navigation';
 const SignOutButton = () => {
   const handleClick = () => {
     signOutUser();
-    redirect('/');
   };
   return (
     <>
