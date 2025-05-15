@@ -1,50 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
- 
-generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["driverAdapters"] 
-}
- 
+
 model User {
-  id             String   @id @default(uuid())
-  clerkUserId    String   @unique
-  username       String   @unique
-  imageUrl       String?
-  email          String?  @unique
-  role           String   @default("user")
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String    @default("NO_NAME")
+  email         String    @unique(map: "user_email_idx")
+  password      String?
+  role          String    @default("user")
+  emailVerified DateTime? @db.Timestamp(6)
+  image         String?
+  address       Json?     @db.Json
+  paymentMethod String?
+  createdAt     DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime  @updatedAt
   stashItems     StashItem[]
   history        Purchase[]
   posts          Post[]
-  sentRequests   FriendRequest[] @relation("SentRequests")
-  receivedRequests FriendRequest[] @relation("ReceivedRequests")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  account       Account[]
+  session       Session[]
 }
 
-model FriendRequest {
-  id         String   @id @default(uuid())
-  senderId   String
-  receiverId String
-  status     FriendRequestStatus @default(PENDING)
-  createdAt  DateTime @default(now())
+model Account {
+  userId            String  @db.Uuid
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  sender     User @relation("SentRequests", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver   User @relation("ReceivedRequests", fields: [receiverId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "account_userId_user_id_fk")
+  @@id([provider, providerAccountId], map: "account_provider_providerAccountId_pk")
 }
 
-enum FriendRequestStatus {
-  PENDING
-  ACCEPTED
-  DECLINED
+model Session {
+  sessionToken String   @id
+  userId       String   @db.Uuid
+  expires      DateTime @db.Timestamp(6)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "session_userId_user_id_fk")
 }
- 
- 
-model Purchase {
+
+ model Purchase {
   id       String   @id @default(uuid())
-  userId    String
+  userId    String @db.Uuid
   date     DateTime @default(now())
   dispensary String
   total    Float
@@ -73,7 +90,7 @@ model PurchaseItem {
 
 model StashItem {
   id         String   @id @default(uuid())
-  userId     String
+  userId     String @db.Uuid
   name       String
   category   String?
   type       String?
@@ -90,7 +107,7 @@ model StashItem {
 
 model Post {
   id         String   @id @default(uuid())
-  userId     String
+  userId     String @db.Uuid
   activity   String
   location   String   @default("N/A")
   stashItems Json
