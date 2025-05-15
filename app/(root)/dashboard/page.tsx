@@ -9,9 +9,6 @@ import Gravatar from '@/components/shared/gravatar';
 import { currentUser } from '@clerk/nextjs/server';
 
 const DashboardPage = async () => {
-  const user = await currentUser();
-  const email = user?.emailAddresses[0]?.emailAddress;
-
   return (
     <>
       <div className="bg-white">
@@ -21,10 +18,6 @@ const DashboardPage = async () => {
       <div className="newPage">
         <div className="justify-center bg-green-200 flex md:flex-row flex-col gap-8">
           <div className="items-center bg-white flex flex-col p-8">
-            <Gravatar
-              email={email || 'default@example.com'}
-              className="object-cover object-center rounded-full"
-            />
             <Image
               className="object-cover object-center rounded-full"
               alt="hero"

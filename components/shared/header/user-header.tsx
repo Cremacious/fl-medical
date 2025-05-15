@@ -5,9 +5,10 @@ import Link from 'next/link';
 import Sidebar from './sidebar';
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
+import SignOutButton from './signout-button';
 // import { SignOutButton } from '@clerk/nextjs';
 
-const UserHeader = async () => {
+const UserHeader = () => {
   const links = [
     { name: 'Dashboard', link: '/dashboard' },
     { name: 'Profile', link: '/dashboard/profile' },
@@ -59,6 +60,7 @@ const UserHeader = async () => {
             <Sidebar links={links} />
             <div className="hidden lg:flex customOrange roundShadow items-center py-1 px-2">
               {/* <SignOutButton /> */}
+         <SignOutButton/>
             </div>
           </div>
         </div>
