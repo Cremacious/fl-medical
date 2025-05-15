@@ -1,26 +1,89 @@
 'use server';
-import { currentUser, auth } from '@clerk/nextjs/server';
-import { db } from '@/lib/db';
+import prisma from '../prisma';
+import { auth } from '../auth';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { formatError } from '../utils';
 import { purchaseSchema } from '../validators';
 
-export async function getHistory() {
+export async function addHistoryPurchase(data: z.infer<typeof purchaseSchema>) {
   try {
-    const user = await auth();
-    if (!user) {
+    const session = await auth();
+    if (!session) {
       throw new Error('No logged-in user found.');
     }
-    const existingUser = await db.user.findUnique({
+    if (!session.user?.id) {
+      throw new Error('No user ID found in session.');
+    }
+    const existingUser = await prisma.user.findUnique({
       where: {
-        clerkUserId: user.userId ?? undefined,
+        id: session.user.id,
+      },
+    });
+    if (!existingUser) throw new Error('User not found');
+    const purchase = purchaseSchema.parse(data);
+
+    await prisma.purchase.create({
+      data: {
+        userId: existingUser.id,
+        dispensary: purchase.dispensary,
+        date: purchase.date,
+        total: purchase.items.reduce(
+          (sum, item) => sum + (item.price ?? 0) * (item.quantity ?? 0),
+          0
+        ),
+        quantity: purchase.items.reduce(
+          (sum, item) => sum + (item.quantity ?? 0),
+          0
+        ),
+        purchaseItems: {
+          create: purchase.items.map((item) => ({
+            name: item.name,
+            category: item.category,
+            type: item.type,
+            size: item.size,
+            quantity: item.quantity,
+            price: item.price,
+            thc: parseFloat(item.thc ?? '0'),
+            cbd: parseFloat(item.cbd ?? '0'),
+            lineage: item.lineage,
+            details: item.details ?? '',
+          })),
+        },
+      },
+    });
+
+    revalidatePath('/dashboard/history');
+    return {
+      success: true,
+      message: `Purchase added to history`,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
+}
+
+export async function getHistory() {
+  try {
+    const session = await auth();
+    if (!session) {
+      throw new Error('No logged-in user found.');
+    }
+    if (!session.user?.id) {
+      throw new Error('No user ID found in session.');
+    }
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
       },
     });
     if (!existingUser) {
       throw new Error('User not found');
     }
-    const history = await db.purchase.findMany({
+    const history = await prisma.purchase.findMany({
       where: {
         userId: existingUser.id,
       },
@@ -42,19 +105,22 @@ export async function getHistory() {
 
 export async function getPurchaseById(id: string) {
   try {
-    const user = await auth();
-    if (!user) {
+    const session = await auth();
+    if (!session) {
       throw new Error('No logged-in user found.');
     }
-    const existingUser = await db.user.findUnique({
+    if (!session.user?.id) {
+      throw new Error('No user ID found in session.');
+    }
+    const existingUser = await prisma.user.findUnique({
       where: {
-        clerkUserId: user.userId ?? undefined,
+        id: session.user.id,
       },
     });
     if (!existingUser) {
       throw new Error('User not found');
     }
-    const purchase = await db.purchase.findUnique({
+    const purchase = await prisma.purchase.findUnique({
       where: {
         id,
       },
@@ -73,19 +139,22 @@ export async function getPurchaseById(id: string) {
 
 export async function getAllPurchaseItemsFromHistory() {
   try {
-    const user = await auth();
-    if (!user) {
+    const session = await auth();
+    if (!session) {
       throw new Error('No logged-in user found.');
     }
-    const existingUser = await db.user.findUnique({
+    if (!session.user?.id) {
+      throw new Error('No user ID found in session.');
+    }
+    const existingUser = await prisma.user.findUnique({
       where: {
-        clerkUserId: user.userId ?? undefined,
+        id: session.user.id,
       },
     });
     if (!existingUser) {
       throw new Error('User not found');
     }
-    const purchases = await db.purchase.findMany({
+    const purchases = await prisma.purchase.findMany({
       where: {
         userId: existingUser.id,
       },
@@ -104,20 +173,23 @@ export async function editPurchase(
   data: z.infer<typeof purchaseSchema>
 ) {
   try {
-    const user = await auth();
-    if (!user) {
+    const session = await auth();
+    if (!session) {
       throw new Error('No logged-in user found.');
     }
-    const existingUser = await db.user.findUnique({
+    if (!session.user?.id) {
+      throw new Error('No user ID found in session.');
+    }
+    const existingUser = await prisma.user.findUnique({
       where: {
-        clerkUserId: user.userId ?? undefined,
+        id: session.user.id,
       },
     });
     if (!existingUser) {
       throw new Error('User not found');
     }
 
-    const purchase = await db.purchase.findUnique({
+    const purchase = await prisma.purchase.findUnique({
       where: {
         id,
       },
@@ -146,7 +218,7 @@ export async function editPurchase(
             quantity: item.quantity,
             price: item.price,
             thc: item.thc ? parseFloat(item.thc) : null,
-            cbd: item.cbd ? parseFloat(item.cbd) : null, 
+            cbd: item.cbd ? parseFloat(item.cbd) : null,
             lineage: item.lineage,
             details: item.details,
           },
@@ -159,7 +231,7 @@ export async function editPurchase(
             quantity: item.quantity,
             price: item.price,
             thc: item.thc ? parseFloat(item.thc) : null,
-            cbd: item.cbd ? parseFloat(item.cbd) : null, 
+            cbd: item.cbd ? parseFloat(item.cbd) : null,
             lineage: item.lineage,
             details: item.details,
           },
@@ -171,7 +243,7 @@ export async function editPurchase(
           .map((item) => ({ id: item.id })),
       },
     };
-    await db.purchase.update({
+    await prisma.purchase.update({
       where: {
         id,
       },

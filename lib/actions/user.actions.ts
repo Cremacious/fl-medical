@@ -1,7 +1,5 @@
 'use server';
 
-import { currentUser, auth } from '@clerk/nextjs/server';
-// import { db } from '@/lib/db';
 import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
@@ -78,74 +76,8 @@ export async function signUp(prevState: unknown, formData: FormData) {
   }
 }
 
-// export const checkUserExists = async () => {
-//   const user = await currentUser();
-//   if (!user) {
-//     throw new Error('No logged-in user found.');
-//   }
-//   const existingUser = await prisma.user.findUnique({
-//     where: {
-//       clerkUserId: user.id,
-//     },
-//   });
 
-//   if (existingUser) {
-//     return existingUser;
-//   }
-//   const newUser = await prisma.user.create({
-//     data: {
-//       clerkUserId: user.id,
-//       username: user.username || `user_${user.id}`,
-//       email: user.emailAddresses[0]?.emailAddress || '',
-//       role: 'user',
-//     },
-//   });
-//   console.log('newUser', newUser);
-//   return newUser;
-// };
 
-// export async function addStashItem(
-//   data: z.infer<typeof insertStashItemSchema>
-// ) {
-//   try {
-//     const user = await auth();
-//     if (!user) {
-//       throw new Error('No logged-in user found.');
-//     }
-//     const existingUser = await prisma.user.findUnique({
-//       where: {
-//         userId: user.userId ?? undefined,
-//       },
-//     });
-//     if (!existingUser) {
-//       throw new Error('User not found');
-//     }
-
-//     const stashItem = insertStashItemSchema.parse({
-//       ...data,
-//       userId: existingUser.id,
-//       postId: null,
-//     });
-
-//     await prisma.stashItem.create({
-//       data: {
-//         ...stashItem,
-//         userId: stashItem.userId!,
-//       },
-//     });
-
-//     revalidatePath('/dashboard/stash');
-//     return {
-//       success: true,
-//       message: `Item ${stashItem.name} added to stash`,
-//     };
-//   } catch (error) {
-//     return {
-//       success: false,
-//       message: formatError(error),
-//     };
-//   }
-// }
 
 // export async function addHistoryPurchase(data: z.infer<typeof purchaseSchema>) {
 //   try {

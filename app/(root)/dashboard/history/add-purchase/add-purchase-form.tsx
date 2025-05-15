@@ -25,7 +25,7 @@ import {
 import { CirclePlus, MinusCircle } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-import { addHistoryPurchase } from '@/lib/actions/user.actions';
+import { addHistoryPurchase } from '@/lib/actions/history.actions';
 import { redirect } from 'next/navigation';
 
 const AddPurchaseForm = () => {

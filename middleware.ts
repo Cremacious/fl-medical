@@ -1,17 +1,12 @@
-// import NextAuth from 'next-auth';
-// import { authConfig } from './lib/auth.config';
 
-// export const { auth: middleware } = NextAuth(authConfig);
-
-// middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  if (path === '/sign-in') return NextResponse.next(); // Allow sign-in page
+  if (path === '/sign-in') return NextResponse.next(); 
 
-  // Use getToken to check for a valid session
+
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   if (!token) {
     return NextResponse.redirect(
