@@ -2,21 +2,25 @@ import { StashItem } from '@/lib/types';
 import icon from '@/assets/images/icons/stash/flower.png';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
-import { currentUser } from '@clerk/nextjs/server';
+
 import { capitalizeFirstLetter, getCategoryIcon } from '@/lib/utils';
 import { EllipsisVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { auth } from '@/lib/auth';
 
 const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
   const item = await getStashItemById(id);
   const imageIcon = getCategoryIcon(item.category);
 
+  const session = await auth();
+
   return (
     <div className="newPage min-h-screen">
       <div className="customCyan max-w-lg mx-auto px-4 pt-8 pb-2 roundShadow">
         <div className="customBlue roundShadow p-6">
+          <div className="flex flex-row justify-end">Edit</div>
           <div className="flex justify-center mb-4">
             <Image src={imageIcon} alt="image" height={100} width={100} />
           </div>
@@ -24,7 +28,7 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
             {item.name}
           </h1>
           <p className="textOrange font-bold">
-            {/* {capitalizeFirstLetter(user?.username || 'No Username')} thinks... */}
+            {session?.user?.name || 'No Username'} thinks...
           </p>
           <p className="mb-6 mt-2 text-white">
             {item.thoughts && item.thoughts.trim() !== ''

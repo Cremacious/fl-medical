@@ -118,7 +118,7 @@ const HistoryTable = ({ purchases }: { purchases: Purchase[] }) => {
       <div className="customCyan h-screen roundShadow py-4 md:px-4 px-1">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="customBlue roundShadow">
               <TableHead className="text-center text-md font-bold textOrange">
                 Date
               </TableHead>
@@ -159,25 +159,25 @@ const HistoryTable = ({ purchases }: { purchases: Purchase[] }) => {
             ))}
           </TableBody>
         </Table>
-        <div className="flex justify-center mt-8 customBlue p-4 roundShadow">
-          <div className="flex items-center mr-2 text-white font-bold">
-            Page:{' '}
-          </div>
-          <div className="flex gap-2">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-                className={`px-4 py-2 rounded animationEffect font-bold ${
-                  currentPage === index + 1
-                    ? 'bg-[#f7c062] text-slate-800'
-                    : 'bg-[#3e9495] text-white'
-                }`}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
+      </div>
+      <div className="flex justify-center mt-8 ">
+        <div className="flex items-center mr-2 text-white font-bold">
+          Page:{' '}
+        </div>
+        <div className="flex gap-2">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className={`px-4 py-2 rounded animationEffect font-bold ${
+                currentPage === index + 1
+                  ? 'bg-[#f7c062] text-slate-800'
+                  : 'bg-[#3e9495] text-white'
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </div>
     </div>
