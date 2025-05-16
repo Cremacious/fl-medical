@@ -1,10 +1,14 @@
-import { StashItem } from '@/lib/types';
-import icon from '@/assets/images/icons/stash/flower.png';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { capitalizeFirstLetter, getCategoryIcon } from '@/lib/utils';
-import { EllipsisVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
@@ -20,7 +24,23 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
     <div className="newPage min-h-screen">
       <div className="customCyan max-w-lg mx-auto px-4 pt-8 pb-2 roundShadow">
         <div className="customBlue roundShadow p-6">
-          <div className="flex flex-row justify-end">Edit</div>
+          <div className="flex flex-row justify-end">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex justify-center">
+                <Button>Edit</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <Link href={`/dashboard/stash/edit/${item.id}`}>
+                    Edit Item
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="bg-red-400">
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <div className="flex justify-center mb-4">
             <Image src={imageIcon} alt="image" height={100} width={100} />
           </div>
@@ -80,14 +100,6 @@ const ItemPage = async (props: { params: Promise<{ id: string }> }) => {
                   : 'N/A'}
               </div>
             </div>
-          </div>
-        </div>
-        <div className="flex justify-center mt-2">
-          <div className="flex flex-row gap-8 justify-evenly px-6 py-2 roundShadow customBlue">
-            <Button asChild>
-              <Link href={`/dashboard/stash/edit/${item.id}`}>Edit Item</Link>
-            </Button>
-            <Button variant="destructive">Delete</Button>
           </div>
         </div>
       </div>
