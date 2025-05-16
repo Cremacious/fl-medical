@@ -65,14 +65,14 @@ export async function getAllStashItems() {
 
 export async function getStashItemById(id: string) {
   try {
-   const session = await auth()
-   if (!session) throw new Error('No session found')
-    if (!session.user?.id) throw new Error('User not found')
+    const session = await auth();
+    if (!session) throw new Error('No session found');
+    if (!session.user?.id) throw new Error('User not found');
 
     const stashItem = await prisma.stashItem.findUnique({
       where: {
         id: id,
-        userId: session.user.id
+        userId: session.user.id,
       },
     });
 
@@ -95,10 +95,10 @@ export async function editStashItem(
     if (!session) {
       throw new Error('No session found.');
     }
-    if (!session.user?.id) throw new Error('No user found')
+    if (!session.user?.id) throw new Error('No user found');
     const existingUser = await prisma.user.findUnique({
       where: {
-        id: session.user.id
+        id: session.user.id,
       },
     });
     if (!existingUser) {
@@ -118,6 +118,32 @@ export async function editStashItem(
     revalidatePath('/dashboard/stash');
 
     return { success: true, message: `${stashItem.name} updated successfully` };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
+
+export async function deleteStashItem(id: string) {
+  try {
+    const session = await auth();
+    if (!session) throw new Error('Session not found');
+    if (!session.user?.id) {
+      throw new Error('User ID is undefined');
+    }
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
+    });
+    if (!existingUser) throw new Error('No user found');
+    const stashItem = await prisma.stashItem.delete({
+      where: {
+        id: id,
+        userId: existingUser.id,
+      },
+    });
+    revalidatePath('/dashboard/stash');
+    return { success: true, message: `${stashItem.name} deleted successfully` };
   } catch (error) {
     return { success: false, message: formatError(error) };
   }

@@ -15,6 +15,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+
 import { Textarea } from '@/components/ui/textarea';
 import { insertStashItemSchema } from '@/lib/validators';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,7 +34,7 @@ import { Input } from '@/components/ui/input';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import { editStashItem } from '@/lib/actions/stash.actions';
+import { editStashItem, deleteStashItem } from '@/lib/actions/stash.actions';
 import { redirect } from 'next/navigation';
 import { StashItem } from '@/lib/types';
 
@@ -59,13 +71,59 @@ const EditStashForm = ({ item }: { item: StashItem }) => {
     }
   };
 
+  const handleDelete = async () => {
+    if (!id) {
+      toast.error('Error: Missing item ID');
+      return;
+    }
+    const response = await deleteStashItem(id);
+    if (response.success) {
+      toast.success(response.message);
+      redirect('/dashboard/stash');
+    } else {
+      toast.error(`Error: ${response.message}`);
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex flex-col items-center justify-center ">
       <Form {...form}>
         <form
           className="customBlue p-4 my-4 roundShadow"
           onSubmit={form.handleSubmit(onSubmit)}
         >
+          <div className="flex flex-row justify-end">
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="bg-red-500 hover:bg-red-400 font-bold text-white"
+                >
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="customBlue">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="textOrange font-bold text-lg">
+                    Are you absolutely sure?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="text-white">
+                    This action cannot be undone. This will permanently delete
+                    your item from your stash.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="bg-white border-none">
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction onClick={handleDelete}>
+                    Delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
           <div className="">
             <FormField
               control={form.control}
@@ -256,6 +314,7 @@ const EditStashForm = ({ item }: { item: StashItem }) => {
           />
           <div className="flex justify-center mt-6">
             <Button type="submit">Submit</Button>
+            <div className="flex flex-row justify-end"></div>
           </div>
         </form>
       </Form>

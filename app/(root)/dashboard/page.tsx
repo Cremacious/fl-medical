@@ -5,14 +5,13 @@ import Image from 'next/image';
 import stock from '@/public/avatar.png';
 import TimelineRow from '@/components/timeline/timeline-row';
 
+
 import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 const DashboardPage = async () => {
   const session = await auth();
-  // if (!session) {
-  //   redirect('/sign-in');
-  // }
+
 
   return (
     <>

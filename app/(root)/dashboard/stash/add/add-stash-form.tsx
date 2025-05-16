@@ -24,8 +24,11 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { addStashItem } from '@/lib/actions/stash.actions';
 import { redirect } from 'next/navigation';
+import { useState } from 'react';
 
 const AddStashForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<z.infer<typeof insertStashItemSchema>>({
     resolver: zodResolver(insertStashItemSchema),
     defaultValues: {
@@ -43,14 +46,17 @@ const AddStashForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof insertStashItemSchema>> = async (
     data
   ) => {
+    setIsSubmitting(true);
     const response = await addStashItem(data);
     if (response.success) {
       toast.success(response.message);
       form.reset();
       redirect('/dashboard/stash');
     } else {
+      setIsSubmitting(false);
       toast.error(`Error: ${response.message}`);
     }
+    setIsSubmitting(false);
   };
 
   return (
@@ -254,7 +260,9 @@ const AddStashForm = () => {
               )}
             />
             <div className="flex justify-center mt-6">
-              <Button type="submit">Submit</Button>
+              <Button type="submit">
+                {isSubmitting ? 'Submitting...' : 'Submit'}
+              </Button>
             </div>
           </form>
         </div>
