@@ -4,9 +4,7 @@ import UsageChart from '@/components/usage-chart';
 import Image from 'next/image';
 import stock from '@/public/avatar.png';
 import TimelineRow from '@/components/timeline/timeline-row';
-// import { UserButton } from '@clerk/nextjs';
-import Gravatar from '@/components/shared/gravatar';
-import { currentUser } from '@clerk/nextjs/server';
+
 import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 

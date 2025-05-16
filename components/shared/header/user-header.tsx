@@ -6,7 +6,7 @@ import Sidebar from './sidebar';
 import { Separator } from '@/components/ui/separator';
 import logo from '@/public/logo.jpeg';
 import SignOutButton from './signout-button';
-// import { SignOutButton } from '@clerk/nextjs';
+
 
 const UserHeader = () => {
   const links = [

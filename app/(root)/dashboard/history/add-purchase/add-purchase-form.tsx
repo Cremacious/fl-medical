@@ -1,5 +1,5 @@
 'use client';
-
+import { format } from "date-fns"
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { purchaseSchema } from '@/lib/validators';
@@ -22,11 +22,14 @@ import {
   FormMessage,
   FormDescription,
 } from '@/components/ui/form';
-import { CirclePlus, MinusCircle } from 'lucide-react';
+import { CalendarIcon, CirclePlus, MinusCircle } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { addHistoryPurchase } from '@/lib/actions/history.actions';
 import { redirect } from 'next/navigation';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import { cn } from '@/lib/utils';
 
 const AddPurchaseForm = () => {
   const form = useForm<z.infer<typeof purchaseSchema>>({
@@ -70,7 +73,6 @@ const AddPurchaseForm = () => {
 
     const purchaseData = { ...data, id, total };
 
-
     const response = await addHistoryPurchase(purchaseData);
     if (response.success) {
       toast.success(response.message);
@@ -81,13 +83,12 @@ const AddPurchaseForm = () => {
     }
   };
 
-
   return (
     <div className="flex items-center justify-center">
       <div className="rounded-lg">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-4 customBlue p-4 justify-center roundShadow mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 customBlue p-4 justify-center roundShadow mb-4">
               <FormField
                 control={form.control}
                 name="dispensary"
@@ -107,28 +108,50 @@ const AddPurchaseForm = () => {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="date"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="textOrange font-bold text-md">
-                      Purchase Date
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        className="bg-white max-w-[140px]"
-                        type="date"
-                        value={field.value?.toISOString().split('T')[0]}
-                        onChange={(e) =>
-                          field.onChange(new Date(e.target.value))
-                        }
-                      />
-                    </FormControl>
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={'outline'}
+                            className={cn(
+                              'w-[240px] pl-3 text-left font-normal',
+                              !field.value && 'text-muted-foreground'
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, 'PPP')
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date('1900-01-01')
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormDescription>
+                      Your date of birth is used to calculate your age.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
             </div>
             {fields.map((item, index) => (
               <div
@@ -394,9 +417,6 @@ const AddPurchaseForm = () => {
               </div>
             ))}
 
-
-
-            
             <div className="flex justify-center mt-4">
               <button
                 type="button"
