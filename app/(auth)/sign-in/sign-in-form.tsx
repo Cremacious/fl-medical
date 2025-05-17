@@ -16,7 +16,7 @@ const SignInForm = () => {
   const SignInButton = () => {
     const { pending } = useFormStatus();
     return (
-      <Button disabled={pending} className="w-full" variant="default">
+      <Button disabled={pending} className="w-full font-bold" variant="default">
         {pending ? 'Signing In...' : 'Sign In with credentials'}
       </Button>
     );
@@ -25,8 +25,11 @@ const SignInForm = () => {
     <form action={action}>
       <div className="space-y-6">
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label className="textOrange font-bold" htmlFor="email">
+            Email
+          </Label>
           <Input
+            className="bg-white mt-2"
             id="email"
             name="email"
             required
@@ -36,8 +39,11 @@ const SignInForm = () => {
           />
         </div>
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label className="textOrange font-bold" htmlFor="password">
+            Password
+          </Label>
           <Input
+            className="bg-white mt-2"
             id="password"
             name="password"
             required
@@ -53,11 +59,17 @@ const SignInForm = () => {
           )}
         </div>
 
-        <div className="text-sm text-center text-muted-foreground">
+        <div className="text-sm text-center text-white">
           Don&apos;t have an account?{' '}
-          <Link target="_self" className="link" href="/sign-up">
-            Sign Up
-          </Link>
+          <span>
+            <Link
+              target="_self"
+              className="link textOrange font-bold"
+              href="/sign-up"
+            >
+              Sign Up
+            </Link>
+          </span>
         </div>
       </div>
     </form>

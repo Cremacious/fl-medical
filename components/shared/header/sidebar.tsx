@@ -57,7 +57,7 @@ const Sidebar = ({ links }: { links: Link[] }) => {
                     <Link
                       href={link.link}
                       className="textOrange block font-medium text-lg"
-                      onClick={handleClose} // Close the sheet when a link is clicked
+                      onClick={handleClose} 
                     >
                       {link.name}
                     </Link>
